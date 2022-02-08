@@ -93,9 +93,16 @@ public class Employee {
     }
 
     public boolean isRecordValid() {
-        return false;
+
+        if (employeeID == null || namePrefix == null || firstName == null ||
+                middleInitial == null || lastName == null || gender == null ||
+                email == null || dateOfBirth == null || dateOfJoin == null ||
+                salary == null)
+        {
+            return false;
+        }
+
+        return true;
     }
-
-
 
 }
