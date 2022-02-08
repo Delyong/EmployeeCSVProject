@@ -34,6 +34,9 @@ public class Employee {
         this.lastName = parseName(lastName);
 
 
+        this.dateOfBirth = parseDate(dateOfBirth);
+        this.dateOfJoin = parseDate(dateOfJoin);
+
 
     }
 
@@ -42,7 +45,7 @@ public class Employee {
     }
 
     private String parseName(String name) {
-        if (name.length() == 0) {
+        if (name.length() == 0 || name == null) {
             return null;
         }
 
@@ -51,7 +54,7 @@ public class Employee {
 
     private Character parseMiddleName(String middleInitial) {
 
-        if (middleInitial.length() != 1) {
+        if (middleInitial.length() != 1 || middleInitial == null) {
             return null;
         }
 
@@ -61,6 +64,8 @@ public class Employee {
     // require yyyy-mm-dd format
     // now mm-dd-yyyy
     public Date parseDate(String date) {
+
+        if (date == null) { return null; }
 
         // check length of date
         StringBuilder sb = new StringBuilder();
@@ -75,9 +80,12 @@ public class Employee {
                 .append(dateSplitArray[0]).append("-")
                 .append(dateSplitArray[1]);
 
-        Date returnDate = Date.valueOf(sb.toString());
+        try {
+            return Date.valueOf(sb.toString());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
 
-        return returnDate;
     }
 
     private Integer convertEmployeeId(String employeeID) {
