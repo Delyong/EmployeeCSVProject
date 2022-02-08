@@ -35,5 +35,8 @@ public class Employee {
         return null;
     }
 
+    public Integer getEmployeeID() {
+        return employeeID;
+    }
 
 }
