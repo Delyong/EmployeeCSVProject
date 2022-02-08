@@ -18,7 +18,6 @@ public class Employee {
     private Date dateOfJoin;
 
     private Float salary;
-    private boolean isValidRecord;
 
     public Employee(String employeeID, String namePrefix, String firstName,
                     String middleInitial, String lastName, String gender,
@@ -30,13 +29,12 @@ public class Employee {
         this.employeeID = convertEmployeeId(employeeID);
 
         this.firstName = parseName(firstName);
-        this.middleInitial = parseMiddleName(middleInitial);
+        this.middleInitial = parseMiddleInitial(middleInitial);
         this.lastName = parseName(lastName);
 
 
         this.dateOfBirth = parseDate(dateOfBirth);
         this.dateOfJoin = parseDate(dateOfJoin);
-
 
     }
 
@@ -44,17 +42,17 @@ public class Employee {
         super();
     }
 
-    private String parseName(String name) {
-        if (name.length() == 0 || name == null) {
+    public String parseName(String name) {
+        if (name == null || name.length() == 0) {
             return null;
         }
 
         return name;
     }
 
-    private Character parseMiddleName(String middleInitial) {
+    public Character parseMiddleInitial(String middleInitial) {
 
-        if (middleInitial.length() != 1 || middleInitial == null) {
+        if (middleInitial == null || middleInitial.length() != 1) {
             return null;
         }
 
