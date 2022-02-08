@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.sql.Date;
 
@@ -26,13 +25,11 @@ public class EmployeeTests {
         Assertions.assertEquals("1977-12-19", date.toString());
     }
 
-    // TODO here
-    @DisplayName("Given date '12/19/1977', parseDate.toString returns a date string that " +
-            "matches the expected date")
+    @DisplayName("Given an invalid date '122/6/1000', parseDate returns null")
     @Test
     public void givenAInvalidDate_parseDate_returnsNull() {
-        Date date = employee.parseDate("12/19/1977");
-        Assertions.assertEquals("1977-12-19", date.toString());
+        Date date = employee.parseDate("122/6/1000");
+        Assertions.assertEquals(null, date);
     }
 
     @DisplayName("Given a null date, parseDate returns null")
@@ -64,17 +61,20 @@ public class EmployeeTests {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-
-    })
+    @CsvSource(value = {"R,R", "X,X", "M,M"})
     @DisplayName("Given a valid middleInitial, parseMiddleInitial returns expected character")
     public void givenAValidMiddleInitial_parseMiddleInitial_matchingCharacter(
             String middleInitial, Character expected)
     {
-        System.out.println(middleInitial);
-        System.out.println(expected);
         Character actual = employee.parseMiddleInitial(middleInitial);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @DisplayName("Given a middleInitial 'RM', parseMiddleInitial returns null")
+    @Test
+    public void givenA2LengthMiddleInitial_parseMiddleInitial_returnsNull() {
+        Character middleInitial = employee.parseMiddleInitial("RM");
+        Assertions.assertEquals(null, middleInitial);
     }
 
     @DisplayName("Given a null middle initial, parseMiddleInitial returns null")
@@ -83,6 +83,5 @@ public class EmployeeTests {
         Character middleInitial = employee.parseMiddleInitial(null);
         Assertions.assertEquals(null, middleInitial);
     }
-
 
 }
