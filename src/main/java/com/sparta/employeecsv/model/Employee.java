@@ -6,16 +6,15 @@ public class Employee {
 
     private String namePrefix;
     private String firstName;
-    private String middleName;
+    private Character middleInitial;
     private String lastName;
 
-    private char gender;
+    private Character gender;
     private String email;
     private String dateOfBirth;
     private String dateOfJoin;
 
-    private float salary;
-
+    private Float salary;
 
     public Employee(String employeeID, String namePrefix, String firstName,
                     String middleName, String lastName, String gender,
@@ -24,9 +23,17 @@ public class Employee {
     )
     {
 
-        this.employeeID = Integer.parseInt(employeeID);
+        this.employeeID = convertEmployeeId(employeeID);
 
+        this.firstName = firstName;
+        // this.middleName = middleName;
+        this.lastName = lastName;
 
     }
+
+    private Integer convertEmployeeId(String employeeID) {
+        return null;
+    }
+
 
 }
