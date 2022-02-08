@@ -1,6 +1,8 @@
 package com.sparta.employeecsv.view;
 
 import com.sparta.employeecsv.model.Employee;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,18 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import static java.util.Collections.nCopies;
-import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 
 public class ReadFile {
     String fileName = "EmployeeRecords.csv";
+    public static Logger logger = LogManager.getLogger("Project Logger");
     public void readFile(String fileName){
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { //read data from the file
             List<Employee> employees = new ArrayList<Employee>(); //list to collect Employee objects
@@ -34,6 +32,7 @@ public class ReadFile {
             }
 
         } catch (IOException e) {
+            logger.error("Error reading the file");
             e.printStackTrace();
         }
     }
