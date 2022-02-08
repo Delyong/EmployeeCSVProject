@@ -1,5 +1,8 @@
 package com.sparta.employeecsv.model;
 
+import java.sql.Date;
+import java.util.Arrays;
+
 public class Employee {
 
     private Integer employeeID;
@@ -11,14 +14,14 @@ public class Employee {
 
     private Character gender;
     private String email;
-    private String dateOfBirth;
-    private String dateOfJoin;
+    private Date dateOfBirth;
+    private Date dateOfJoin;
 
     private Float salary;
     private boolean isValidRecord;
 
     public Employee(String employeeID, String namePrefix, String firstName,
-                    String middleName, String lastName, String gender,
+                    String middleInitial, String lastName, String gender,
                     String email, String dateOfBirth, String dateOfJoin,
                     String salary
     )
@@ -26,10 +29,24 @@ public class Employee {
 
         this.employeeID = convertEmployeeId(employeeID);
 
-        this.firstName = firstName;
-        this.middleInitial = parseMiddleName("s");
-        this.lastName = lastName;
+        this.firstName = parseName(firstName);
+        this.middleInitial = parseMiddleName(middleInitial);
+        this.lastName = parseName(lastName);
 
+
+
+    }
+
+    public Employee() {
+        super();
+    }
+
+    private String parseName(String name) {
+        if (name.length() == 0) {
+            return null;
+        }
+
+        return name;
     }
 
     private Character parseMiddleName(String middleInitial) {
@@ -39,6 +56,28 @@ public class Employee {
         }
 
         return middleInitial.charAt(0);
+    }
+
+    // require yyyy-mm-dd format
+    // now mm-dd-yyyy
+    public Date parseDate(String date) {
+
+        // check length of date
+        StringBuilder sb = new StringBuilder();
+        String[] dateSplitArray = date.split("/");
+
+        // if the array doesn't have 3 elements an error will be thrown
+        if (dateSplitArray.length != 3) {
+            return null;
+        }
+
+        sb.append(dateSplitArray[2]).append("-")
+                .append(dateSplitArray[0]).append("-")
+                .append(dateSplitArray[1]);
+
+        Date returnDate = Date.valueOf(sb.toString());
+
+        return returnDate;
     }
 
     private Integer convertEmployeeId(String employeeID) {
