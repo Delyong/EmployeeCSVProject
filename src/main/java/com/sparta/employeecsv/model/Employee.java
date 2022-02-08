@@ -15,6 +15,7 @@ public class Employee {
     private String dateOfJoin;
 
     private Float salary;
+    private boolean isValidRecord;
 
     public Employee(String employeeID, String namePrefix, String firstName,
                     String middleName, String lastName, String gender,
@@ -26,14 +27,28 @@ public class Employee {
         this.employeeID = convertEmployeeId(employeeID);
 
         this.firstName = firstName;
-        // this.middleName = middleName;
+        this.middleInitial = parseMiddleName("s");
         this.lastName = lastName;
 
+    }
+
+    private Character parseMiddleName(String middleInitial) {
+
+        if (middleInitial.length() != 1) {
+            return null;
+        }
+
+        return middleInitial.charAt(0);
     }
 
     private Integer convertEmployeeId(String employeeID) {
         return null;
     }
+
+    public boolean isRecordValid() {
+        return false;
+    }
+
 
 
 }
