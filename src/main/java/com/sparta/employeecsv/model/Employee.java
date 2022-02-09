@@ -30,10 +30,13 @@ public class Employee {
         this.middleInitial = parseMiddleInitial(middleInitial);
         this.lastName = parseName(lastName);
 
-
         this.dateOfBirth = parseDate(dateOfBirth);
         this.dateOfJoin = parseDate(dateOfJoin);
+        this.namePrefix = parseNamePrefix(namePrefix);
 
+        this.gender = parseGender(gender);
+        this.email = parseEmail(email);
+        this.salary = parseSalary(salary);
     }
 
     public Employee() {
