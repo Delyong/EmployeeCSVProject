@@ -1,17 +1,13 @@
 package com.sparta.employeecsvtest;
 
 import com.sparta.employeecsv.model.Employee;
-import com.sparta.employeecsv.view.ReadFile;
-import com.sun.jdi.IntegerValue;
+import com.sparta.employeecsv.model.ReadFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
-
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReadFileTest {
 
