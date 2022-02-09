@@ -16,9 +16,6 @@ public class DisplayManager {
     private JLabel lblDupNumber;
     private JTextArea duplicateListFld;
 
-    private boolean isButtonPressed = false;
-    private String filename;
-
     private CSVController controller;
 
     public DisplayManager(CSVController controller) {
@@ -54,11 +51,11 @@ public class DisplayManager {
         lblNewLabel_1_1.setBounds(46, 164, 141, 14);
         frame.getContentPane().add(lblNewLabel_1_1);
 
-        lblUniqueNumber = new JLabel(String.valueOf(controller.getUniqueCount()));
+        lblUniqueNumber = new JLabel("N/A");
         lblUniqueNumber.setBounds(197, 128, 78, 14);
         frame.getContentPane().add(lblUniqueNumber);
 
-        lblDupNumber = new JLabel(String.valueOf(controller.getDuplicateCount()));
+        lblDupNumber = new JLabel("N/A");
         lblDupNumber.setBounds(197, 164, 78, 14);
         frame.getContentPane().add(lblDupNumber);
 
@@ -70,7 +67,7 @@ public class DisplayManager {
         scrollPane.setBounds(46, 239, 570, 218);
         frame.getContentPane().add(scrollPane);
 
-        duplicateListFld = new JTextArea(controller.getDuplicatesString());
+        duplicateListFld = new JTextArea();
         scrollPane.setViewportView(duplicateListFld);
 
         JLabel lblNewLabel_5 = new JLabel("Employees CSV");
@@ -94,17 +91,13 @@ public class DisplayManager {
      * This function runs when the start button is pressed
      */
     private void buttonFunction() {
-        filename = filenameFld.getText();
-        isButtonPressed = true;
+        String filename = filenameFld.getText();
+        controller.getFile(filename);
 
-    }
+        setDuplicateNumber(controller.getDuplicateCount());
+        setUniqueNumber(controller.getUniqueCount());
+        listDuplicates(controller.getDuplicatesString());
 
-    public boolean isButtonPressed() {
-        return isButtonPressed;
-    }
-
-    public String getFilename() {
-        return filename;
     }
 
     /**
@@ -129,11 +122,8 @@ public class DisplayManager {
      * Gets a list of object with duplicate records and toString Function. Prints it on the Text Area in
      * GUI for duplicate record list
      *
-     * @param list list of duplicate records
      */
-    public void listDuplicates(ArrayList<Object> list) {
-        for (int i = 0; i < list.size(); i++) {
-            duplicateListFld.append(list.get(i).toString());
-        }
+    public void listDuplicates(String duplicates) {
+        duplicateListFld.setText(duplicates);
     }
 }
