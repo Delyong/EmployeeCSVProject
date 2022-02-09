@@ -6,6 +6,8 @@ import com.sparta.employeecsv.model.ReadFile;
 
 import java.util.HashMap;
 
+import static com.sparta.employeecsv.view.CSVMain.logger;
+
 public class CSVController {
 
     private ReadFile readFile;
@@ -20,6 +22,7 @@ public class CSVController {
 
     public void setupDatabase() {
 
+        logger.info("Database has been set up");
         employeeDatabase = new EmployeeDatabase();
 
         employeeDatabase.connectToDatabase();
@@ -29,19 +32,22 @@ public class CSVController {
     }
 
     public void cleanUpDatabase() {
+        logger.info("Database has been closed");
         employeeDatabase.closeConnection();
     }
 
     public int getUniqueCount() {
+        logger.info("Amount of unique records has been displayed");
         return readFile.getEmployees().size();
     }
 
     public int getDuplicateCount() {
-        System.out.println(readFile.getDuplicates().toString());
+        logger.info("Amount of duplicated records has been displayed");
         return readFile.getDuplicates().size();
     }
 
     public String getDuplicatesString() {
+        logger.info("Duplicate records has been displayed to the user");
         return readFile.getDuplicates().toString();
     }
 
@@ -55,9 +61,8 @@ public class CSVController {
                 corruptCount++;
             }
         }
-
+        logger.info("Amount of corrupted records has been displayed");
         return corruptCount;
 
     }
-
 }

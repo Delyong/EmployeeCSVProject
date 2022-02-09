@@ -59,7 +59,7 @@ public class EmployeeParser {
 
 
     public static String parseNamePrefix(String namePrefix) {
-        if (namePrefix.matches("[a-zA-Z]{2,3}."))
+        if (namePrefix.matches("[a-zA-Z]{2,4}."))
             return namePrefix;
         else
             return null;
