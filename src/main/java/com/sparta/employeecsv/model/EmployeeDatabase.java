@@ -21,45 +21,45 @@ public class EmployeeDatabase {
     }
 
     public static void main(String[] args){
-    try{
-        String dropTable = "DROP TABLE IF EXISTS `EmployeeRecordsLarge`;"; //drop table if exists
-        Statement st = conn.createStatement(); //prepare java statement
-        ResultSet rs = st.executeQuery(dropTable); //execute the query
-        st.close(); //close connection to database
-    } catch (Exception e){
-        logger.error("Error while dropping table", e);
-    }
+        try{
+            String dropTable = "DROP TABLE IF EXISTS `EmployeeRecordsLarge`;"; //drop table if exists
+            Statement st = conn.createStatement(); //prepare java statement
+            ResultSet rs = st.executeQuery(dropTable); //execute the query
+            st.close(); //close connection to database
+        } catch (Exception e){
+            logger.error("Error while dropping table", e);
+        }
 
-    try{
-        String createTable = "CREATE TABLE `EmployeeRecordsLarge` (" +
-                "`EmployeeID` INT," +
-                "`NamePrefix` VARCHAR(5)," +
-                "`FirstName` VARCHAR(30)," +
-                "`MiddleInitial` VARCHAR(1)," +
-                "`LastName` VARCHAR(30)," +
-                "`Gender` VARCHAR(1)," +
-                "`Email` VARCHAR(50)," +
-                "`DateOfBirth` DATE," +
-                "`DateOfJoining` DATE," +
-                "`Salary` DECIMAL(12,2)," +
-                "PRIMARY KEY (`EmployeeID`)" +
-                ");";
-        Statement st = conn.createStatement(); //prepare java statement
-        ResultSet rs = st.executeQuery(createTable); //execute the query
-        st.close(); //close connection to database
-    } catch (Exception e){
-        logger.error("Error while creating the table", e);
-    }
+        try{
+            String createTable = "CREATE TABLE `EmployeeRecordsLarge` (" +
+                    "`EmployeeID` INT," +
+                    "`NamePrefix` VARCHAR(5)," +
+                    "`FirstName` VARCHAR(30)," +
+                    "`MiddleInitial` VARCHAR(1)," +
+                    "`LastName` VARCHAR(30)," +
+                    "`Gender` VARCHAR(1)," +
+                    "`Email` VARCHAR(50)," +
+                    "`DateOfBirth` DATE," +
+                    "`DateOfJoining` DATE," +
+                    "`Salary` DECIMAL(12,2)," +
+                    "PRIMARY KEY (`EmployeeID`)" +
+                    ");";
+            Statement st = conn.createStatement(); //prepare java statement
+            ResultSet rs = st.executeQuery(createTable); //execute the query
+            st.close(); //close connection to database
+        } catch (Exception e){
+            logger.error("Error while creating the table", e);
+        }
 
-    //insert values into the table
+        //insert values into the table
 
         String sqlInsert = "INSERT INTO EmployeeRecordsLarge (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    try {
-        PreparedStatement preparedStatement = conn.prepareStatement(sqlInsert);
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlInsert);
 
-    } catch (Exception e){
-        logger.error("Error while inserting data into the table", e);
-    }
+        } catch (Exception e){
+            logger.error("Error while inserting data into the table", e);
+        }
 
     }
 

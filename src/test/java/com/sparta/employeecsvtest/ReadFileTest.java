@@ -11,45 +11,24 @@ import java.util.List;
 
 class ReadFileTest {
 
-<<<<<<< HEAD
-     @Test
-     @DisplayName("Check if getDuplicates works")
-     void getDuplicates() {
-         Employee emp1 = new Employee("1", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
-         Employee emp2 = new Employee("2", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
-         Employee emp3 = new Employee("1", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
+    // @Test
+    // @DisplayName("Check if getDuplicates works")
+    // void getDuplicates() {
+    //     Employee emp1 = new Employee("1", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
+    //     Employee emp2 = new Employee("2", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
+    //     Employee emp3 = new Employee("1", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
+    //
+    //
+    //     List<Employee> employeeList = new ArrayList<>();
+    //
+    //     employeeList.add(emp1);
+    //     employeeList.add(emp2);
+    //     employeeList.add(emp3);
+    //
+    //     final List<Employee> duplicates = ReadFile.getDuplicates(employeeList);
+    //
+    //     ReadFile.logger.info("Duplicates: {}",duplicates);
+    //
+    // }
 
-
-         List<Employee> employeeList = new ArrayList<>();
-
-         employeeList.add(emp1);
-         employeeList.add(emp2);
-         employeeList.add(emp3);
-
-         final List<Employee> duplicates = ReadFile.getDuplicates(employeeList);
-
-         ReadFile.logger.info("Duplicates: {}",duplicates);
-
-     }
-=======
-// @Test
-// @DisplayName("Check if getDuplicates works")
-// void getDuplicates() {
-//     Employee emp1 = new Employee("1", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
-//     Employee emp2 = new Employee("2", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
-//     Employee emp3 = new Employee("1", "Mr", "John", "T", "Spiderman", "M", "test@test.com", "05/05/2000", "02/06/2019", "20000");
-//
-//
-//     List<Employee> employeeList = new ArrayList<>();
-//
-//     employeeList.add(emp1);
-//     employeeList.add(emp2);
-//     employeeList.add(emp3);
-//
-//     final List<Employee> duplicates = ReadFile.getDuplicates();
-//
-//     ReadFile.logger.info("Duplicates: {}",duplicates);
-//
-// }
->>>>>>> b043483af597d31aa9b2013ba162de91ee9a88c7
 }
