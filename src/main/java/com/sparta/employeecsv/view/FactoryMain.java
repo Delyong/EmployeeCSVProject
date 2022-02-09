@@ -1,17 +1,8 @@
 package com.sparta.employeecsv.view;
 
+import com.sparta.employeecsv.controller.CSVController;
+
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.JButton;
 
 public class FactoryMain {
 
@@ -22,9 +13,23 @@ public class FactoryMain {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    DisplayManager window = new DisplayManager();
+
+                    CSVController controller = new CSVController();
+                    controller.getFile("EmployeeRecords.csv");
+
+                    DisplayManager window = new DisplayManager(controller);
+
+                    //get back records from controller
+
                     window.initialize();
                     window.frame.setVisible(true);
+
+                    // get the file path from displayManager
+                    // System.out.println(window.buttonFunction());
+
+                    System.out.println(window.getFilename());
+
+                    //pass into controller read file in controller
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
