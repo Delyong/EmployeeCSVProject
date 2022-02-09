@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO sort out employee toString
+
 public class CSVController {
 
     private ReadFile readFile;

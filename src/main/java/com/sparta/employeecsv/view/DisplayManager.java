@@ -70,7 +70,7 @@ public class DisplayManager {
         scrollPane.setBounds(46, 239, 570, 218);
         frame.getContentPane().add(scrollPane);
 
-        duplicateListFld = new JTextArea();
+        duplicateListFld = new JTextArea(controller.getDuplicatesString());
         scrollPane.setViewportView(duplicateListFld);
 
         JLabel lblNewLabel_5 = new JLabel("Employees CSV");
