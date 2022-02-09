@@ -1,20 +1,26 @@
 package com.sparta.employeecsv.model;
+import com.sparta.employeecsv.database.ConnectionFactory;
+import com.sparta.employeecsv.view.CSVMain;
+
 import java.sql.*;
-import static com.sparta.employeecsv.model.ReadFile.logger;
 
 public class EmployeeDatabase {
     //assuming conn = connection to database
     public static void main(String[] args) {
-    try{
+    try {
+        Connection connection = ConnectionFactory.getConnection();
         String dropTable = "DROP TABLE IF EXISTS `EmployeeRecordsLarge`;"; //drop table if exists
-        Statement st = conn.createStatement(); //prepare java statement
+        Statement st = connection.createStatement(); //prepare java statement
         ResultSet rs = st.executeQuery(dropTable); //execute the query
         st.close(); //close connection to database
     } catch (Exception e){
-        logger.error("Error while dropping table", e);
+        CSVMain.logger.error("Error while dropping table", e);
     }
 
     try{
+
+        Connection connection = ConnectionFactory.getConnection();
+
         String createTable = "CREATE TABLE `EmployeeRecordsLarge` (" +
                 "`EmployeeID` INT," +
                 "`NamePrefix` VARCHAR(5)," +
@@ -28,11 +34,13 @@ public class EmployeeDatabase {
                 "`Salary` DECIMAL(12,2)," +
                 "PRIMARY KEY (`EmployeeID`)" +
                 ");";
-        Statement st = conn.createStatement(); //prepare java statement
+
+        Statement st = connection.createStatement(); //prepare java statement
         ResultSet rs = st.executeQuery(createTable); //execute the query
         st.close(); //close connection to database
+
     } catch (Exception e){
-        logger.error("Error while creating the table", e);
+        CSVMain.logger.error("Error while creating the table", e);
     }
         
 
