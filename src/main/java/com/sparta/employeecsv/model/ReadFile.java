@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class ReadFile {
 
-    private HashMap<String, Employee> employees;
+    public static HashMap<String, Employee> employees;
     private ArrayList<Employee> duplicates;
 
     public void readFile(String fileName){

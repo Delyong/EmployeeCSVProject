@@ -2,8 +2,13 @@ package com.sparta.employeecsv.model;
 
 import java.io.IOException;
 import java.sql.*;
-import static com.sparta.employeecsv.model.ReadFile.logger;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import static com.sparta.employeecsv.view.CSVMain.logger;
 import static com.sparta.employeecsv.database.ConnectionFactory.*;
+import static com.sparta.employeecsv.model.ReadFile.*;
 
 
 public class EmployeeDatabase {
@@ -56,7 +61,15 @@ public class EmployeeDatabase {
         String sqlInsert = "INSERT INTO EmployeeRecordsLarge (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sqlInsert);
+            Iterator empIterator = ReadFile.employees.entrySet().iterator();
+            while (empIterator.hasNext()) {
+                Map.Entry mapElement
+                        = (Map.Entry)empIterator.next();
+                preparedStatement.setInt(1, ((int)mapElement.getValue()));
+                preparedStatement.setString(2,((String)mapElement.getValue()));
+                preparedStatement.setString(3,((String)mapElement.getValue()));
 
+            }
         } catch (Exception e){
             logger.error("Error while inserting data into the table", e);
         }
