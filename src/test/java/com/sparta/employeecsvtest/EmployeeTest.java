@@ -1,6 +1,6 @@
 package com.sparta.employeecsvtest;
 
-import com.sparta.employeecsv.model.Employee;
+import com.sparta.employeecsv.model.EmployeeParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -15,53 +15,53 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EmployeeTest {
 
-    private static Employee employee;
+    private static EmployeeParser employeeParser;
 
     @BeforeAll
     public static void setUp(){
-        employee = new Employee();;
+        employeeParser = new EmployeeParser();;
     }
 
     @DisplayName("Given date '12/19/1977', parseDate.toString returns a date string that " +
             "matches the expected date")
     @Test
     public void givenAValidDate_parseDate_returnsMatchingDate() {
-        Date date = employee.parseDate("12/19/1977");
+        Date date = employeeParser.parseDate("12/19/1977");
         Assertions.assertEquals("1977-12-19", date.toString());
     }
 
     @DisplayName("Given an invalid date '122/6/1000', parseDate returns null")
     @Test
     public void givenAInvalidDate_parseDate_returnsNull() {
-        Date date = employee.parseDate("122/6/1000");
+        Date date = employeeParser.parseDate("122/6/1000");
         Assertions.assertEquals(null, date);
     }
 
     @DisplayName("Given a null date, parseDate returns null")
     @Test
     public void givenANullDate_parseDate_returnsNull() {
-        Date date = employee.parseDate(null);
+        Date date = employeeParser.parseDate(null);
         Assertions.assertEquals(null, date);
     }
 
     @DisplayName("Given a null name, parseName returns null")
     @Test
     public void givenANullName_parseName_returnsNull() {
-        String name = employee.parseName(null);
+        String name = employeeParser.parseName(null);
         Assertions.assertEquals(null, name);
     }
 
     @DisplayName("Given name 'Roberto', parseName matches name")
     @Test
     public void givenAValidName_parseName_matchesName() {
-        String name = employee.parseName("Roberto");
+        String name = employeeParser.parseName("Roberto");
         Assertions.assertEquals("Roberto", name);
     }
 
     @DisplayName("Given an empty name, parseName returns null")
     @Test
     public void givenAnEmptyName_parseName_returnsNull() {
-        String name = employee.parseName("");
+        String name = employeeParser.parseName("");
         Assertions.assertEquals(null, name);
     }
 
@@ -71,80 +71,80 @@ public class EmployeeTest {
     public void givenAValidMiddleInitial_parseMiddleInitial_matchingCharacter(
             String middleInitial, Character expected)
     {
-        Character actual = employee.parseMiddleInitial(middleInitial);
+        Character actual = employeeParser.parseMiddleInitial(middleInitial);
         Assertions.assertEquals(expected, actual);
     }
 
     @DisplayName("Given a middleInitial 'RM', parseMiddleInitial returns null")
     @Test
     public void givenA2LengthMiddleInitial_parseMiddleInitial_returnsNull() {
-        Character middleInitial = employee.parseMiddleInitial("RM");
+        Character middleInitial = employeeParser.parseMiddleInitial("RM");
         Assertions.assertEquals(null, middleInitial);
     }
 
     @DisplayName("Given a null middle initial, parseMiddleInitial returns null")
     @Test
     public void givenANullMiddleInitial_parseMiddleInitial_returnsNull() {
-        Character middleInitial = employee.parseMiddleInitial(null);
+        Character middleInitial = employeeParser.parseMiddleInitial(null);
         Assertions.assertEquals(null, middleInitial);
     }
 
     @Test
     @DisplayName("Given a valid employee ID, convertEmployeeId, should return the integer value")
     public void givenAValidEmployeeId_ConvertEmployeeId_ReturnsTheIntegerValue(){
-        assertEquals(1240, employee.parseEmployeeId("1240"));
+        assertEquals(1240, employeeParser.parseEmployeeId("1240"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"12f", "test", "!%", "34af*"})
     @DisplayName("Given a invalid employee ID, convertEmployeeId, should return null")
     public void givenAnInvalidEmployeeId_ConvertEmployeeId_ReturnsNull(String employeeId){
-        assertEquals(null, employee.parseEmployeeId(employeeId));
+        assertEquals(null, employeeParser.parseEmployeeId(employeeId));
     }
 
     @Test
     @DisplayName("Given a valid name prefix, convertEmployeeId, should return the the string value with correct format")
     public void givenAValidNamePrefix_ConvertNamePrefix_ReturnsTheStringValue(){
-        assertEquals("Mr.", employee.parseNamePrefix("Mr."));
+        assertEquals("Mr.", employeeParser.parseNamePrefix("Mr."));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Mrrss.", "Mr", "*%&.", "Mrs13."})
     @DisplayName("Given a invalid name prefix, convertNamePrefix, should return null")
     public void givenAnInvalidNamePrefix_ConvertNamePrefix_ReturnsNull(String namePrefix){
-        assertEquals(null, employee.parseNamePrefix(namePrefix));
+        assertEquals(null, employeeParser.parseNamePrefix(namePrefix));
     }
 
     @Test
     @DisplayName("Given a valid gender, convertGender, should return the the character value")
     public void givenAValidGender_ConvertGender_ReturnsTheCharacterValue(){
-        assertEquals('F', employee.parseGender("F"));
+        assertEquals('F', employeeParser.parseGender("F"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Male", "M12", "%$^", "34adf*"})
     @DisplayName("Given a invalid gender, convertGender, should return null")
     public void givenAnInvalidGender_ConvertGender_ReturnsNull(String gender){
-        assertEquals(null, employee.parseGender(gender));
+        assertEquals(null, employeeParser.parseGender(gender));
     }
 
     @Test
     @DisplayName("Given a valid email, convertEmail, should return the string valid email format")
     public void givenAValidEmail_ConvertEmail_ReturnsTheStringValue(){
-        assertEquals("test@gmail.com", employee.parseEmail("test@gmail.com"));
+        assertEquals("test@gmail.com", employeeParser.parseEmail("test@gmail.com"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"notanemail", "test$%£@gmail.com", "1234asdf£", "testgmailcom"})
     @DisplayName("Given a invalid email, convertEmail, should return null")
     public void givenAnInvalidEmail_ConvertEmail_ReturnsNull(String email){
-        assertEquals(null, employee.parseEmail(email));
+        assertEquals(null, employeeParser.parseEmail(email));
     }
 
     @Test
     @DisplayName("Given a valid salary, convertSalary, should return the integer value")
     public void givenAValidSalary_ConvertSalary_ReturnsTheIntegerValue(){
-        assertEquals(45000, employee.parseSalary("45000"));
+        assertEquals(45000, employeeParser.parseSalary("45000"));
     }
 
 
@@ -152,6 +152,6 @@ public class EmployeeTest {
     @ValueSource(strings = {"12bghjue", "%$53", " ", "notanumber"})
     @DisplayName("Given a invalid employee ID, convertEmployeeId, should return null")
     public void givenAnInvalidSalary_ConvertSalary_ReturnsNull(String salary){
-        assertEquals(null, employee.parseSalary(salary));
+        assertEquals(null, employeeParser.parseSalary(salary));
     }
 }
