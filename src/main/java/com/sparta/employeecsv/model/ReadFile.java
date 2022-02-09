@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.sparta.employeecsv.view.CSVMain.logger;
+
 public class ReadFile {
 
     private HashMap<String, Employee> employees;
@@ -37,6 +39,7 @@ public class ReadFile {
                 }
 
             }
+            logger.info("File provided has been read");
 
         } catch (IOException e) {
             CSVMain.logger.error("Error reading the file");
