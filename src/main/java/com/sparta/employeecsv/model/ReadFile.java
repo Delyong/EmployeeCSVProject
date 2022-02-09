@@ -20,8 +20,10 @@ import static java.util.stream.Collectors.toList;
 public class ReadFile {
 
     String fileName = "EmployeeRecords.csv";
+
     private HashMap<String, Employee> employees;
     private ArrayList<Employee> duplicates;
+
     public static Logger logger = LogManager.getLogger("Project Logger");
 
     public void readFile(String fileName){
