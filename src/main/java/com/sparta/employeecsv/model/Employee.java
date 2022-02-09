@@ -90,6 +90,10 @@ public class Employee {
         return null;
     }
 
+    public Integer getEmployeeID() {
+        return employeeID;
+    }
+
     public boolean isRecordValid() {
 
         if (employeeID == null || namePrefix == null || firstName == null ||
@@ -101,6 +105,7 @@ public class Employee {
         }
 
         return true;
+
     }
 
 }
