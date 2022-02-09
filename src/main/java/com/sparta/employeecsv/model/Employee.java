@@ -1,7 +1,6 @@
 package com.sparta.employeecsv.model;
 
 import java.sql.Date;
-import java.util.Arrays;
 
 public class Employee {
 
@@ -23,10 +22,9 @@ public class Employee {
                     String middleInitial, String lastName, String gender,
                     String email, String dateOfBirth, String dateOfJoin,
                     String salary
-    )
-    {
+    ) {
 
-        this.employeeID = convertEmployeeId(employeeID);
+        this.employeeID = parseEmployeeId(employeeID);
 
         this.firstName = parseName(firstName);
         this.middleInitial = parseMiddleInitial(middleInitial);
@@ -40,6 +38,22 @@ public class Employee {
 
     public Employee() {
         super();
+    }
+
+    public Integer getEmployeeID() {
+        return employeeID;
+    }
+
+    public boolean isRecordValid() {
+
+        if (employeeID == null || namePrefix == null || firstName == null ||
+                middleInitial == null || lastName == null || gender == null ||
+                email == null || dateOfBirth == null || dateOfJoin == null ||
+                salary == null) {
+            return false;
+        }
+
+        return true;
     }
 
     public String parseName(String name) {
@@ -63,7 +77,9 @@ public class Employee {
     // now mm-dd-yyyy
     public Date parseDate(String date) {
 
-        if (date == null) { return null; }
+        if (date == null) {
+            return null;
+        }
 
         // check length of date
         StringBuilder sb = new StringBuilder();
@@ -86,26 +102,39 @@ public class Employee {
 
     }
 
-    private Integer convertEmployeeId(String employeeID) {
-        return null;
+    public static Integer parseEmployeeId(String employeeID) {
+        if (employeeID.matches("[0-9]{1,5}"))
+            return Integer.valueOf(employeeID);
+        else
+            return null;
     }
 
-    public Integer getEmployeeID() {
-        return employeeID;
+
+    public static String parseNamePrefix(String namePrefix) {
+        if (namePrefix.matches("[a-zA-Z]{2,3}."))
+            return namePrefix;
+        else
+            return null;
     }
 
-    public boolean isRecordValid() {
-
-        if (employeeID == null || namePrefix == null || firstName == null ||
-                middleInitial == null || lastName == null || gender == null ||
-                email == null || dateOfBirth == null || dateOfJoin == null ||
-                salary == null)
-        {
-            return false;
-        }
-
-        return true;
-
+    public static Character parseGender(String gender) {
+        if (gender.matches("F|M"))
+            return gender.charAt(0);
+        else
+            return null;
     }
 
+    public static String parseEmail(String email) {
+        if (email.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$"))
+            return email;
+        else
+            return null;
+    }
+
+    public static Float parseSalary(String salary) {
+        if (salary.matches("[0-9]{1,10}"))
+            return Float.valueOf(salary);
+        else
+            return null;
+    }
 }
