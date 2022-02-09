@@ -1,4 +1,4 @@
-package com.sparta.employeecsv.view;
+package com.sparta.employeecsv.model;
 
 import com.sparta.employeecsv.model.Employee;
 import org.apache.logging.log4j.LogManager;
