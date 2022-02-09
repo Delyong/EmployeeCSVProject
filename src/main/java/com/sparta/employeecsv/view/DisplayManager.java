@@ -44,23 +44,23 @@ public class DisplayManager {
         filenameFld.setColumns(10);
 
         JLabel lblNewLabel_1 = new JLabel("Number of unique records:");
-        lblNewLabel_1.setBounds(46, 128, 141, 14);
+        lblNewLabel_1.setBounds(46, 128, 250, 14);
         frame.getContentPane().add(lblNewLabel_1);
 
         JLabel lblNewLabel_1_1 = new JLabel("Number of duplicate records:");
-        lblNewLabel_1_1.setBounds(46, 164, 141, 14);
+        lblNewLabel_1_1.setBounds(46, 164, 250, 14);
         frame.getContentPane().add(lblNewLabel_1_1);
 
         lblUniqueNumber = new JLabel("N/A");
-        lblUniqueNumber.setBounds(197, 128, 78, 14);
+        lblUniqueNumber.setBounds(240, 128, 78, 14);
         frame.getContentPane().add(lblUniqueNumber);
 
         lblDupNumber = new JLabel("N/A");
-        lblDupNumber.setBounds(197, 164, 78, 14);
+        lblDupNumber.setBounds(240, 164, 78, 14);
         frame.getContentPane().add(lblDupNumber);
 
         JLabel lblNewLabel_4 = new JLabel("Duplicated records listed:");
-        lblNewLabel_4.setBounds(46, 214, 141, 14);
+        lblNewLabel_4.setBounds(46, 214, 200, 14);
         frame.getContentPane().add(lblNewLabel_4);
 
         JScrollPane scrollPane = new JScrollPane();
