@@ -20,6 +20,7 @@ public class FactoryMain {
     private JLabel lblUniqueNumber;
     private JLabel lblDupNumber;
     private JTextArea duplicateListFld;
+
     /**
      * Launch the application.
      */
@@ -109,39 +110,38 @@ public class FactoryMain {
     /**
      * This function runs when the start button is press
      */
-    private void buttonFunction(){
+    private void buttonFunction() {
         String filename = filenameFld.getText();
         //remaining logic
     }
 
     /**
      * display number of duplicate records on the GUI
+     *
      * @param numberOfDuplicates Integer value of number of duplicate record
      */
-    public void setDuplicateNumber(int numberOfDuplicates){
-        lblDupNumber.setText(""+numberOfDuplicates);
+    public void setDuplicateNumber(int numberOfDuplicates) {
+        lblDupNumber.setText("" + numberOfDuplicates);
     }
 
     /**
      * display number of unique records on the GUI
+     *
      * @param numberOfUnique Integer value of number of unique record
      */
-    public void setUniqueNumber(int numberOfUnique){
-        lblUniqueNumber.setText(""+numberOfUnique);
+    public void setUniqueNumber(int numberOfUnique) {
+        lblUniqueNumber.setText("" + numberOfUnique);
     }
 
     /**
      * Gets a list of object with duplicate records and toString Function. Prints it on the Text Area in
      * GUI for duplicate record list
+     *
      * @param list list of duplicate records
      */
-    public void listDuplicates(ArrayList<Object> list){
+    public void listDuplicates(ArrayList<Object> list) {
         for (int i = 0; i < list.size(); i++) {
             duplicateListFld.append(list.get(i).toString());
         }
-
     }
-
-
 }
-
