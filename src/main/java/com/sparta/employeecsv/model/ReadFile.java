@@ -7,13 +7,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.io.*;
+import org.apache.commons.collections.CollectionUtils;
 
-import java.util.function.Function;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import static java.util.Collections.nCopies;
-import static java.util.stream.Collectors.toList;
+
 
 public class ReadFile {
     String fileName = "EmployeeRecords.csv";
@@ -30,23 +30,29 @@ public class ReadFile {
 
                 employees.add(employee); //add the object to the List
             }
+            getDuplicates(employees);
 
         } catch (IOException e) {
             logger.error("Error reading the file");
             e.printStackTrace();
         }
     }
+    public static AtomicInteger i = new AtomicInteger(-1);
+    public static List<Employee> getDuplicates(final List<Employee> employeeList) {
+        List<Employee> duplicates = null;
+        StringBuilder sb = new StringBuilder();
+        int[] ids = {};
+        employeeList.forEach(temp -> sb.append(temp.getEmployeeID() + ","));
 
-    public static List<Employee> getDuplicates(final List<Employee> employeeList){
-
-        List<Employee> duplicates = employeeList.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet().stream()
-                .filter(n -> n.getValue() > 1)
-                .flatMap(n -> nCopies(n.getValue().intValue(), n.getKey()).stream())
-                .collect(toList());
+        String sbb = sb.toString();
+        List<String> sbList = Arrays.asList(sbb.split("\\s*,\\s*"));
+        sbb = String.join(",",Arrays.asList(sbb.split(",")).stream().distinct().collect(Collectors.toList()));
+        List<String> sbbList = Arrays.asList(sbb.split("\\s*,\\s*"));
+        List<String> list = new ArrayList<>(CollectionUtils.disjunction(sbList, sbbList));
+        System.out.println(list);
 
         return duplicates;
+    }
 
     }
-}
+
