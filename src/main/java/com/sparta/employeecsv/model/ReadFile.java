@@ -54,5 +54,4 @@ public class ReadFile {
         return duplicates;
     }
 
-    }
-
+}

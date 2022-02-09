@@ -1,5 +1,7 @@
 package com.sparta.employeecsv.view;
 
+import com.sparta.employeecsv.controller.CSVController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,17 @@ public class DisplayManager {
     private JLabel lblUniqueNumber;
     private JLabel lblDupNumber;
     private JTextArea duplicateListFld;
+
+    private boolean isButtonPressed = false;
+    private String filename;
+
+    private CSVController controller;
+
+    public DisplayManager(CSVController controller) {
+
+        this.controller = controller;
+
+    }
 
     /**
      * Initialize the contents of the frame.
@@ -41,11 +54,11 @@ public class DisplayManager {
         lblNewLabel_1_1.setBounds(46, 164, 141, 14);
         frame.getContentPane().add(lblNewLabel_1_1);
 
-        lblUniqueNumber = new JLabel("N/A");
+        lblUniqueNumber = new JLabel(String.valueOf(controller.getUniqueCount()));
         lblUniqueNumber.setBounds(197, 128, 78, 14);
         frame.getContentPane().add(lblUniqueNumber);
 
-        lblDupNumber = new JLabel("N/A");
+        lblDupNumber = new JLabel(String.valueOf(controller.getDuplicateCount()));
         lblDupNumber.setBounds(197, 164, 78, 14);
         frame.getContentPane().add(lblDupNumber);
 
@@ -57,7 +70,7 @@ public class DisplayManager {
         scrollPane.setBounds(46, 239, 570, 218);
         frame.getContentPane().add(scrollPane);
 
-        duplicateListFld = new JTextArea();
+        duplicateListFld = new JTextArea(controller.getDuplicatesString());
         scrollPane.setViewportView(duplicateListFld);
 
         JLabel lblNewLabel_5 = new JLabel("Employees CSV");
@@ -78,11 +91,20 @@ public class DisplayManager {
     }
 
     /**
-     * This function runs when the start button is press
+     * This function runs when the start button is pressed
      */
     private void buttonFunction() {
-        String filename = filenameFld.getText();
-        //remaining logic
+        filename = filenameFld.getText();
+        isButtonPressed = true;
+
+    }
+
+    public boolean isButtonPressed() {
+        return isButtonPressed;
+    }
+
+    public String getFilename() {
+        return filename;
     }
 
     /**
