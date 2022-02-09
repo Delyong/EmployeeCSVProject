@@ -7,10 +7,9 @@ import java.sql.*;
 
 public class EmployeeDatabase {
 
-    public static void main(String[] args) {
+    private Connection connection;
 
-        Connection connection = null;
-
+    public void connectToDatabase() {
         try {
             connection = ConnectionFactory.getConnection();
             CSVMain.logger.info("Successfully created database connection");
@@ -18,9 +17,11 @@ public class EmployeeDatabase {
             CSVMain.logger.fatal("Failed to create database connection");
             e.printStackTrace();
         }
+    }
+
+    public void dropTable() {
 
         try {
-
             String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
 
             Statement st = connection.createStatement(); //prepare java statement
@@ -35,6 +36,9 @@ public class EmployeeDatabase {
             e.printStackTrace();
         }
 
+    }
+
+    public void createTable() {
         try {
 
             String createTable = "CREATE TABLE `EmployeeRecords` (" +
@@ -62,14 +66,15 @@ public class EmployeeDatabase {
             CSVMain.logger.fatal("Error while creating the table", e);
             e.printStackTrace();
         }
+    }
 
+    public void closeConnection() {
         try {
             ConnectionFactory.closeConnection();
         } catch (SQLException e) {
             CSVMain.logger.error("Error while closing the connection", e);
             e.printStackTrace();
         }
-
     }
 
 }

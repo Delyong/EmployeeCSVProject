@@ -1,23 +1,35 @@
 package com.sparta.employeecsv.controller;
 
 import com.sparta.employeecsv.model.Employee;
+import com.sparta.employeecsv.model.EmployeeDatabase;
 import com.sparta.employeecsv.model.ReadFile;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-// TODO sort out employee toString
 
 public class CSVController {
 
     private ReadFile readFile;
+    private EmployeeDatabase employeeDatabase;
 
     public void getFile(String fileName) {
 
         readFile = new ReadFile();
         readFile.readFile(fileName);
 
+    }
+
+    public void setupDatabase() {
+
+        employeeDatabase = new EmployeeDatabase();
+
+        employeeDatabase.connectToDatabase();
+        employeeDatabase.dropTable();
+        employeeDatabase.createTable();
+
+    }
+
+    public void cleanUpDatabase() {
+        employeeDatabase.closeConnection();
     }
 
     public int getUniqueCount() {
