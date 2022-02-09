@@ -2,7 +2,7 @@ package com.sparta.employeecsv.view;
 
 import com.sparta.employeecsv.controller.CSVController;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 public class FactoryMain {
 
@@ -15,7 +15,6 @@ public class FactoryMain {
                 try {
 
                     CSVController controller = new CSVController();
-                    controller.getFile("EmployeeRecords.csv");
 
                     DisplayManager window = new DisplayManager(controller);
 
@@ -26,8 +25,6 @@ public class FactoryMain {
 
                     // get the file path from displayManager
                     // System.out.println(window.buttonFunction());
-
-                    System.out.println(window.getFilename());
 
                     //pass into controller read file in controller
                 } catch (Exception e) {
