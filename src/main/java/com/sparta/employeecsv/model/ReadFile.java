@@ -1,30 +1,17 @@
 package com.sparta.employeecsv.model;
 
-import com.sparta.employeecsv.model.Employee;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.sparta.employeecsv.view.CSVMain;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import static java.util.Collections.nCopies;
-import static java.util.stream.Collectors.toList;
 
 public class ReadFile {
 
-    String fileName = "EmployeeRecords.csv";
-
     private HashMap<String, Employee> employees;
     private ArrayList<Employee> duplicates;
-
-    public static Logger logger = LogManager.getLogger("Project Logger");
 
     public void readFile(String fileName){
 
@@ -50,7 +37,7 @@ public class ReadFile {
             }
 
         } catch (IOException e) {
-            logger.error("Error reading the file");
+            CSVMain.logger.error("Error reading the file");
             e.printStackTrace();
         }
 
