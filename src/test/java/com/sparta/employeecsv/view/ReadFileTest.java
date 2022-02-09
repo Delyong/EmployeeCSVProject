@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadFileTest {
-    public static Logger logger = LogManager.getLogger("Project Logger");
+
     @Test
     @DisplayName("Check if getDuplicates works")
     void getDuplicates() {
@@ -30,7 +30,7 @@ class ReadFileTest {
 
         final List<Employee> duplicates = ReadFile.getDuplicates(employeeList);
 
-        logger.info("Duplicates: {}",duplicates);
+        ReadFile.logger.info("Duplicates: {}",duplicates);
 
     }
 }
