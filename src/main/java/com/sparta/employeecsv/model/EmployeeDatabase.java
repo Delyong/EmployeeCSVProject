@@ -1,9 +1,23 @@
 package com.sparta.employeecsv.model;
+import java.io.IOException;
 import java.sql.*;
 import static com.sparta.employeecsv.model.ReadFile.logger;
+import static com.sparta.employeecsv.database.ConnectionFactory.*;
 
 public class EmployeeDatabase {
     //assuming conn = connection to database
+    static Connection conn;
+
+    {
+        try {
+            conn = getConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
     try{
         String dropTable = "DROP TABLE IF EXISTS `EmployeeRecordsLarge`;"; //drop table if exists
@@ -34,7 +48,7 @@ public class EmployeeDatabase {
     } catch (Exception e){
         logger.error("Error while creating the table", e);
     }
-        
+
 
 
     }
