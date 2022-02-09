@@ -1,8 +1,10 @@
 package com.sparta.employeecsv.model;
+
 import java.io.IOException;
 import java.sql.*;
 import static com.sparta.employeecsv.model.ReadFile.logger;
 import static com.sparta.employeecsv.database.ConnectionFactory.*;
+
 
 public class EmployeeDatabase {
     //assuming conn = connection to database
@@ -18,7 +20,7 @@ public class EmployeeDatabase {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
     try{
         String dropTable = "DROP TABLE IF EXISTS `EmployeeRecordsLarge`;"; //drop table if exists
         Statement st = conn.createStatement(); //prepare java statement
@@ -49,7 +51,16 @@ public class EmployeeDatabase {
         logger.error("Error while creating the table", e);
     }
 
+    //insert values into the table
 
+        String sqlInsert = "INSERT INTO EmployeeRecordsLarge (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        PreparedStatement preparedStatement = conn.prepareStatement(sqlInsert);
+
+    } catch (Exception e){
+        logger.error("Error while inserting data into the table", e);
+    }
 
     }
+
 }
