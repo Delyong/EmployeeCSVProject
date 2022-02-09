@@ -59,6 +59,7 @@ public class Employee {
         return true;
     }
 
+    // TODO limit string size to sql limit
     public String parseName(String name) {
         if (name == null || name.length() == 0) {
             return null;
@@ -106,7 +107,7 @@ public class Employee {
     }
 
     public static Integer parseEmployeeId(String employeeID) {
-        if (employeeID.matches("[0-9]{1,5}"))
+        if (employeeID.matches("[0-9]{1,10}"))
             return Integer.valueOf(employeeID);
         else
             return null;
@@ -139,5 +140,12 @@ public class Employee {
             return Float.valueOf(salary);
         else
             return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeID=" + employeeID +
+                '}';
     }
 }
