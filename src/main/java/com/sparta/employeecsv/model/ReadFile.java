@@ -12,11 +12,13 @@ public class ReadFile {
 
     private HashMap<String, Employee> employees;
     private ArrayList<Employee> duplicates;
+    private ArrayList<Employee> corrupted;
 
     public void readFile(String fileName){
 
         employees = new HashMap<>();
         duplicates = new ArrayList();
+        corrupted = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { //read data from the file
             employees = new HashMap<String,Employee>(); //list to collect Employee objects
@@ -49,5 +51,9 @@ public class ReadFile {
 
     public ArrayList<Employee> getDuplicates() {
         return duplicates;
+    }
+
+    public ArrayList<Employee> getCorrupted(){
+        return corrupted;
     }
 }

@@ -53,11 +53,11 @@ public class CSVController {
         for (String id : employees.keySet()) {
             if (!employees.get(id).isRecordValid()) {
                 corruptCount++;
+                System.out.println("\n\n" + employees.get(id));
             }
         }
 
         return corruptCount;
 
     }
-
 }
