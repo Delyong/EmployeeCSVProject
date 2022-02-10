@@ -100,13 +100,18 @@ public class DisplayManager {
      * This function runs when the start button is pressed
      */
     private void buttonFunction() {
+
         String filename = filenameFld.getText();
+
         controller.getFile(filename);
 
         setDuplicateNumber(controller.getDuplicateCount());
         setUniqueNumber(controller.getUniqueCount());
         setCorruptedNumber(controller.getCorruptedCount());
+
         listDuplicates(controller.getDuplicatesString());
+
+        controller.insertRecordsToDatabase();
 
     }
 

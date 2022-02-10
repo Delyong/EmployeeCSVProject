@@ -47,6 +47,42 @@ public class Employee {
         return employeeID;
     }
 
+    public String getNamePrefix() {
+        return namePrefix;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public Character getMiddleInitial() {
+        return middleInitial;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Character getGender() {
+        return gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Date getDateOfJoin() {
+        return dateOfJoin;
+    }
+
+    public Float getSalary() {
+        return salary;
+    }
+
     public boolean isRecordValid() {
 
         if (employeeID == null || namePrefix == null || firstName == null ||

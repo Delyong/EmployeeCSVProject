@@ -12,7 +12,7 @@ import static com.sparta.employeecsv.view.CSVMain.logger;
 
 public class ReadFile {
 
-    public static HashMap<String, Employee> employees;
+    private HashMap<String, Employee> employees;
     private ArrayList<Employee> duplicates;
     private ArrayList<Employee> corrupted;
 
