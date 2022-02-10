@@ -31,6 +31,14 @@ public class CSVController {
 
     }
 
+    public void insertRecordsToDatabase() {
+
+        HashMap<String, Employee> employees = readFile.getEmployees();
+
+        employeeDatabase.insertRecords(employees);
+
+    }
+
     public void cleanUpDatabase() {
         logger.info("Database has been closed");
         employeeDatabase.closeConnection();
