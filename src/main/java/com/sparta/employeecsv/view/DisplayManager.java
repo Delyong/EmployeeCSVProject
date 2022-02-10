@@ -100,6 +100,8 @@ public class DisplayManager {
      * This function runs when the start button is pressed
      */
     private void buttonFunction() {
+        long startTime = System.nanoTime();
+
         String filename = filenameFld.getText();
         controller.getFile(filename);
 
@@ -108,6 +110,7 @@ public class DisplayManager {
         setCorruptedNumber(controller.getCorruptedCount());
         listDuplicates(controller.getDuplicatesString());
 
+        System.out.println("Reading and printing records took: " + (System.nanoTime() - startTime) + " nano seconds");
     }
 
     /**

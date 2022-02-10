@@ -62,14 +62,14 @@ public class Employee {
     @Override
     public String toString() {
         return "(employeeID: " + employeeID +
-                " namePrefix: " + namePrefix +
-                " firstName: " + firstName +
-                " middleInitial: " + middleInitial +
-                " lastName: " + lastName +
-                " gender: " + gender +
-                " email: " + email +
-                " dob: " + dateOfBirth +
-                " doj: " + dateOfJoin +
-                " salary: " + salary + ")\n";
+                " | namePrefix: " + namePrefix +
+                " | firstName: " + firstName +
+                " | middleInitial: " + middleInitial +
+                " | lastName: " + lastName +
+                " | gender: " + gender +
+                " | email: " + email +
+                " | dob: " + dateOfBirth +
+                " | doj: " + dateOfJoin +
+                " | salary: " + salary + ")\n";
     }
 }
