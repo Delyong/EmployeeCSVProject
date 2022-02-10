@@ -32,7 +32,11 @@ public class CSVController {
     }
 
     public void insertRecordsToDatabase() {
+
         HashMap<String, Employee> employees = readFile.getEmployees();
+
+        employeeDatabase.insertRecords(employees);
+
     }
 
     public void cleanUpDatabase() {
