@@ -6,7 +6,7 @@ import com.sparta.employeecsv.model.ReadFile;
 
 import java.util.HashMap;
 
-import static com.sparta.employeecsv.view.CSVMain.logger;
+import static com.sparta.employeecsv.CSVMain.logger;
 
 public class CSVController {
 

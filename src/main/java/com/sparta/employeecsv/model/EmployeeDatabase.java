@@ -1,6 +1,6 @@
 package com.sparta.employeecsv.model;
+import com.sparta.employeecsv.CSVMain;
 import com.sparta.employeecsv.database.ConnectionFactory;
-import com.sparta.employeecsv.view.CSVMain;
 
 import java.io.IOException;
 import java.sql.*;
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import static com.sparta.employeecsv.view.CSVMain.logger;
+import static com.sparta.employeecsv.CSVMain.logger;
 
 public class EmployeeDatabase {
 

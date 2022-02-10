@@ -1,6 +1,6 @@
 package com.sparta.employeecsv.model;
 
-import com.sparta.employeecsv.view.CSVMain;
+import com.sparta.employeecsv.CSVMain;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.sparta.employeecsv.view.CSVMain.logger;
+import static com.sparta.employeecsv.CSVMain.logger;
 
 public class ReadFile {
 

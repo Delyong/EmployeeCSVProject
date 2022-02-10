@@ -1,6 +1,7 @@
-package com.sparta.employeecsv.view;
+package com.sparta.employeecsv;
 
 import com.sparta.employeecsv.controller.CSVController;
+import com.sparta.employeecsv.view.DisplayManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

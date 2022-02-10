@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static com.sparta.employeecsv.view.CSVMain.logger;
+import static com.sparta.employeecsv.CSVMain.logger;
 
 public class ConnectionFactory {
 
