@@ -19,7 +19,7 @@ public class EmployeeTest {
 
     @BeforeAll
     public static void setUp(){
-        employeeParser = new EmployeeParser();;
+        employeeParser = new EmployeeParser();
     }
 
     @DisplayName("Given date '12/19/1977', parseDate.toString returns a date string that " +
