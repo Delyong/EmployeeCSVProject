@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,25 +39,17 @@ public class CSVController implements Runnable {
         logger.info("Database has been set up");
         employeeDatabase = new EmployeeDatabase();
 
-        try {
-            connection = ConnectionFactory.getConnection();
-            logger.info("Successfully created database connection");
-        } catch (SQLException | IOException e) {
-            logger.fatal("Failed to create database connection");
-            e.printStackTrace();
-        }
-
-        employeeDatabase.dropTable(connection);
-        employeeDatabase.createTable(connection);
+        employeeDatabase.dropTable();
+        employeeDatabase.createTable();
 
     }
 
     public void insertRecordsToDatabase() {
 
-        HashMap<String, Employee> employees = readFile.getEmployees();
+        ArrayList<Employee> employees = readFile.getEmployeeAsList();
 
         long startTime = System.nanoTime();
-        employeeDatabase.insertRecordsMap(connection, employees);
+        employeeDatabase.insertRecordsList(employees);
 
         System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
         logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
@@ -68,46 +61,16 @@ public class CSVController implements Runnable {
 
         ArrayList<Employee> employees = readFile.getEmployeeAsList();
 
-        List<Employee> thread1List = employees.subList(0,employees.size()/4);
-        List<Employee> thread2List = employees.subList(employees.size()/4, employees.size()/2);
-        List<Employee> thread3List = employees.subList(employees.size()/2 ,(employees.size()/4) * 3);
-        List<Employee> thread4List = employees.subList((employees.size()/4) * 3, employees.size());
+        Thread[] threads = createNumberOfThreads(4, employees);
 
-        System.out.println((thread1List.size() + thread2List.size() + thread3List.size() + thread4List.size()));
-        System.out.println((employees.size()));
-
-        InsertEmployeeThread insertThread1 = new InsertEmployeeThread(
-                connection, new ArrayList<Employee>(thread1List)
-        );
-
-        InsertEmployeeThread insertThread2 = new InsertEmployeeThread(
-                connection, new ArrayList<Employee>(thread2List)
-        );
-
-        InsertEmployeeThread insertThread3 = new InsertEmployeeThread(
-                connection, new ArrayList<Employee>(thread3List)
-        );
-
-        InsertEmployeeThread insertThread4 = new InsertEmployeeThread(
-                connection, new ArrayList<Employee>(thread4List)
-        );
-
-        Thread thread1 = new Thread(insertThread1);
-        Thread thread2 = new Thread(insertThread2);
-        Thread thread3 = new Thread(insertThread3);
-        Thread thread4 = new Thread(insertThread4);
-
-        thread1.start();
-        thread2.start();
-        thread3.start();
-        thread4.start();
+        for (Thread thread : threads) {
+            thread.start();
+        }
 
         try {
-            thread1.join();
-            thread2.join();
-            thread3.join();
-            thread4.join();
-
+            for (Thread thread : threads) {
+                thread.join();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -115,6 +78,47 @@ public class CSVController implements Runnable {
         System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
         logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
 
+    }
+
+    private Thread[] createNumberOfThreads(int count, ArrayList<Employee> employees) {
+
+        Thread[] threads = new Thread[count];
+        int[] intervals = new int[count * 2];
+
+        int employeesSize = employees.size();
+        System.out.println(employeesSize);
+
+        // 0 , same1, same1, same2, same2, same3, same3, employeesSize
+
+        for (int i = 0; i < count; i++) {
+
+            intervals[i * 2] = (employeesSize/count) * i;
+
+            if ((2 * i) + 1 < intervals.length) {
+                intervals[(i * 2) + 1] = (employeesSize/count) * (i+1);
+            }
+
+        }
+
+        // make sure no values are lost to rounding
+        intervals[intervals.length - 1] = employeesSize;
+
+        System.out.println(Arrays.toString(intervals));
+        System.out.println(employeesSize);
+
+        for (int i = 0; i < count; i++) {
+
+            List<Employee> splitEmployees = employees.subList(intervals[i*2], intervals[(i*2)+1]);
+
+            InsertEmployeeThread insertEmployeeThread = new InsertEmployeeThread(
+                    new ArrayList(splitEmployees)
+            );
+
+            threads[i] = new Thread(insertEmployeeThread);
+
+        }
+
+        return threads;
     }
 
     public void cleanUpDatabase() {
