@@ -13,7 +13,7 @@ import static com.sparta.employeecsv.CSVMain.logger;
 public class EmployeeDatabase {
 
     private Connection connection;
-
+    
     public void connectToDatabase() {
         try {
             connection = ConnectionFactory.getConnection();
@@ -23,29 +23,29 @@ public class EmployeeDatabase {
             e.printStackTrace();
         }
     }
-
+    
     public void dropTable() {
-
+    
         try {
             String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
-
+    
             Statement st = connection.createStatement(); //prepare java statement
             st.executeUpdate(dropTable); //execute the query
-
+    
             logger.info("Successfully dropped 'EmployeeRecords' if exists");
-
+    
             st.close(); //close connection to database
-
+    
         } catch (Exception e) {
             logger.error("Error while dropping table", e); //add error into the log file
             e.printStackTrace();
         }
-
+    
     }
-
+    
     public void createTable() {
         try {
-
+    
             String createTable = "CREATE TABLE `EmployeeRecords` (" +
                     "`EmployeeID` INT," +
                     "`NamePrefix` VARCHAR(5)," +
@@ -59,20 +59,20 @@ public class EmployeeDatabase {
                     "`Salary` DECIMAL(12,2)," +
                     "PRIMARY KEY (`EmployeeID`)" +
                     ");";
-
+    
             Statement st = connection.createStatement(); //prepare java statement
-
+    
             st.executeUpdate(createTable); //execute the query
             CSVMain.logger.info("Successfully created 'EmployeeRecords' table");
-
+    
             st.close(); //close connection to database
-
+    
         } catch (Exception e) {
             logger.fatal("Error while creating the table", e);
             e.printStackTrace();
         }
     }
-
+    
     public void closeConnection() {
         try {
             ConnectionFactory.closeConnection();
@@ -81,7 +81,7 @@ public class EmployeeDatabase {
             e.printStackTrace();
         }
     }
-
+    
     public void insertRecords(HashMap<String, Employee> employees){
     //insert values into the table
 
@@ -94,25 +94,24 @@ public class EmployeeDatabase {
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
             Iterator empIterator = employees.entrySet().iterator();
+                for (Employee employee : employees.values()) {
+                    synchronized (employee) {
+                        preparedStatement.setInt(1, employee.getEmployeeID());
+                        preparedStatement.setString(2, employee.getNamePrefix());
+                        preparedStatement.setString(3, employee.getFirstName());
+                        preparedStatement.setString(4, employee.getMiddleInitial().toString());
+                        preparedStatement.setString(5, employee.getLastName());
+                        preparedStatement.setString(6, employee.getGender().toString());
+                        preparedStatement.setString(7, employee.getEmail());
+                        preparedStatement.setDate(8, employee.getDateOfBirth());
+                        preparedStatement.setDate(9, employee.getDateOfJoin());
+                        preparedStatement.setFloat(10, employee.getSalary());
 
-            for (Employee employee : employees.values()) { //prepare the insert statement
+                        preparedStatement.executeUpdate();
 
-                preparedStatement.setInt(1, employee.getEmployeeID());
-                preparedStatement.setString(2, employee.getNamePrefix());
-                preparedStatement.setString(3, employee.getFirstName());
-                preparedStatement.setString(4, employee.getMiddleInitial().toString());
-                preparedStatement.setString(5, employee.getLastName());
-                preparedStatement.setString(6, employee.getGender().toString());
-                preparedStatement.setString(7, employee.getEmail());
-                preparedStatement.setDate(8, employee.getDateOfBirth());
-                preparedStatement.setDate(9, employee.getDateOfJoin());
-                preparedStatement.setFloat(10, employee.getSalary());
-
-                preparedStatement.executeUpdate();//execute the insert
-
-                System.out.print("Added record: " + employee.toString());
-
-            }
+                        System.out.print("Added record: " + employee.toString());
+                    }
+                }
 
             preparedStatement.close();
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
-public class CSVController {
+public class CSVController implements Runnable {
 
     private ReadFile readFile;
     private EmployeeDatabase employeeDatabase;
@@ -18,6 +18,11 @@ public class CSVController {
         readFile = new ReadFile();
         readFile.readFile(fileName);
 
+    }
+
+    @Override
+    public void run() {
+        insertRecordsToDatabase();
     }
 
     public void setupDatabase() {
@@ -35,8 +40,9 @@ public class CSVController {
 
         HashMap<String, Employee> employees = readFile.getEmployees();
 
+        long startTime = System.nanoTime();
         employeeDatabase.insertRecords(employees);
-
+        logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
     }
 
     public void cleanUpDatabase() {
