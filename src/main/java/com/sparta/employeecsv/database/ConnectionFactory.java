@@ -22,9 +22,9 @@ public class ConnectionFactory {
             props.load(new FileReader("mysql.properties"));
 
             connection = DriverManager.getConnection(
-                    props.getProperty("db5006577199.hosting-data.io"),
-                    props.getProperty("dbu917722"),
-                    props.getProperty("passPartout@")
+                    props.getProperty("dburl"),
+                    props.getProperty("dbuserid"),
+                    props.getProperty("dbpassword")
             );
         }
 

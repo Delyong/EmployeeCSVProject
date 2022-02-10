@@ -85,13 +85,18 @@ public class EmployeeDatabase {
         }
     }
 
-    public void insertRecordsSingleThread(){
-//insert values into the table
+    public void insertRecords(HashMap<String, Employee> employees){
+    //insert values into the table
 
-        String sqlInsert = "INSERT INTO EmployeeRecords (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlInsert =
+                "INSERT INTO EmployeeRecords " +
+                "(EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
-            Iterator empIterator = ReadFile.employees.entrySet().iterator();
+            Iterator empIterator = employees.entrySet().iterator();
+
             while (empIterator.hasNext()) {
                 Map.Entry mapElement
                         = (Map.Entry)empIterator.next();
@@ -100,9 +105,12 @@ public class EmployeeDatabase {
                 preparedStatement.setString(3,((String)mapElement.getValue()));
 
             }
+
         } catch (Exception e){
             logger.error("Error while inserting data into the table", e);
         }
+        }
+
     }
 
 }
