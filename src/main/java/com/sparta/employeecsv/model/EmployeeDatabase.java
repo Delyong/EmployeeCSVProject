@@ -88,7 +88,7 @@ public class EmployeeDatabase {
     public void insertRecordsSingleThread(){
 //insert values into the table
 
-        String sqlInsert = "INSERT INTO EmployeeRecordsLarge (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlInsert = "INSERT INTO EmployeeRecords (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
             Iterator empIterator = ReadFile.employees.entrySet().iterator();
