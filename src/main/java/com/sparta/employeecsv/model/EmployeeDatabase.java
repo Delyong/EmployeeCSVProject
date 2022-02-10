@@ -1,8 +1,5 @@
 package com.sparta.employeecsv.model;
 import com.sparta.employeecsv.CSVMain;
-import com.sparta.employeecsv.database.ConnectionFactory;
-
-import java.io.IOException;
 import java.sql.*;
 
 import java.util.HashMap;
@@ -14,17 +11,7 @@ public class EmployeeDatabase {
 
     private Connection connection;
     
-    public void connectToDatabase() {
-        try {
-            connection = ConnectionFactory.getConnection();
-            logger.info("Successfully created database connection");
-        } catch (SQLException | IOException e) {
-            logger.fatal("Failed to create database connection");
-            e.printStackTrace();
-        }
-    }
-    
-    public void dropTable() {
+    public void dropTable(Connection connection) {
     
         try {
             String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
@@ -43,7 +30,7 @@ public class EmployeeDatabase {
     
     }
     
-    public void createTable() {
+    public void createTable(Connection connection) {
         try {
     
             String createTable = "CREATE TABLE `EmployeeRecords` (" +
@@ -73,16 +60,7 @@ public class EmployeeDatabase {
         }
     }
     
-    public void closeConnection() {
-        try {
-            ConnectionFactory.closeConnection();
-        } catch (SQLException e) {
-            logger.error("Error while closing the connection", e);
-            e.printStackTrace();
-        }
-    }
-    
-    public void insertRecords(HashMap<String, Employee> employees){
+    public void insertRecords(Connection connection, HashMap<String, Employee> employees){
     //insert values into the table
 
         String sqlInsert =

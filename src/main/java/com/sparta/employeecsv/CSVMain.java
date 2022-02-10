@@ -40,17 +40,7 @@ public class CSVMain {
                     window.listDuplicates(controller.getDuplicatesString());
 
 
-                    //controller.insertRecordsToDatabase();
-                    Thread th1 = new Thread(controller);
-                    Thread th2 = new Thread(controller);
-                    th1.start();
-                    th2.start();
-                    try {
-                        th1.join();
-                        th2.join();
-                    } catch (InterruptedException ie) {
-                        ie.printStackTrace();
-                    }
+                    controller.insertRecordsToDatabase();
 
                 }
             };

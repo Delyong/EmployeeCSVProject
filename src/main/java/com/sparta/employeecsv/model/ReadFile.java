@@ -57,6 +57,16 @@ public class ReadFile {
         return employees;
     }
 
+    public ArrayList<Employee> getEmployeeAsList() {
+        ArrayList<Employee> employeesList = new ArrayList<Employee>(employees.size());
+
+        for (Employee employee : employees.values()) {
+            employeesList.add(employee);
+        }
+
+        return employeesList;
+    }
+
     public ArrayList<Employee> getDuplicates() {
         return duplicates;
     }
