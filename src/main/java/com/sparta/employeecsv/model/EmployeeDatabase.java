@@ -37,7 +37,7 @@ public class EmployeeDatabase {
             st.close(); //close connection to database
 
         } catch (Exception e) {
-            logger.error("Error while dropping table", e);
+            logger.error("Error while dropping table", e); //add error into the log file
             e.printStackTrace();
         }
 
@@ -95,7 +95,7 @@ public class EmployeeDatabase {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
             Iterator empIterator = employees.entrySet().iterator();
 
-            for (Employee employee : employees.values()) {
+            for (Employee employee : employees.values()) { //prepare the insert statement
 
                 preparedStatement.setInt(1, employee.getEmployeeID());
                 preparedStatement.setString(2, employee.getNamePrefix());
@@ -108,7 +108,7 @@ public class EmployeeDatabase {
                 preparedStatement.setDate(9, employee.getDateOfJoin());
                 preparedStatement.setFloat(10, employee.getSalary());
 
-                preparedStatement.executeUpdate();
+                preparedStatement.executeUpdate();//execute the insert
 
                 System.out.print("Added record: " + employee.toString());
 
@@ -117,7 +117,7 @@ public class EmployeeDatabase {
             preparedStatement.close();
 
         } catch (Exception e){
-            logger.error("Error while inserting data into the table", e);
+            logger.error("Error while inserting data into the table", e); //add error into the log file
             e.printStackTrace();
         }
 
