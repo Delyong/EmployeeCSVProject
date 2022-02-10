@@ -1,7 +1,10 @@
 package com.sparta.employeecsv.model;
+import com.sparta.employeecsv.database.ConnectionFactory;
+import com.sparta.employeecsv.view.CSVMain;
 
 import java.io.IOException;
 import java.sql.*;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -10,33 +13,43 @@ import static com.sparta.employeecsv.view.CSVMain.logger;
 import static com.sparta.employeecsv.database.ConnectionFactory.*;
 import static com.sparta.employeecsv.model.ReadFile.*;
 
-
 public class EmployeeDatabase {
-    //assuming conn = connection to database
-    static Connection conn;
 
-    {
+    private Connection connection;
+
+    public void connectToDatabase() {
         try {
-            conn = getConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+            connection = ConnectionFactory.getConnection();
+            CSVMain.logger.info("Successfully created database connection");
+        } catch (SQLException | IOException e) {
+            CSVMain.logger.fatal("Failed to create database connection");
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args){
-        try{
-            String dropTable = "DROP TABLE IF EXISTS `EmployeeRecordsLarge`;"; //drop table if exists
-            Statement st = conn.createStatement(); //prepare java statement
-            ResultSet rs = st.executeQuery(dropTable); //execute the query
+    public void dropTable() {
+
+        try {
+            String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
+
+            Statement st = connection.createStatement(); //prepare java statement
+            st.execute(dropTable); //execute the query
+
+            CSVMain.logger.info("Successfully dropped 'EmployeeRecords' if exists");
+
             st.close(); //close connection to database
-        } catch (Exception e){
-            logger.error("Error while dropping table", e);
+
+        } catch (Exception e) {
+            CSVMain.logger.fatal("Error while dropping table", e);
+            e.printStackTrace();
         }
 
-        try{
-            String createTable = "CREATE TABLE `EmployeeRecordsLarge` (" +
+    }
+
+    public void createTable() {
+        try {
+
+            String createTable = "CREATE TABLE `EmployeeRecords` (" +
                     "`EmployeeID` INT," +
                     "`NamePrefix` VARCHAR(5)," +
                     "`FirstName` VARCHAR(30)," +
@@ -49,18 +62,35 @@ public class EmployeeDatabase {
                     "`Salary` DECIMAL(12,2)," +
                     "PRIMARY KEY (`EmployeeID`)" +
                     ");";
-            Statement st = conn.createStatement(); //prepare java statement
-            ResultSet rs = st.executeQuery(createTable); //execute the query
-            st.close(); //close connection to database
-        } catch (Exception e){
-            logger.error("Error while creating the table", e);
-        }
 
-        //insert values into the table
+            Statement st = connection.createStatement(); //prepare java statement
+
+            st.execute(createTable); //execute the query
+            CSVMain.logger.info("Successfully created 'EmployeeRecords' table");
+
+            st.close(); //close connection to database
+
+        } catch (Exception e) {
+            CSVMain.logger.fatal("Error while creating the table", e);
+            e.printStackTrace();
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            ConnectionFactory.closeConnection();
+        } catch (SQLException e) {
+            CSVMain.logger.error("Error while closing the connection", e);
+            e.printStackTrace();
+        }
+    }
+
+    public void insertRecordsSingleThread(){
+//insert values into the table
 
         String sqlInsert = "INSERT INTO EmployeeRecordsLarge (EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sqlInsert);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
             Iterator empIterator = ReadFile.employees.entrySet().iterator();
             while (empIterator.hasNext()) {
                 Map.Entry mapElement
@@ -73,7 +103,6 @@ public class EmployeeDatabase {
         } catch (Exception e){
             logger.error("Error while inserting data into the table", e);
         }
-
     }
 
 }

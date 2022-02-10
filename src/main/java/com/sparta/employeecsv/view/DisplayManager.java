@@ -14,6 +14,7 @@ public class DisplayManager {
     private JTextField filenameFld;
     private JLabel lblUniqueNumber;
     private JLabel lblDupNumber;
+    private JLabel lblCurNumber;
     private JTextArea duplicateListFld;
 
     private CSVController controller;
@@ -44,20 +45,28 @@ public class DisplayManager {
         filenameFld.setColumns(10);
 
         JLabel lblNewLabel_1 = new JLabel("Number of unique records:");
-        lblNewLabel_1.setBounds(46, 128, 250, 14);
+        lblNewLabel_1.setBounds(46, 150, 250, 14);
         frame.getContentPane().add(lblNewLabel_1);
 
-        JLabel lblNewLabel_1_1 = new JLabel("Number of duplicate records:");
-        lblNewLabel_1_1.setBounds(46, 164, 250, 14);
-        frame.getContentPane().add(lblNewLabel_1_1);
+        JLabel lblNewLabel_2 = new JLabel("Number of duplicate records:");
+        lblNewLabel_2.setBounds(46, 180, 250, 14);
+        frame.getContentPane().add(lblNewLabel_2);
+
+        JLabel lblNewLabel_3 = new JLabel("Number of Corrupted records:");
+        lblNewLabel_3.setBounds(46, 120, 250, 14);
+        frame.getContentPane().add(lblNewLabel_3);
 
         lblUniqueNumber = new JLabel("N/A");
-        lblUniqueNumber.setBounds(240, 128, 78, 14);
+        lblUniqueNumber.setBounds(240, 150, 78, 14);
         frame.getContentPane().add(lblUniqueNumber);
 
         lblDupNumber = new JLabel("N/A");
-        lblDupNumber.setBounds(240, 164, 78, 14);
+        lblDupNumber.setBounds(240, 180, 78, 14);
         frame.getContentPane().add(lblDupNumber);
+
+        lblCurNumber = new JLabel("N/A");
+        lblCurNumber.setBounds(240, 120, 78, 14);
+        frame.getContentPane().add(lblCurNumber);
 
         JLabel lblNewLabel_4 = new JLabel("Duplicated records listed:");
         lblNewLabel_4.setBounds(46, 214, 200, 14);
@@ -96,6 +105,7 @@ public class DisplayManager {
 
         setDuplicateNumber(controller.getDuplicateCount());
         setUniqueNumber(controller.getUniqueCount());
+        setCorruptedNumber(controller.getCorruptedCount());
         listDuplicates(controller.getDuplicatesString());
 
     }
@@ -116,6 +126,10 @@ public class DisplayManager {
      */
     public void setUniqueNumber(int numberOfUnique) {
         lblUniqueNumber.setText("" + numberOfUnique);
+    }
+
+    public void setCorruptedNumber(int numberOfCorrupted){
+        lblCurNumber.setText("" + numberOfCorrupted);
     }
 
     /**

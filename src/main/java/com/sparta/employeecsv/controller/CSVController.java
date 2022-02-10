@@ -1,17 +1,17 @@
 package com.sparta.employeecsv.controller;
 
 import com.sparta.employeecsv.model.Employee;
+import com.sparta.employeecsv.model.EmployeeDatabase;
 import com.sparta.employeecsv.model.ReadFile;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-// TODO sort out employee toString
+import static com.sparta.employeecsv.view.CSVMain.logger;
 
 public class CSVController {
 
     private ReadFile readFile;
+    private EmployeeDatabase employeeDatabase;
 
     public void getFile(String fileName) {
 
@@ -20,16 +20,34 @@ public class CSVController {
 
     }
 
+    public void setupDatabase() {
+
+        logger.info("Database has been set up");
+        employeeDatabase = new EmployeeDatabase();
+
+        employeeDatabase.connectToDatabase();
+        employeeDatabase.dropTable();
+        employeeDatabase.createTable();
+
+    }
+
+    public void cleanUpDatabase() {
+        logger.info("Database has been closed");
+        employeeDatabase.closeConnection();
+    }
+
     public int getUniqueCount() {
+        logger.info("Amount of unique records has been displayed");
         return readFile.getEmployees().size();
     }
 
     public int getDuplicateCount() {
-        System.out.println(readFile.getDuplicates().toString());
+        logger.info("Amount of duplicated records has been displayed");
         return readFile.getDuplicates().size();
     }
 
     public String getDuplicatesString() {
+        logger.info("Duplicate records has been displayed to the user");
         return readFile.getDuplicates().toString();
     }
 
@@ -43,9 +61,8 @@ public class CSVController {
                 corruptCount++;
             }
         }
-
+        logger.info("Amount of corrupted records has been displayed");
         return corruptCount;
 
     }
-
 }

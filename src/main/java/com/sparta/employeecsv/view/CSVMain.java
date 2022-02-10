@@ -19,18 +19,13 @@ public class CSVMain {
                 try {
 
                     CSVController controller = new CSVController();
-
                     DisplayManager window = new DisplayManager(controller);
-
-                    //get back records from controller
 
                     window.initialize();
                     window.frame.setVisible(true);
 
-                    // get the file path from displayManager
-                    // System.out.println(window.buttonFunction());
+                    controller.setupDatabase();
 
-                    //pass into controller read file in controller
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
