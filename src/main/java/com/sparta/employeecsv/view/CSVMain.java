@@ -19,12 +19,11 @@ public class CSVMain {
                 try {
 
                     CSVController controller = new CSVController();
+                    controller.setupDatabase();
                     DisplayManager window = new DisplayManager(controller);
 
                     window.initialize();
                     window.frame.setVisible(true);
-
-                    controller.setupDatabase();
 
                 } catch (Exception e) {
                     e.printStackTrace();

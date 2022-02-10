@@ -96,21 +96,22 @@ public class EmployeeDatabase {
             Iterator empIterator = employees.entrySet().iterator();
 
             for (Employee employee : employees.values()) {
+                synchronized (employee){
+                    preparedStatement.setInt(1, employee.getEmployeeID());
+                    preparedStatement.setString(2, employee.getNamePrefix());
+                    preparedStatement.setString(3, employee.getFirstName());
+                    preparedStatement.setString(4, employee.getMiddleInitial().toString());
+                    preparedStatement.setString(5, employee.getLastName());
+                    preparedStatement.setString(6, employee.getGender().toString());
+                    preparedStatement.setString(7, employee.getEmail());
+                    preparedStatement.setDate(8, employee.getDateOfBirth());
+                    preparedStatement.setDate(9, employee.getDateOfJoin());
+                    preparedStatement.setFloat(10, employee.getSalary());
 
-                preparedStatement.setInt(1, employee.getEmployeeID());
-                preparedStatement.setString(2, employee.getNamePrefix());
-                preparedStatement.setString(3, employee.getFirstName());
-                preparedStatement.setString(4, employee.getMiddleInitial().toString());
-                preparedStatement.setString(5, employee.getLastName());
-                preparedStatement.setString(6, employee.getGender().toString());
-                preparedStatement.setString(7, employee.getEmail());
-                preparedStatement.setDate(8, employee.getDateOfBirth());
-                preparedStatement.setDate(9, employee.getDateOfJoin());
-                preparedStatement.setFloat(10, employee.getSalary());
+                    preparedStatement.executeUpdate();
 
-                preparedStatement.executeUpdate();
-
-                System.out.print("Added record: " + employee.toString());
+                    System.out.print("Added record: " + employee.toString());
+                }
 
             }
 
