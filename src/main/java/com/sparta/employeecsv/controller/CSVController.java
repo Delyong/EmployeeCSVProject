@@ -8,6 +8,7 @@ import com.sparta.employeecsv.model.ReadFile;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.sparta.employeecsv.CSVMain.logger;
@@ -53,32 +54,16 @@ public class CSVController implements Runnable {
         HashMap<String, Employee> employees = readFile.getEmployees();
 
         long startTime = System.nanoTime();
-        employeeDatabase.insertRecords(connection, employees);
+        employeeDatabase.insertRecordsMap(connection, employees);
         logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
     }
 
     public void insertRecordsToDatabaseThreads() {
 
-
-        Thread th1 = new Thread();
-        Thread th2 = new Thread();
-
-        th1.start();
-        th2.start();
-
-        try {
-            th1.join();
-            th2.join();
-        } catch (InterruptedException ie) {
-            ie.printStackTrace();
-        }
-
-        HashMap<String, Employee> employees = readFile.getEmployees();
-
-
+        ArrayList<Employee> employees = readFile.getEmployeeAsList();
 
         long startTime = System.nanoTime();
-        employeeDatabase.insertRecords(connection, employees);
+        employeeDatabase.insertRecordsList(connection, employees);
         logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
     }
 
