@@ -3,6 +3,7 @@ package com.sparta.employeecsv.controller;
 import com.sparta.employeecsv.database.ConnectionFactory;
 import com.sparta.employeecsv.model.Employee;
 import com.sparta.employeecsv.model.EmployeeDatabase;
+import com.sparta.employeecsv.model.InsertEmployeeThread;
 import com.sparta.employeecsv.model.ReadFile;
 
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
@@ -62,9 +64,32 @@ public class CSVController implements Runnable {
 
         ArrayList<Employee> employees = readFile.getEmployeeAsList();
 
-        long startTime = System.nanoTime();
-        employeeDatabase.insertRecordsList(connection, employees);
-        logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
+        List<Employee> thread1List = employees.subList(0,employees.size()/2);
+        List<Employee> thread2List = employees.subList(employees.size()/2, employees.size());
+        System.out.println((thread1List.size() + thread2List.size()));
+        System.out.println((employees.size()));
+
+        InsertEmployeeThread insertThread1 = new InsertEmployeeThread(
+                connection, new ArrayList<Employee>(thread1List)
+        );
+
+        InsertEmployeeThread insertThread2 = new InsertEmployeeThread(
+                connection, new ArrayList<Employee>(thread2List)
+        );
+
+        Thread thread1 = new Thread(insertThread1);
+        Thread thread2 = new Thread(insertThread2);
+
+        thread1.start();
+        thread2.start();
+
+
+
+        // long startTime = System.nanoTime();
+        // employeeDatabase.insertRecordsList(connection, employees);
+        //
+        // logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
+
     }
 
     public void cleanUpDatabase() {
