@@ -3,8 +3,25 @@ package com.sparta.employeecsv.model;
 import java.sql.Date;
 
 public class EmployeeParser {
+
+    public Employee parseEmployee(String employeeID, String namePrefix, String firstName,
+                                         String middleInitial, String lastName, String gender,
+                                         String email, String dateOfBirth, String dateOfJoin,
+                                         String salary
+    ) {
+
+        return new Employee(
+                parseEmployeeId(employeeID), parseNamePrefix(namePrefix),
+                parseName(firstName), parseMiddleInitial(middleInitial),
+                parseName(lastName), parseGender(gender),
+                parseEmail(email), parseDate(dateOfBirth),
+                parseDate(dateOfJoin), parseSalary(salary)
+        );
+
+    }
+
     // TODO limit string size to sql limit
-    public static String parseName(String name) {
+    public String parseName(String name) {
         if (name == null || name.length() == 0) {
             return null;
         }
@@ -12,7 +29,7 @@ public class EmployeeParser {
         return name;
     }
 
-    public static Character parseMiddleInitial(String middleInitial) {
+    public Character parseMiddleInitial(String middleInitial) {
 
         if (middleInitial == null || middleInitial.length() != 1) {
             return null;
@@ -23,7 +40,7 @@ public class EmployeeParser {
 
     // require yyyy-mm-dd format
     // now mm-dd-yyyy
-    public static Date parseDate(String date) {
+    public Date parseDate(String date) {
 
         if (date == null) {
             return null;
@@ -50,7 +67,7 @@ public class EmployeeParser {
 
     }
 
-    public static Integer parseEmployeeId(String employeeID) {
+    public Integer parseEmployeeId(String employeeID) {
         if (employeeID.matches("[0-9]{1,10}"))
             return Integer.valueOf(employeeID);
         else
@@ -58,28 +75,28 @@ public class EmployeeParser {
     }
 
 
-    public static String parseNamePrefix(String namePrefix) {
+    public String parseNamePrefix(String namePrefix) {
         if (namePrefix.matches("[a-zA-Z]{2,4}."))
             return namePrefix;
         else
             return null;
     }
 
-    public static Character parseGender(String gender) {
+    public Character parseGender(String gender) {
         if (gender.matches("F|M"))
             return gender.charAt(0);
         else
             return null;
     }
 
-    public static String parseEmail(String email) {
+    public String parseEmail(String email) {
         if (email.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$"))
             return email;
         else
             return null;
     }
 
-    public static Float parseSalary(String salary) {
+    public Float parseSalary(String salary) {
         if (salary.matches("[0-9]{1,10}"))
             return Float.valueOf(salary);
         else
