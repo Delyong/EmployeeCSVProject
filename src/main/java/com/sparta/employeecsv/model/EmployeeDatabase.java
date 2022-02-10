@@ -1,5 +1,8 @@
 package com.sparta.employeecsv.model;
 import com.sparta.employeecsv.CSVMain;
+import com.sparta.employeecsv.database.ConnectionFactory;
+
+import java.io.IOException;
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -11,8 +14,18 @@ import static com.sparta.employeecsv.CSVMain.logger;
 public class EmployeeDatabase {
 
     private Connection connection;
-    
-    public void dropTable(Connection connection) {
+
+    public EmployeeDatabase() {
+        try {
+            connection = ConnectionFactory.getConnection();
+            logger.info("Successfully created database connection");
+        } catch (SQLException | IOException e) {
+            logger.fatal("Failed to create database connection");
+            e.printStackTrace();
+        }
+    }
+
+    public void dropTable() {
     
         try {
             String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
@@ -31,7 +44,7 @@ public class EmployeeDatabase {
     
     }
     
-    public void createTable(Connection connection) {
+    public void createTable() {
         try {
     
             String createTable = "CREATE TABLE `EmployeeRecords` (" +
@@ -61,7 +74,7 @@ public class EmployeeDatabase {
         }
     }
     
-    public void insertRecordsMap(Connection connection, HashMap<String, Employee> employees){
+    public void insertRecordsMap(HashMap<String, Employee> employees){
     //insert values into the table
 
         String sqlInsert =
@@ -88,7 +101,7 @@ public class EmployeeDatabase {
 
                         preparedStatement.executeUpdate();
 
-                        System.out.print("Added record: " + employee.toString());
+                        // System.out.print("Added record: " + employee.toString());
                     }
                 }
 
@@ -101,7 +114,7 @@ public class EmployeeDatabase {
 
     }
 
-    public void insertRecordsList(Connection connection, ArrayList<Employee> employees){
+    public void insertRecordsList(ArrayList<Employee> employees){
     //insert values into the table
 
         String sqlInsert =
@@ -109,7 +122,11 @@ public class EmployeeDatabase {
                 "(EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+
+
         try {
+
+            connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
             Iterator empIterator = employees.iterator();
@@ -126,10 +143,10 @@ public class EmployeeDatabase {
                 preparedStatement.setFloat(10, employee.getSalary());
 
                 preparedStatement.executeUpdate();
-                System.out.print("Added record: " + employee.toString());
+                // System.out.print("Added record: " + employee.toString());
             }
 
-
+            connection.setAutoCommit(true);
             preparedStatement.close();
 
         } catch (Exception e){
