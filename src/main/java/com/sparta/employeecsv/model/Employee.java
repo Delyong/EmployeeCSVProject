@@ -18,25 +18,26 @@ public class Employee {
 
     private Float salary;
 
-    public Employee(String employeeID, String namePrefix, String firstName,
-                    String middleInitial, String lastName, String gender,
-                    String email, String dateOfBirth, String dateOfJoin,
-                    String salary
+    public Employee(Integer employeeID, String namePrefix, String firstName,
+                    Character middleInitial, String lastName, Character gender,
+                    String email, Date dateOfBirth, Date dateOfJoin,
+                    Float salary
     ) {
 
-        this.employeeID = EmployeeParser.parseEmployeeId(employeeID);
+        this.employeeID = employeeID;
 
-        this.firstName = EmployeeParser.parseName(firstName);
-        this.middleInitial = EmployeeParser.parseMiddleInitial(middleInitial);
-        this.lastName = EmployeeParser.parseName(lastName);
+        this.namePrefix = namePrefix;
+        this.firstName = firstName;
+        this.middleInitial = middleInitial;
+        this.lastName = lastName;
 
-        this.dateOfBirth = EmployeeParser.parseDate(dateOfBirth);
-        this.dateOfJoin = EmployeeParser.parseDate(dateOfJoin);
-        this.namePrefix = EmployeeParser.parseNamePrefix(namePrefix);
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfJoin = dateOfJoin;
 
-        this.gender = EmployeeParser.parseGender(gender);
-        this.email = EmployeeParser.parseEmail(email);
-        this.salary = EmployeeParser.parseSalary(salary);
+        this.gender = gender;
+        this.email = email;
+        this.salary = salary;
+
     }
 
     public Employee() {

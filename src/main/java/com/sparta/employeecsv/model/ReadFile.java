@@ -14,22 +14,27 @@ public class ReadFile {
 
     private HashMap<String, Employee> employees;
     private ArrayList<Employee> duplicates;
-    private ArrayList<Employee> corrupted;
 
     public void readFile(String fileName){
 
         employees = new HashMap<>();
         duplicates = new ArrayList();
-        corrupted = new ArrayList<>();
+
+        EmployeeParser employeeParser = new EmployeeParser();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { //read data from the file
-            employees = new HashMap<String,Employee>(); //list to collect Employee objects
+
+            //list to collect Employee objects
+            employees = new HashMap<String,Employee>();
 
             String line = "";
             while ((line = br.readLine()) != null) { //read the file line by line
                 String[] data = line.split(","); //extract individual fields from each line
 
-                Employee employee = new Employee(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]); //create new Employee object
+                //create new Employee object
+                Employee employee = employeeParser.parseEmployee(data[0], data[1], data[2],
+                        data[3], data[4], data[5], data[6],
+                        data[7], data[8], data[9]);
 
                 if (employees.containsKey(data[0])) {
                     duplicates.add(employee);
@@ -56,7 +61,4 @@ public class ReadFile {
         return duplicates;
     }
 
-    public ArrayList<Employee> getCorrupted(){
-        return corrupted;
-    }
 }
