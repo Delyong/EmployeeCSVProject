@@ -1,6 +1,7 @@
-package com.sparta.employeecsv.view;
+package com.sparta.employeecsv;
 
 import com.sparta.employeecsv.controller.CSVController;
+import com.sparta.employeecsv.view.DisplayManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,17 +40,7 @@ public class CSVMain {
                     window.listDuplicates(controller.getDuplicatesString());
 
 
-                    //controller.insertRecordsToDatabase();
-                    Thread th1 = new Thread(controller);
-                    Thread th2 = new Thread(controller);
-                    th1.start();
-                    th2.start();
-                    try {
-                        th1.join();
-                        th2.join();
-                    } catch (InterruptedException ie) {
-                        ie.printStackTrace();
-                    }
+                    controller.insertRecordsToDatabase();
 
                 }
             };

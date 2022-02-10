@@ -1,6 +1,6 @@
 package com.sparta.employeecsv.model;
 
-import com.sparta.employeecsv.view.CSVMain;
+import com.sparta.employeecsv.CSVMain;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.sparta.employeecsv.view.CSVMain.logger;
+import static com.sparta.employeecsv.CSVMain.logger;
 
 public class ReadFile {
 
@@ -55,6 +55,16 @@ public class ReadFile {
 
     public HashMap<String, Employee> getEmployees() {
         return employees;
+    }
+
+    public ArrayList<Employee> getEmployeeAsList() {
+        ArrayList<Employee> employeesList = new ArrayList<Employee>(employees.size());
+
+        for (Employee employee : employees.values()) {
+            employeesList.add(employee);
+        }
+
+        return employeesList;
     }
 
     public ArrayList<Employee> getDuplicates() {
