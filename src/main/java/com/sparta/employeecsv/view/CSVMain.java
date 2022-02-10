@@ -28,7 +28,9 @@ public class CSVMain {
                 public void actionPerformed(ActionEvent e) {
                     String filename = window.getFilename();
 
+                    long startTime = System.nanoTime();
                     controller.getFile(filename);
+                    System.out.println("Reading records took: " + (System.nanoTime() - startTime) + " nano seconds");
 
                     window.setDuplicateNumber(controller.getDuplicateCount());
                     window.setUniqueNumber(controller.getUniqueCount());
@@ -36,7 +38,19 @@ public class CSVMain {
 
                     window.listDuplicates(controller.getDuplicatesString());
 
-                    controller.insertRecordsToDatabase();
+
+                    //controller.insertRecordsToDatabase();
+                    Thread th1 = new Thread(controller);
+                    Thread th2 = new Thread(controller);
+                    th1.start();
+                    th2.start();
+                    try {
+                        th1.join();
+                        th2.join();
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+
                 }
             };
 

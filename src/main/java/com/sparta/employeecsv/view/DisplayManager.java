@@ -1,9 +1,11 @@
 package com.sparta.employeecsv.view;
 
 import com.sparta.employeecsv.controller.CSVController;
+import com.sparta.employeecsv.model.ReadFile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DisplayManager {
@@ -81,6 +83,7 @@ public class DisplayManager {
         btnStart.addActionListener(buttonPress);
     }
 
+
     /**
      * display number of duplicate records on the GUI
      *
@@ -99,14 +102,13 @@ public class DisplayManager {
         lblUniqueNumber.setText("" + numberOfUnique);
     }
 
-    public void setCorruptedNumber(int numberOfCorrupted){
+    public void setCorruptedNumber(int numberOfCorrupted) {
         lblCurNumber.setText("" + numberOfCorrupted);
     }
 
     /**
      * Gets a list of object with duplicate records and toString Function. Prints it on the Text Area in
      * GUI for duplicate record list
-     *
      */
     public void listDuplicates(String duplicates) {
         duplicateListFld.setText(duplicates);
@@ -116,3 +118,4 @@ public class DisplayManager {
         return filenameFld.getText();
     }
 }
+
