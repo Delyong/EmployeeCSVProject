@@ -4,9 +4,7 @@ import com.sparta.employeecsv.controller.CSVController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class DisplayManager {
 
@@ -17,18 +15,10 @@ public class DisplayManager {
     private JLabel lblCurNumber;
     private JTextArea duplicateListFld;
 
-    private CSVController controller;
-
-    public DisplayManager(CSVController controller) {
-
-        this.controller = controller;
-
-    }
-
     /**
      * Initialize the contents of the frame.
      */
-    public void initialize() {
+    public void initialize(ActionListener buttonPress) {
         frame = new JFrame();
         frame.setResizable(false);
         frame.setBounds(100, 100, 673, 507);
@@ -88,31 +78,7 @@ public class DisplayManager {
         JButton btnStart = new JButton("Start");
         btnStart.setBounds(500, 73, 89, 23);
         frame.getContentPane().add(btnStart);
-        btnStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buttonFunction();
-            }
-        });
-    }
-
-    /**
-     * This function runs when the start button is pressed
-     */
-    private void buttonFunction() {
-
-        String filename = filenameFld.getText();
-
-        controller.getFile(filename);
-
-        setDuplicateNumber(controller.getDuplicateCount());
-        setUniqueNumber(controller.getUniqueCount());
-        setCorruptedNumber(controller.getCorruptedCount());
-
-        listDuplicates(controller.getDuplicatesString());
-
-        controller.insertRecordsToDatabase();
-
+        btnStart.addActionListener(buttonPress);
     }
 
     /**
@@ -144,5 +110,9 @@ public class DisplayManager {
      */
     public void listDuplicates(String duplicates) {
         duplicateListFld.setText(duplicates);
+    }
+
+    public String getFilename() {
+        return filenameFld.getText();
     }
 }

@@ -4,6 +4,9 @@ import com.sparta.employeecsv.controller.CSVController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class CSVMain {
 
     public static Logger logger = LogManager.getLogger("CSV-Logger");
@@ -16,12 +19,29 @@ public class CSVMain {
         try {
 
             CSVController controller = new CSVController();
-            DisplayManager window = new DisplayManager(controller);
-
-            window.initialize();
-            window.frame.setVisible(true);
+            DisplayManager window = new DisplayManager();
 
             controller.setupDatabase();
+
+            ActionListener buttonPress = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String filename = window.getFilename();
+
+                    controller.getFile(filename);
+
+                    window.setDuplicateNumber(controller.getDuplicateCount());
+                    window.setUniqueNumber(controller.getUniqueCount());
+                    window.setCorruptedNumber(controller.getCorruptedCount());
+
+                    window.listDuplicates(controller.getDuplicatesString());
+
+                    controller.insertRecordsToDatabase();
+                }
+            };
+
+            window.initialize(buttonPress);
+            window.frame.setVisible(true);
 
         } catch (Exception e) {
             e.printStackTrace();
