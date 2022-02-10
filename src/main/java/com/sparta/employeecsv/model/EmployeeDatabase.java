@@ -9,8 +9,6 @@ import java.util.Iterator;
 import static com.sparta.employeecsv.CSVMain.logger;
 
 public class EmployeeDatabase {
-
-    private Connection connection;
     
     public void dropTable(Connection connection) {
     
@@ -88,7 +86,7 @@ public class EmployeeDatabase {
 
                         preparedStatement.executeUpdate();
 
-                        System.out.print("Added record: " + employee.toString());
+                        // System.out.print("Added record: " + employee.toString());
                     }
                 }
 
@@ -126,9 +124,8 @@ public class EmployeeDatabase {
                 preparedStatement.setFloat(10, employee.getSalary());
 
                 preparedStatement.executeUpdate();
-                System.out.print("Added record: " + employee.toString());
+                // System.out.print("Added record: " + employee.toString());
             }
-
 
             preparedStatement.close();
 

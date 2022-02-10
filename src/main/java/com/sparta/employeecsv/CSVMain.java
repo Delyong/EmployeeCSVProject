@@ -39,7 +39,7 @@ public class CSVMain {
 
                     window.listDuplicates(controller.getDuplicatesString());
 
-                    controller.insertRecordsToDatabaseThreads();
+                    controller.insertRecordsToDatabase();
 
                 }
             };
