@@ -98,7 +98,13 @@ public class EmployeeDatabase {
                 preparedStatement.setInt(1, ((int)mapElement.getValue()));
                 preparedStatement.setString(2,((String)mapElement.getValue()));
                 preparedStatement.setString(3,((String)mapElement.getValue()));
-
+                preparedStatement.setString(4,((String)mapElement.getValue()));
+                preparedStatement.setString(5,((String)mapElement.getValue()));
+                preparedStatement.setString(6,((String)mapElement.getValue()));
+                preparedStatement.setString(7,((String)mapElement.getValue()));
+                preparedStatement.setString(8,((String)mapElement.getValue()));
+                preparedStatement.setString(9,((String)mapElement.getValue()));
+                preparedStatement.setInt(10,((int)mapElement.getValue()));
             }
         } catch (Exception e){
             logger.error("Error while inserting data into the table", e);
