@@ -53,15 +53,15 @@ public class CSVController {
 
         ArrayList<Employee> employees = readFile.getEmployeeAsList();
 
-        Thread[] threads = createNumberOfThreads(4, employees);
+        Thread[] threads = createNumberOfThreads(8, employees);
 
-        try {
-            for (Thread thread : threads) {
+        for (Thread thread : threads) {
+            thread.start();
+            try {
                 thread.join();
-                thread.start();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
         System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
