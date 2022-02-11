@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 public class DisplayManager {
 
@@ -116,6 +117,21 @@ public class DisplayManager {
 
     public String getFilename() {
         return filenameFld.getText();
+    }
+
+    public String getThreadCount() {
+
+        System.out.println("Please enter the desired number of threads: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+
+        return input;
+
+    }
+
+    public void displayInvalidThreadMsg() {
+        System.out.println("Invalid thread count please input a number between 1 and 100!");
     }
 }
 
