@@ -137,10 +137,10 @@ public class CSVController {
     public int getCorruptedCount() {
 
         int corruptCount = 0;
-        HashMap<String, Employee> employees = readFile.getEmployees();
+        List<Employee> employees = readFile.getEmployees();
 
-        for (String id : employees.keySet()) {
-            if (!employees.get(id).isRecordValid()) {
+        for (Employee e : employees) {
+            if (!e.isRecordValid()) {
                 corruptCount++;
             }
         }

@@ -1,11 +1,7 @@
 package com.sparta.employeecsv.view;
 
-import com.sparta.employeecsv.controller.CSVController;
-import com.sparta.employeecsv.model.ReadFile;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DisplayManager {
