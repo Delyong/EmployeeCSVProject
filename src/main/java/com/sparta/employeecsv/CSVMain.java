@@ -37,7 +37,7 @@ public class CSVMain {
                     window.setUniqueNumber(controller.getUniqueCount());
                     window.setCorruptedNumber(controller.getCorruptedCount());
 
-                    // window.listDuplicates(controller.getDuplicatesString());
+                    window.listDuplicates(controller.getDuplicatesString());
 
                     controller.insertRecordsToDatabaseThreads();
 

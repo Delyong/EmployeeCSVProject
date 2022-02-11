@@ -10,7 +10,8 @@
 > - [What is logged](#What-is-logged)
 
 ## Summary
-> This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) which they wish to read and write to the database 
+> This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) 
+> which they wish to read and write to the database 
 > using `MySQL` queries whilst utilising `Buffered FileReader & Lambda expressions`. This will then display the
 > number of corrupted records, number of employee records, number and list of duplicated records.
 
@@ -62,7 +63,21 @@
 > + Create a `mylogfile.log` file in the root folder to store the 
 
 ## How to use the project
+> Run `CSVMain` Java class and enter the number of threads that you wish to run the program with
 
+![thread-prompt](https://cdn.discordapp.com/attachments/935470190127353868/941815873704960090/unknown.png)
+
+> Enter the file name that you wish to be read and written to the database
+> i.e. "EmployeeRecords.csv" | "EmployeeRecordsLarge.csv"
+
+![filename](https://cdn.discordapp.com/attachments/935470190127353868/941816896137867354/unknown.png)
+
+> Once you hit the start button, the following details will be printed:
+
+![filedetails](https://cdn.discordapp.com/attachments/935470190127353868/941817637615317002/unknown.png)
+
+> You can then refresh the `employeerecord` database in the link you provided in `mysql.properties`
+> to see if the employee records has been inserted in the database
 
 ## Branches and Phases
 
