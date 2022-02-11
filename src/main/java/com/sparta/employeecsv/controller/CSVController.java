@@ -61,18 +61,15 @@ public class CSVController implements Runnable {
 
         ArrayList<Employee> employees = readFile.getEmployeeAsList();
 
-        Thread[] threads = createNumberOfThreads(4, employees);
+        Thread[] threads = createNumberOfThreads(8, employees);
 
         for (Thread thread : threads) {
             thread.start();
-        }
-
-        try {
-            for (Thread thread : threads) {
+            try {
                 thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
         System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
