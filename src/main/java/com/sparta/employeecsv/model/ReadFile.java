@@ -7,10 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.sparta.employeecsv.CSVMain.logger;
@@ -37,12 +35,16 @@ public class ReadFile {
             List<Employee> distinctList = original.stream()
                     .distinct().toList();
             System.out.println("1");
-            // List<Employee> duplicatesList = original.stream()
-            //         .filter(i -> Collections.frequency(original, i) > 1)
-            //         .distinct().toList();
+            List<Employee> duplicatesList = original.stream()
+                     .collect(Collectors.groupingBy(Function.identity()
+                             , Collectors.counting()))
+                    .entrySet().stream()
+                    .filter((m -> m.getValue() > 1))
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.toList());
 
             employees = new ArrayList<>(distinctList);
-            // duplicates = new ArrayList<>(duplicatesList);
+            duplicates = new ArrayList<>(duplicatesList);
 
             System.out.println("2");
 
