@@ -33,11 +33,11 @@ public class CSVMain {
                     controller.getFile(filename);
                     System.out.println("Reading records took: " + (System.nanoTime() - startTime) + " nano seconds");
 
-                    window.setDuplicateNumber(controller.getDuplicateCount());
+                    // window.setDuplicateNumber(controller.getDuplicateCount());
                     window.setUniqueNumber(controller.getUniqueCount());
                     window.setCorruptedNumber(controller.getCorruptedCount());
 
-                    window.listDuplicates(controller.getDuplicatesString());
+                    // window.listDuplicates(controller.getDuplicatesString());
 
                     controller.insertRecordsToDatabaseThreads();
 

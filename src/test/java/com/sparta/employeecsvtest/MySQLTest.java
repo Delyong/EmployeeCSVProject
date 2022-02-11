@@ -64,7 +64,7 @@ public class MySQLTest {
     public void checkInsertDataIntoTheTable() throws SQLException, ParseException {
         boolean exists = false;
         ArrayList<Employee> testRecords = new ArrayList<>();
-        Employee e = new Employee(1, "Mr", "Mihai", 'T', "Udrea", 'M', "udreamihai@gmail.com", null, null, 75000F, 0);
+        Employee e = new Employee(1, "Mr", "Mihai", 'T', "Udrea", 'M', "udreamihai@gmail.com", null, null, 75000F);
         testRecords.add(e);
         System.out.println(testRecords);
         Statement st = connection.createStatement(); //prepare java statement
