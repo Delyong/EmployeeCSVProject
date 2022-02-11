@@ -11,10 +11,10 @@
 
 ## Summary
 > This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) which they wish to read and write to the database 
-> using MySQL queries whilst utilising Buffered FileReader & Lambda expressions. This will then display the
+> using `MySQL` queries whilst utilising `Buffered FileReader & Lambda expressions`. This will then display the
 > number of corrupted records, number of employee records, number and list of duplicated records.
 
-> Users are also able to enter the number of threads they wish to use to execute the program at the start (In the console)
+> Users are also able to enter the number of `threads` they wish to use to execute the program at the start (In the console)
 
 > Practices applied that are worth mentioning:
 >> + MVC Project Structure
@@ -22,10 +22,47 @@
 >> + System Timings
 
 ## Dependencies
+> + JUnit (For test cases)
+> + MySQL (For Querying the database, both reading from and writing to)
+> + Log4j2 (For logging user actions and system status)
+```xml
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.25</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+    </dependencies>
+```
 
 ## How to set up the project
+> + Download the source code from this GitHub link
+> + Open the project with an IDE of your choice
+> + In the `pom.xml` file, insert the dependencies listed above
+> + Refresh Maven
+> + In the root folder, create `mysql.properties` file and write the following details to connect to the database
+>> + dburl=
+>> + dbuserid=
+>> + dbpassword=
+> + Create a `mylogfile.log` file in the root folder to store the 
 
 ## How to use the project
+
 
 ## Branches and Phases
 
