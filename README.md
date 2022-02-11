@@ -10,26 +10,27 @@
 > - [What is logged](#What-is-logged)
 
 ## Summary
+> This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) which they wish to read and write to the database 
+> using MySQL queries whilst utilising Buffered FileReader & Lambda expressions. This will then display the
+> number of corrupted records, number of employee records, number and list of duplicated records.
+
+> Users are also able to enter the number of threads they wish to use to execute the program at the start (In the console)
+
+> Practices applied that are worth mentioning:
+>> + MVC Project Structure
+>> + Logging
+>> + System Timings
 
 ## Dependencies
 
 ## How to set up the project
-> Download the code as a ZIP file and extract it on a directory of your choice
-and open that folder using the IDE of your choice.
-
-![download](https://cdn.discordapp.com/attachments/881969703017386034/938889540482002944/unknown.png)
-
-> Once opened, go to ***'pom.xml'*** file, right click and select generate
-the following dependencies:
-
-![generate](https://cdn.discordapp.com/attachments/881969703017386034/938890401828446308/unknown.png)
-![dependency](https://cdn.discordapp.com/attachments/881969703017386034/938892345863209031/unknown.png)
-
 
 ## How to use the project
 
 ## Branches and Phases
 
 ## Testing and Outcome
+
+## Timings
 
 ## What is logged
