@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class CSVMain {
 
@@ -39,7 +40,11 @@ public class CSVMain {
 
                     window.listDuplicates(controller.getDuplicatesString());
 
-                    controller.insertRecordsToDatabaseThreads();
+                    try {
+                        controller.insertRecordsToDatabaseThreads();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
 
                 }
             };
