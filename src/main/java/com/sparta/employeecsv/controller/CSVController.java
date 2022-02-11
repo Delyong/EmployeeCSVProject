@@ -8,8 +8,6 @@ import com.sparta.employeecsv.model.ReadFile;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
@@ -36,24 +34,13 @@ public class CSVController {
 
     }
 
-    public void insertRecordsToDatabase() {
-
-        ArrayList<Employee> employees = readFile.getEmployees();
-
-        long startTime = System.nanoTime();
-        employeeDatabase.insertRecordsList(employees);
-
-        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
-        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
-    }
-
-    public void insertRecordsToDatabaseThreads() {
+    public void insertRecordsToDatabaseThreads(int threadCount) {
 
         long startTime = System.nanoTime();
 
-        ArrayList<Employee> employees = readFile.getEmployees();
+        ArrayList<Employee> employees = readFile.getEmployeesList();
 
-        Thread[] threads = createNumberOfThreads(8, employees);
+        Thread[] threads = createNumberOfThreads(threadCount, employees);
 
         for (Thread thread : threads) {
             thread.start();
@@ -77,7 +64,6 @@ public class CSVController {
         int employeesSize = employees.size();
 
         // 0 , same1, same1, same2, same2, same3, same3, employeesSize
-
         for (int i = 0; i < count; i++) {
 
             intervals[i * 2] = (employeesSize/count) * i;
@@ -109,6 +95,30 @@ public class CSVController {
         return threads;
     }
 
+    public boolean checkThreadCount(String count) {
+
+        int threadCount = 0;
+
+        try {
+            threadCount = Integer.parseInt(count);
+        } catch (NumberFormatException e) {
+            logger.warn("Invalid thread count input, isn't a number");
+            return false;
+        }
+
+        if (threadCount >= 1 && threadCount <= 100) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public int parseThreadCount(String count) {
+        return Integer.parseInt(count);
+    }
+
     public void cleanUpDatabase() {
         try {
             ConnectionFactory.closeConnection();
@@ -121,7 +131,7 @@ public class CSVController {
 
     public int getUniqueCount() {
         logger.info("Amount of unique records has been displayed");
-        return readFile.getEmployees().size();
+        return readFile.getEmployeesList().size();
     }
 
     public int getDuplicateCount() {
@@ -137,13 +147,14 @@ public class CSVController {
     public int getCorruptedCount() {
 
         int corruptCount = 0;
-        ArrayList<Employee> employees = readFile.getEmployees();
+        ArrayList<Employee> employees = readFile.getEmployeesList();
 
         for (Employee employee : employees) {
             if (!employee.isRecordValid()) {
                 corruptCount++;
             }
         }
+
         logger.info("Amount of corrupted records has been displayed");
         return corruptCount;
 

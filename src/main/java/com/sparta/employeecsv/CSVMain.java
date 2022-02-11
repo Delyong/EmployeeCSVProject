@@ -24,6 +24,19 @@ public class CSVMain {
 
             controller.setupDatabase();
 
+            String threadCountStr = window.getThreadCount();
+            boolean isValidThreadCount = controller.checkThreadCount(threadCountStr);
+
+            while (!isValidThreadCount) {
+                logger.warn("Invalid thread count input");
+                window.displayInvalidThreadMsg();
+                threadCountStr = window.getThreadCount();
+                isValidThreadCount = controller.checkThreadCount(threadCountStr);
+            }
+
+            logger.info("Valid thread count input");
+            int threadCount = controller.parseThreadCount(threadCountStr);
+
             ActionListener buttonPress = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -39,7 +52,7 @@ public class CSVMain {
 
                     // window.listDuplicates(controller.getDuplicatesString());
 
-                    controller.insertRecordsToDatabaseThreads();
+                    controller.insertRecordsToDatabaseThreads(threadCount);
 
                 }
             };
