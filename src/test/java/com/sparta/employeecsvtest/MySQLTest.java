@@ -17,7 +17,7 @@ public class MySQLTest {
     private Connection connection = ConnectionFactory.getConnection();
     @Test
     @DisplayName("Test table creation")
-    public void checkDropTable() throws SQLException {
+    public void checkDropCreateTable() throws SQLException {
         boolean exists = false;
         String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
         String createTable = "CREATE TABLE `EmployeeRecords` (" +
@@ -45,6 +45,12 @@ public class MySQLTest {
         }
         st.close(); //close connection to database
         Assertions.assertTrue(exists);
+    }
+
+    @Test
+    @DisplayName("Test table creation")
+    public void checkInsertDataIntoTheTable() throws SQLException {
+        boolean exists = false;
     }
 
     public MySQLTest() throws SQLException, IOException {
