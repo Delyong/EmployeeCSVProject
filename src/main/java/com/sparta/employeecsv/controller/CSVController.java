@@ -38,7 +38,7 @@ public class CSVController {
 
     public void insertRecordsToDatabase() {
 
-        ArrayList<Employee> employees = readFile.getEmployeeAsList();
+        ArrayList<Employee> employees = readFile.getEmployees();
 
         long startTime = System.nanoTime();
         employeeDatabase.insertRecordsList(employees);
@@ -51,7 +51,7 @@ public class CSVController {
 
         long startTime = System.nanoTime();
 
-        ArrayList<Employee> employees = readFile.getEmployeeAsList();
+        ArrayList<Employee> employees = readFile.getEmployees();
 
         Thread[] threads = createNumberOfThreads(8, employees);
 
@@ -137,10 +137,10 @@ public class CSVController {
     public int getCorruptedCount() {
 
         int corruptCount = 0;
-        HashMap<String, Employee> employees = readFile.getEmployees();
+        ArrayList<Employee> employees = readFile.getEmployees();
 
-        for (String id : employees.keySet()) {
-            if (!employees.get(id).isRecordValid()) {
+        for (Employee employee : employees) {
+            if (!employee.isRecordValid()) {
                 corruptCount++;
             }
         }
