@@ -6,8 +6,6 @@ import com.sparta.employeecsv.model.EmployeeDatabase;
 import com.sparta.employeecsv.model.InsertEmployeeThread;
 import com.sparta.employeecsv.model.ReadFile;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,22 +14,16 @@ import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
-public class CSVController implements Runnable {
+public class CSVController {
 
     private ReadFile readFile;
     private EmployeeDatabase employeeDatabase;
-    private Connection connection;
 
     public void getFile(String fileName) {
 
         readFile = new ReadFile();
         readFile.readFile(fileName);
 
-    }
-
-    @Override
-    public void run() {
-        insertRecordsToDatabase();
     }
 
     public void setupDatabase() {
@@ -51,8 +43,8 @@ public class CSVController implements Runnable {
         long startTime = System.nanoTime();
         employeeDatabase.insertRecordsList(employees);
 
-        System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
-        logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
+        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
     }
 
     public void insertRecordsToDatabaseThreads() {
@@ -72,12 +64,12 @@ public class CSVController implements Runnable {
             }
         }
 
-        System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
-        logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
+        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
 
     }
 
-    private Thread[] createNumberOfThreads(int count, ArrayList<Employee> employees) {
+    public Thread[] createNumberOfThreads(int count, ArrayList<Employee> employees) {
 
         Thread[] threads = new Thread[count];
         int[] intervals = new int[count * 2];
