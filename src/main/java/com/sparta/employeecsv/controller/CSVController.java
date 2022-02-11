@@ -22,7 +22,7 @@ public class CSVController {
     public void getFile(String fileName) {
 
         readFile = new ReadFile();
-        readFile.readFile(fileName);
+        readFile.readFileLambda(fileName);
 
     }
 
@@ -75,7 +75,6 @@ public class CSVController {
         int[] intervals = new int[count * 2];
 
         int employeesSize = employees.size();
-        System.out.println(employeesSize);
 
         // 0 , same1, same1, same2, same2, same3, same3, employeesSize
 
@@ -92,8 +91,8 @@ public class CSVController {
         // make sure no values are lost to rounding
         intervals[intervals.length - 1] = employeesSize;
 
-        System.out.println(Arrays.toString(intervals));
-        System.out.println(employeesSize);
+        // System.out.println(Arrays.toString(intervals));
+        // System.out.println(employeesSize);
 
         for (int i = 0; i < count; i++) {
 
