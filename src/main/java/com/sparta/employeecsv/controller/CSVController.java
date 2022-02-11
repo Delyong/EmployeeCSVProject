@@ -55,13 +55,10 @@ public class CSVController {
 
         Thread[] threads = createNumberOfThreads(4, employees);
 
-        for (Thread thread : threads) {
-            thread.start();
-        }
-
         try {
             for (Thread thread : threads) {
                 thread.join();
+                thread.start();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
