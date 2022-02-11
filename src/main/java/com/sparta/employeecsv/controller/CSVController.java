@@ -51,8 +51,8 @@ public class CSVController implements Runnable {
         long startTime = System.nanoTime();
         employeeDatabase.insertRecordsList(employees);
 
-        System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
-        logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
+        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
     }
 
     public void insertRecordsToDatabaseThreads() {
@@ -75,8 +75,8 @@ public class CSVController implements Runnable {
             e.printStackTrace();
         }
 
-        System.out.println("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
-        logger.info("Writing to database took: " + (System.nanoTime() - startTime) + " nano seconds");
+        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
 
     }
 
