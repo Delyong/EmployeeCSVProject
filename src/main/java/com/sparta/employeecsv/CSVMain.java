@@ -40,11 +40,7 @@ public class CSVMain {
 
                     window.listDuplicates(controller.getDuplicatesString());
 
-                    try {
-                        controller.insertRecordsToDatabaseThreads();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
+                    controller.insertRecordsToDatabaseThreads();
 
                 }
             };

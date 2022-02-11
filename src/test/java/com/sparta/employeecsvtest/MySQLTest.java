@@ -43,16 +43,18 @@ public class MySQLTest {
     public void checkDropCreateTable() throws SQLException {
         boolean exists = false;
 
-
         Statement st = connection.createStatement(); //prepare java statement
         employee.dropTable(); //execute the query
         employee.createTable();
+
         DatabaseMetaData dbmd = (DatabaseMetaData) connection.getMetaData();
         String[] types = {"TABLE"};
         ResultSet rs = dbmd.getTables(null, null, "%", types);
+
         while (rs.next()) {
             if(rs.getString("TABLE_NAME").equals("EmployeeRecords")) exists = true;
         }
+
         st.close(); //close connection to database
         Assertions.assertTrue(exists);
     }
@@ -62,17 +64,7 @@ public class MySQLTest {
     public void checkInsertDataIntoTheTable() throws SQLException, ParseException {
         boolean exists = false;
         ArrayList<Employee> testRecords = new ArrayList<>();
-        Employee e = new Employee();
-        e.setEmployeeID(1);
-        e.setNamePrefix("Mr");
-        e.setFirstName("Mihai");
-        e.setMiddleInitial('T');
-        e.setLastName("Udrea");
-        e.setGender('M');
-        e.setEmail("udreamihai@gmail.com");
-        e.setDateOfBirth(null);
-        e.setDateOfJoin(null);
-        e.setSalary(75000F);
+        Employee e = new Employee(1, "Mr", "Mihai", 'T', "Udrea", 'M', "udreamihai@gmail.com", null, null, 75000F);
         testRecords.add(e);
         System.out.println(testRecords);
         Statement st = connection.createStatement(); //prepare java statement

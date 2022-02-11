@@ -13,7 +13,7 @@ import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EmployeeTest {
+public class EmployeeParserTest {
 
     private static EmployeeParser employeeParser;
 
