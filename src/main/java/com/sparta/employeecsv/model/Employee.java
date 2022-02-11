@@ -1,6 +1,7 @@
 package com.sparta.employeecsv.model;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Employee {
 
@@ -108,5 +109,18 @@ public class Employee {
                 " | dob: " + dateOfBirth +
                 " | doj: " + dateOfJoin +
                 " | salary: " + salary + ")\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return employeeID.equals(employee.employeeID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeID);
     }
 }

@@ -10,13 +10,17 @@ public class EmployeeParser {
                                          String salary
     ) {
 
-        return new Employee(
+        Employee employee;
+
+        employee = new Employee(
                 parseEmployeeId(employeeID), parseNamePrefix(namePrefix),
                 parseName(firstName), parseMiddleInitial(middleInitial),
                 parseName(lastName), parseGender(gender),
                 parseEmail(email), parseDate(dateOfBirth),
                 parseDate(dateOfJoin), parseSalary(salary)
         );
+
+        return employee;
 
     }
 

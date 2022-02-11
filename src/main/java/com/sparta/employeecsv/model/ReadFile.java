@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
@@ -20,25 +22,37 @@ public class ReadFile {
 
     public void readFileLambda(String fileName) {
 
-        employees = new HashMap<>();
-        duplicates = new ArrayList<>();
-
         EmployeeParser employeeParser = new EmployeeParser();
 
         try { //read data from the file
-            List<Employee> employeesList =
-                    Files.lines(Path.of(fileName))
+            List<Employee> original = Files.lines(Path.of(fileName))
                     .map(s -> {
                         String[] data = s.split(",");
                         return employeeParser.parseEmployee(data[0], data[1], data[2],
                                 data[3], data[4], data[5], data[6],
                                 data[7], data[8], data[9]);
                     })
+                    .toList();
+
+            List<Employee> distinctList = original.stream()
+                    .distinct().toList();
+            List<Employee> duplicatesList = original.stream()
+                    .filter(i -> Collections.frequency(original, i) > 1)
                     .distinct().toList();
 
-            System.out.println(employeesList.size());
+            System.out.println(original.size());
+            System.out.println(duplicatesList.size());
 
+            Employee employee;
+            ArrayList<Employee> test = new ArrayList<>(original);
+            ArrayList<Employee> test2 = new ArrayList<>(duplicatesList);
 
+            // for (int i = 0; i < test2.size() ; i++) {
+            //     employee = test2.get(i);
+            //     if (test.contains(employee)) {
+            //         test.remove(employee);
+            //     }
+            // }
 
         } catch (IOException e) {
             e.printStackTrace();
