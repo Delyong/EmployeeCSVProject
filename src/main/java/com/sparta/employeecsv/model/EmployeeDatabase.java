@@ -101,7 +101,11 @@ public class EmployeeDatabase {
 
                         preparedStatement.executeUpdate();
 
+<<<<<<< Updated upstream
                         // System.out.print("Added record: " + employee.toString());
+=======
+                        //System.out.print("Added record: " + employee.toString());
+>>>>>>> Stashed changes
                     }
                 }
 
@@ -143,7 +147,11 @@ public class EmployeeDatabase {
                 preparedStatement.setFloat(10, employee.getSalary());
 
                 preparedStatement.executeUpdate();
+<<<<<<< Updated upstream
                 // System.out.print("Added record: " + employee.toString());
+=======
+                //System.out.print("Added record: " + employee.toString());
+>>>>>>> Stashed changes
             }
 
             connection.setAutoCommit(true);
