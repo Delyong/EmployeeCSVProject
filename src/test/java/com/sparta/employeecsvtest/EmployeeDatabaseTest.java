@@ -16,15 +16,22 @@ import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class MySQLTest {
+public class EmployeeDatabaseTest {
     private static EmployeeDatabase employee;
+
+    public EmployeeDatabaseTest() throws SQLException, IOException {
+    }
+
     @BeforeAll
 
-    public static void setUp(){
+    public static void setUp() {
         employee = new EmployeeDatabase();
     }
+
     private Connection connection = ConnectionFactory.getConnection();
+
     String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
+
     String createTable = "CREATE TABLE `EmployeeRecords` (" +
             "`EmployeeID` INT," +
             "`NamePrefix` VARCHAR(5)," +
@@ -53,7 +60,7 @@ public class MySQLTest {
         ResultSet rs = dbmd.getTables(null, null, "%", types);
 
         while (rs.next()) {
-            if(rs.getString("TABLE_NAME").equals("EmployeeRecords")) exists = true;
+            if (rs.getString("TABLE_NAME").equals("EmployeeRecords")) exists = true;
         }
 
         st.close(); //close connection to database
@@ -62,7 +69,7 @@ public class MySQLTest {
 
     @Test
     @DisplayName("Given a set of records to insert into the database, return true if the records are retrieved after insertion")
-    public void checkInsertDataIntoTheTable() throws SQLException, ParseException {
+    public void GivenRecordsInsertedIntoDatabase_recordsCanBeRetrieved() throws SQLException, ParseException {
         boolean exists = false;
         ArrayList<Employee> testRecords = new ArrayList<>();
         Employee e = new Employee(1, "Mr", "Mihai", 'T', "Udrea", 'M', "udreamihai@gmail.com", null, null, 75000F);
@@ -75,7 +82,7 @@ public class MySQLTest {
         employee.insertRecordsList(testRecords);//insert records
 
         ResultSet rs = st.executeQuery("SELECT * FROM `EmployeeRecords`;");
-        while (rs.next()){
+        while (rs.next()) {
             int id = rs.getInt("EmployeeID");
             String fName = rs.getString("FirstName");
             String lName = rs.getString("LastName");
@@ -85,12 +92,9 @@ public class MySQLTest {
         Assertions.assertTrue(exists);
     }
 
-    public MySQLTest() throws SQLException, IOException {
-    }
-
     @Test
     @DisplayName("Retrieve Employee Records")
-    public void checkGetAllEmployeesFromDB() throws SQLException {
+    public void checkGetAllEmployeesFromDB() {
         EmployeeDatabase employeeDatabase = new EmployeeDatabase();
         List<Employee> employees = employeeDatabase.getEmployees();
         for(Employee emp : employees) {
@@ -98,4 +102,5 @@ public class MySQLTest {
         }
         Assertions.assertNotNull(employees);
     }
+
 }

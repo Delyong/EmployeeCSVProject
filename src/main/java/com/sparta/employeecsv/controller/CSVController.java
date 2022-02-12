@@ -54,6 +54,7 @@ public class CSVController {
             try {
                 thread.join();
             } catch (InterruptedException e) {
+                logger.warn("Can't join thread " + thread.getName(), e.getMessage(), e);
                 e.printStackTrace();
             }
         }
@@ -167,4 +168,5 @@ public class CSVController {
         return corruptCount;
 
     }
+
 }

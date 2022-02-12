@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.sql.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class EmployeeDatabase {
         try {
             connection = ConnectionFactory.getConnection();
         } catch (SQLException | IOException e) {
-            logger.fatal("Failed to get database connection");
+            logger.fatal("Failed to get database connection", e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -38,7 +37,7 @@ public class EmployeeDatabase {
             st.close(); //close connection to database
     
         } catch (SQLException e) {
-            logger.error("Error while dropping table" + e); //add error into the log file
+            logger.error("Error while dropping table ", e.getMessage(), e); //add error into the log file
             e.printStackTrace();
         }
     
@@ -69,7 +68,7 @@ public class EmployeeDatabase {
             st.close(); //close connection to database
     
         } catch (SQLException e) {
-            logger.fatal("Error while creating the table", e.getMessage());
+            logger.fatal("Error while creating the table ", e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -110,7 +109,7 @@ public class EmployeeDatabase {
             preparedStatement.close();
 
         } catch (Exception e){
-            logger.error("Error while inserting data into the table", e); //add error into the log file
+            logger.error("Error while inserting data into the table", e.getMessage(), e);
             e.printStackTrace();
         }
     }
