@@ -129,7 +129,7 @@ TODO
 ## Project management
 TODO
 ![trello-before](https://cdn.discordapp.com/attachments/935470190127353868/942179699201806376/unknown.png)
-![trello-after](https://cdn.discordapp.com/attachments/935470190127353868/942179699201806376/unknown.png)
+![trello-after](https://cdn.discordapp.com/attachments/935470190127353868/942179569102889010/unknown.png)
 
 ## What is logged
 TODO
