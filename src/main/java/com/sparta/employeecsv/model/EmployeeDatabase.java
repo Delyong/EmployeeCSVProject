@@ -18,9 +18,8 @@ public class EmployeeDatabase {
     public EmployeeDatabase() {
         try {
             connection = ConnectionFactory.getConnection();
-            logger.info("Successfully created database connection");
         } catch (SQLException | IOException e) {
-            logger.fatal("Failed to create database connection");
+            logger.fatal("Failed to get database connection");
             e.printStackTrace();
         }
     }

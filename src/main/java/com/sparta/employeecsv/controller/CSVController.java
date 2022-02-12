@@ -6,6 +6,7 @@ import com.sparta.employeecsv.model.EmployeeDatabase;
 import com.sparta.employeecsv.model.InsertEmployeeThread;
 import com.sparta.employeecsv.model.ReadFile;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ public class CSVController {
 
     public void setupDatabase() {
 
-        logger.info("Database has been set up");
         employeeDatabase = new EmployeeDatabase();
 
         employeeDatabase.dropTable();
@@ -107,9 +107,11 @@ public class CSVController {
         }
 
         if (threadCount >= 1 && threadCount <= 100) {
+            logger.info("Thread count input was valid");
             return true;
         }
         else {
+            logger.warn("Invalid thread count input is not a number between 1 and 100");
             return false;
         }
 
@@ -122,9 +124,8 @@ public class CSVController {
     public void cleanUpDatabase() {
         try {
             ConnectionFactory.closeConnection();
-            logger.info("Database has been closed");
         } catch (SQLException e) {
-            logger.error("Error while closing the connection", e);
+            logger.error("Error while closing the database connection");
             e.printStackTrace();
         }
     }

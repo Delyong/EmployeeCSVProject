@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.util.Scanner;
 
 public class DisplayManager {
@@ -21,12 +22,15 @@ public class DisplayManager {
     /**
      * Initialize the contents of the frame.
      */
-    public void initialize(ActionListener buttonPress) {
+    public void initialize(ActionListener buttonPress, WindowAdapter closeEvent) {
+
         frame = new JFrame();
         frame.setResizable(false);
         frame.setBounds(100, 100, 673, 507);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.setAlwaysOnTop(true);
+        frame.addWindowListener(closeEvent);
 
         JLabel lblNewLabel = new JLabel("Enter file name:");
         lblNewLabel.setBounds(46, 77, 106, 14);
@@ -45,7 +49,7 @@ public class DisplayManager {
         lblNewLabel_2.setBounds(46, 180, 250, 14);
         frame.getContentPane().add(lblNewLabel_2);
 
-        JLabel lblNewLabel_3 = new JLabel("Number of Corrupted records:");
+        JLabel lblNewLabel_3 = new JLabel("Number of corrupted records:");
         lblNewLabel_3.setBounds(46, 120, 250, 14);
         frame.getContentPane().add(lblNewLabel_3);
 
@@ -82,6 +86,7 @@ public class DisplayManager {
         btnStart.setBounds(500, 73, 89, 23);
         frame.getContentPane().add(btnStart);
         btnStart.addActionListener(buttonPress);
+
     }
 
 
@@ -121,7 +126,7 @@ public class DisplayManager {
 
     public String getThreadCount() {
 
-        System.out.println("Please enter the desired number of threads: ");
+        System.out.println("Please enter the desired number of threads (1 - 100): ");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
