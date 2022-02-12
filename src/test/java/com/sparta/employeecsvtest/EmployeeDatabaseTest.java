@@ -68,7 +68,7 @@ public class EmployeeDatabaseTest {
 
     @Test
     @DisplayName("Given a set of records to insert into the database, return true if the records are retrieved after insertion")
-    public void checkInsertDataIntoTheTable() throws SQLException, ParseException {
+    public void GivenRecordsInsertedIntoDatabase_recordsCanBeRetrieved() throws SQLException, ParseException {
         boolean exists = false;
         ArrayList<Employee> testRecords = new ArrayList<>();
         Employee e = new Employee(1, "Mr", "Mihai", 'T', "Udrea", 'M', "udreamihai@gmail.com", null, null, 75000F);
