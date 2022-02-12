@@ -10,26 +10,79 @@
 > - [What is logged](#What-is-logged)
 
 ## Summary
+> This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) 
+> which they wish to read and write to the database 
+> using `MySQL` queries whilst utilising `Buffered FileReader & Lambda expressions`. This will then display the
+> number of corrupted records, number of employee records, number and list of duplicated records.
+
+> Users are also able to enter the number of `threads` they wish to use to execute the program at the start (In the console)
+
+> Practices applied that are worth mentioning:
+>> + MVC Project Structure
+>> + Logging
+>> + System Timings
 
 ## Dependencies
+> + JUnit (For test cases)
+> + MySQL (For Querying the database, both reading from and writing to)
+> + Log4j2 (For logging user actions and system status)
+```xml
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.25</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+    </dependencies>
+```
 
 ## How to set up the project
-> Download the code as a ZIP file and extract it on a directory of your choice
-and open that folder using the IDE of your choice.
-
-![download](https://cdn.discordapp.com/attachments/881969703017386034/938889540482002944/unknown.png)
-
-> Once opened, go to ***'pom.xml'*** file, right click and select generate
-the following dependencies:
-
-![generate](https://cdn.discordapp.com/attachments/881969703017386034/938890401828446308/unknown.png)
-![dependency](https://cdn.discordapp.com/attachments/881969703017386034/938892345863209031/unknown.png)
-
+> + Download the source code from this GitHub link
+> + Open the project with an IDE of your choice
+> + In the `pom.xml` file, insert the dependencies listed above
+> + Refresh Maven
+> + In the root folder, create `mysql.properties` file and write the following details to connect to the database
+>> + dburl=
+>> + dbuserid=
+>> + dbpassword=
+> + Create a `mylogfile.log` file in the root folder to store the 
 
 ## How to use the project
+> Run `CSVMain` Java class and enter the number of threads that you wish to run the program with
+
+![thread-prompt](https://cdn.discordapp.com/attachments/935470190127353868/941815873704960090/unknown.png)
+
+> Enter the file name that you wish to be read and written to the database
+> i.e. "EmployeeRecords.csv" | "EmployeeRecordsLarge.csv"
+
+![filename](https://cdn.discordapp.com/attachments/935470190127353868/941816896137867354/unknown.png)
+
+> Once you hit the start button, the following details will be printed:
+
+![filedetails](https://cdn.discordapp.com/attachments/935470190127353868/941817637615317002/unknown.png)
+
+> You can then refresh the `employeerecord` database in the link you provided in `mysql.properties`
+> to see if the employee records has been inserted in the database
 
 ## Branches and Phases
 
 ## Testing and Outcome
+
+## Timings
 
 ## What is logged
