@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -85,5 +86,16 @@ public class MySQLTest {
     }
 
     public MySQLTest() throws SQLException, IOException {
+    }
+
+    @Test
+    @DisplayName("Retrieve Employee Records")
+    public void checkGetAllEmployeesFromDB() throws SQLException {
+        EmployeeDatabase employeeDatabase = new EmployeeDatabase();
+        List<Employee> employees = employeeDatabase.getEmployees();
+        for(Employee emp : employees) {
+            System.out.println(emp.toString());
+        }
+        Assertions.assertNotNull(employees);
     }
 }

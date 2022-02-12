@@ -1,9 +1,12 @@
 package com.sparta.employeecsv.view;
 
+import com.sparta.employeecsv.controller.CSVController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static com.sparta.employeecsv.CSVMain.logger;
@@ -134,18 +137,48 @@ public class DisplayManager {
     }
 
     public void displayInvalidThreadMsg() {
-        System.out.println("Invalid thread count please input a number between 1 and 100!");
+        System.out.print("Invalid thread count please input a number between 1 and 100!");
     }
 
     public void displayReadingTime(long startTime, long endTime) {
-        System.out.println("Reading records took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
-        logger.info("Reading records took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
+        System.out.println("Reading records took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Reading records took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
     }
 
 
     public void displayWritingTime(long startTime, long endTime) {
-        System.out.println("Writing records to database took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
-        logger.info("Writing records to database took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
+        System.out.println("Writing records to database took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing records to database took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+    }
+
+    public void getSelectOption(CSVController controller){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nSelect all employees?(ALL) or select a single employee?(SINGLE) or quit(EXIT): ");
+
+        String allEmployeeOrSingle = sc.next();
+
+        switch (allEmployeeOrSingle.toLowerCase()){
+            case "all" -> {
+                System.out.println(controller.getEmployees());
+            }
+            case "single" -> {
+                System.out.print("Enter the specific employee ID: ");
+                int empID = sc.nextInt();
+                if (controller.getEmployeeById(empID) == null)
+                    System.out.println("The record with provided employee ID does not exist");
+                else
+                    System.out.println(controller.getEmployeeById(empID));
+            }
+            case "exit", "quit", "close" -> {
+                System.out.println("\nClosing the application...");
+                System.exit(0);
+            }
+            default -> {
+                logger.warn("User entered an invalid option for selecting employees");
+                System.out.println("Input invalid, please try again");
+                getSelectOption(controller);
+            }
+        }
     }
 }
 

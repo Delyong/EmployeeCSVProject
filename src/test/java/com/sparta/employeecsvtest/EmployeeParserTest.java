@@ -91,59 +91,59 @@ public class EmployeeParserTest {
 
     @Test
     @DisplayName("Given a valid employee ID, convertEmployeeId, should return the integer value")
-    public void givenAValidEmployeeId_ConvertEmployeeId_ReturnsTheIntegerValue(){
+    public void givenAValidEmployeeId_parseEmployeeId_ReturnsTheIntegerValue(){
         assertEquals(1240, employeeParser.parseEmployeeId("1240"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"12f", "test", "!%", "34af*"})
     @DisplayName("Given a invalid employee ID, convertEmployeeId, should return null")
-    public void givenAnInvalidEmployeeId_ConvertEmployeeId_ReturnsNull(String employeeId){
+    public void givenAnInvalidEmployeeId_parseEmployeeId_ReturnsNull(String employeeId){
         assertEquals(null, employeeParser.parseEmployeeId(employeeId));
     }
 
     @Test
     @DisplayName("Given a valid name prefix, convertEmployeeId, should return the the string value with correct format")
-    public void givenAValidNamePrefix_ConvertNamePrefix_ReturnsTheStringValue(){
+    public void givenAValidNamePrefix_parseNamePrefix_ReturnsTheStringValue(){
         assertEquals("Mr.", employeeParser.parseNamePrefix("Mr."));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Mrrss.", "Mr", "*%&.", "Mrs13."})
     @DisplayName("Given a invalid name prefix, convertNamePrefix, should return null")
-    public void givenAnInvalidNamePrefix_ConvertNamePrefix_ReturnsNull(String namePrefix){
+    public void givenAnInvalidNamePrefix_parseNamePrefix_ReturnsNull(String namePrefix){
         assertEquals(null, employeeParser.parseNamePrefix(namePrefix));
     }
 
     @Test
     @DisplayName("Given a valid gender, convertGender, should return the the character value")
-    public void givenAValidGender_ConvertGender_ReturnsTheCharacterValue(){
+    public void givenAValidGender_parseGender_ReturnsTheCharacterValue(){
         assertEquals('F', employeeParser.parseGender("F"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Male", "M12", "%$^", "34adf*"})
     @DisplayName("Given a invalid gender, convertGender, should return null")
-    public void givenAnInvalidGender_ConvertGender_ReturnsNull(String gender){
+    public void givenAnInvalidGender_parseGender_ReturnsNull(String gender){
         assertEquals(null, employeeParser.parseGender(gender));
     }
 
     @Test
     @DisplayName("Given a valid email, convertEmail, should return the string valid email format")
-    public void givenAValidEmail_ConvertEmail_ReturnsTheStringValue(){
+    public void givenAValidEmail_parseEmail_ReturnsTheStringValue(){
         assertEquals("test@gmail.com", employeeParser.parseEmail("test@gmail.com"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"notanemail", "test$%£@gmail.com", "1234asdf£", "testgmailcom"})
     @DisplayName("Given a invalid email, convertEmail, should return null")
-    public void givenAnInvalidEmail_ConvertEmail_ReturnsNull(String email){
+    public void givenAnInvalidEmail_parseEmail_ReturnsNull(String email){
         assertEquals(null, employeeParser.parseEmail(email));
     }
 
     @Test
     @DisplayName("Given a valid salary, convertSalary, should return the integer value")
-    public void givenAValidSalary_ConvertSalary_ReturnsTheIntegerValue(){
+    public void givenAValidSalary_parseSalary_ReturnsTheIntegerValue(){
         assertEquals(45000, employeeParser.parseSalary("45000"));
     }
 
@@ -151,7 +151,7 @@ public class EmployeeParserTest {
     @ParameterizedTest
     @ValueSource(strings = {"12bghjue", "%$53", " ", "notanumber"})
     @DisplayName("Given a invalid employee ID, convertEmployeeId, should return null")
-    public void givenAnInvalidSalary_ConvertSalary_ReturnsNull(String salary){
+    public void givenAnInvalidSalary_parseSalary_ReturnsNull(String salary){
         assertEquals(null, employeeParser.parseSalary(salary));
     }
 }
