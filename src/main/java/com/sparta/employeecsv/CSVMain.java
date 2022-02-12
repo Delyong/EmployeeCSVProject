@@ -5,7 +5,6 @@ import com.sparta.employeecsv.view.DisplayManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CSVMain {
@@ -37,24 +36,22 @@ public class CSVMain {
             logger.info("Valid thread count input");
             int threadCount = controller.parseThreadCount(threadCountStr);
 
-            ActionListener buttonPress = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String filename = window.getFilename();
+            ActionListener buttonPress = e -> {
 
-                    long startTime = System.nanoTime();
-                    controller.getFile(filename);
-                    System.out.println("Reading records took: " + (System.nanoTime() - startTime) + " nano seconds");
+                String filename = window.getFilename();
 
-                    window.setDuplicateNumber(controller.getDuplicateCount());
-                    window.setUniqueNumber(controller.getUniqueCount());
-                    window.setCorruptedNumber(controller.getCorruptedCount());
+                long startTime = System.nanoTime();
+                controller.getFile(filename);
+                System.out.println("Reading records took: " + (System.nanoTime() - startTime) + " nano seconds");
 
-                    // window.listDuplicates(controller.getDuplicatesString());
+                window.setDuplicateNumber(controller.getDuplicateCount());
+                window.setUniqueNumber(controller.getUniqueCount());
+                window.setCorruptedNumber(controller.getCorruptedCount());
 
-                    controller.insertRecordsToDatabaseThreads(threadCount);
+                window.listDuplicates(controller.getDuplicatesString());
 
-                }
+                controller.insertRecordsToDatabaseThreads(threadCount);
+
             };
 
             window.initialize(buttonPress);
