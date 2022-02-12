@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.util.Scanner;
 
+import static com.sparta.employeecsv.CSVMain.logger;
+
 public class DisplayManager {
 
     public JFrame frame;
@@ -137,6 +139,17 @@ public class DisplayManager {
 
     public void displayInvalidThreadMsg() {
         System.out.println("Invalid thread count please input a number between 1 and 100!");
+    }
+
+    public void displayReadingTime(long startTime, long endTime) {
+        System.out.println("Reading records took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Reading records took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
+    }
+
+
+    public void displayWritingTime(long startTime, long endTime) {
+        System.out.println("Writing records to database took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing records to database took: " + ((double)(endTime - startTime)) / 1_000_000_000 + " seconds");
     }
 }
 

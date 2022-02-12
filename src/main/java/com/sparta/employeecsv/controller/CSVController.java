@@ -34,7 +34,7 @@ public class CSVController {
 
     }
 
-    public void insertRecordsToDatabaseThreads(int threadCount) {
+    public long insertRecordsToDatabaseThreads(int threadCount) {
 
         long startTime = System.nanoTime();
 
@@ -51,8 +51,7 @@ public class CSVController {
             }
         }
 
-        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
-        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
+        return System.nanoTime();
 
     }
 

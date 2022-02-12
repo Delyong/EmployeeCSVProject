@@ -19,18 +19,18 @@ public class CSVMain {
 
         CSVController controller = new CSVController();
         logger.debug("Successfully created controller");
-        DisplayManager window = new DisplayManager();
+        DisplayManager displayManager = new DisplayManager();
         logger.debug("Successfully created view");
 
         controller.setupDatabase();
 
-        String threadCountStr = window.getThreadCount();
+        String threadCountStr = displayManager.getThreadCount();
         boolean isValidThreadCount = controller.checkThreadCount(threadCountStr);
 
         while (!isValidThreadCount) {
             logger.warn("Invalid thread count input retrying");
-            window.displayInvalidThreadMsg();
-            threadCountStr = window.getThreadCount();
+            displayManager.displayInvalidThreadMsg();
+            threadCountStr = displayManager.getThreadCount();
             isValidThreadCount = controller.checkThreadCount(threadCountStr);
         }
 
@@ -38,19 +38,21 @@ public class CSVMain {
 
         ActionListener buttonEvent = e -> {
 
-            String filename = window.getFilename();
+            String filename = displayManager.getFilename();
 
-            long startTime = System.nanoTime();
+            long readStartTime = System.nanoTime();
             controller.getFile(filename);
-            System.out.println("Reading records took: " + (System.nanoTime() - startTime) + " nano seconds");
+            displayManager.displayReadingTime(readStartTime, System.nanoTime());
 
-            window.setDuplicateNumber(controller.getDuplicateCount());
-            window.setUniqueNumber(controller.getUniqueCount());
-            window.setCorruptedNumber(controller.getCorruptedCount());
+            displayManager.setDuplicateNumber(controller.getDuplicateCount());
+            displayManager.setUniqueNumber(controller.getUniqueCount());
+            displayManager.setCorruptedNumber(controller.getCorruptedCount());
 
-            window.listDuplicates(controller.getDuplicatesString());
+            displayManager.listDuplicates(controller.getDuplicatesString());
 
-            controller.insertRecordsToDatabaseThreads(threadCount);
+            long writeStartTime = System.nanoTime();
+            long writeEndTime = controller.insertRecordsToDatabaseThreads(threadCount);
+            displayManager.displayWritingTime(writeStartTime, writeEndTime);
 
         };
 
@@ -62,8 +64,8 @@ public class CSVMain {
             }
         };
 
-        window.initialize(buttonEvent, closeEvent);
-        window.frame.setVisible(true);
+        displayManager.initialize(buttonEvent, closeEvent);
+        displayManager.frame.setVisible(true);
 
 
     }
