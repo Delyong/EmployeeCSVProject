@@ -47,27 +47,6 @@ public class EmployeeDatabaseTest {
             ");";
 
     @Test
-    @DisplayName("Test table creation")
-    public void checkDropCreateTable() throws SQLException {
-        boolean exists = false;
-
-        Statement st = connection.createStatement(); //prepare java statement
-        employee.dropTable(); //execute the query
-        employee.createTable();
-
-        DatabaseMetaData dbmd = (DatabaseMetaData) connection.getMetaData();
-        String[] types = {"TABLE"};
-        ResultSet rs = dbmd.getTables(null, null, "%", types);
-
-        while (rs.next()) {
-            if (rs.getString("TABLE_NAME").equals("EmployeeRecords")) exists = true;
-        }
-
-        st.close(); //close connection to database
-        Assertions.assertTrue(exists);
-    }
-
-    @Test
     @DisplayName("Given a set of records to insert into the database, return true if the records are retrieved after insertion")
     public void GivenRecordsInsertedIntoDatabase_recordsCanBeRetrieved() throws SQLException, ParseException {
         boolean exists = false;

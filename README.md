@@ -13,7 +13,7 @@
 > This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) 
 > which they wish to read and write to the database 
 > using `MySQL` queries whilst utilising `Buffered FileReader & Lambda expressions`. This will then display the
-> number of corrupted records, number of employee records, number and list of duplicated records.
+> number of corrupted records, number of employee records, number and list of duplicated records
 
 > Users are also able to enter the number of `threads` they wish to use to execute the program at the start (In the console)
 
@@ -79,14 +79,57 @@
 ![filedetails](https://cdn.discordapp.com/attachments/935470190127353868/941817637615317002/unknown.png)
 
 > You can then refresh the `employeerecord` database in the link you provided in `mysql.properties`
-> to see if the employee records has been inserted in the database
+> to see if the employee records has been inserted in the database.
+> Once that's been done, transfer the view to the console to select query
+> the Database, either printing all or specific records by EmployeeID
+> There is also an option to exit the program if the user does not want to
+> query the database
+
+![single](https://cdn.discordapp.com/attachments/935470190127353868/942161876614271067/unknown.png)
+![exit](https://cdn.discordapp.com/attachments/935470190127353868/942162539687604306/unknown.png)
+
+> This last part of the program reruns until the exit option is selected
 
 ## Branches and Phases
+> Phase 1: Initial Reading and Cleaning
+>> This phase entailed reading data from a CSV file which involved using TDD on JUnit test cases
+>
+> Phase 2: Persist to Database
+>> This phase entailed connecting the program to the database and querying the database
+> 
+> Phase 3: Add Multithreading
+>> This phase entailed using the larger CSV file and utilising multithreading in order to
+>> improve the program's efficiency in terms of time complexity
+> 
+> Phase 4: Add streams and Lambdas
+>> This phase entailed using functional programming concepts, such as
+>> lambda expressions and streams for reading the CSV file
 
 ## Testing and Outcome
+> Automated tests:
+>> + CSV Controller Test
+>> + Employee Database Test
+>> + Employee File Reader Test
+>> + Employee Parser Test
+>> + Employee Test
+
+> Manual test:
+>> + Display Manager
+>> + CSV Main
+>> + Database Connection
+>> + Multithreading
+
+> Outcome:
+>> All manual and automated tests passed.
+>> The program has met all the requirements and works as intended
 
 ## Timings
+TODO
 
 ## Project management
+TODO
+![trello-before](https://cdn.discordapp.com/attachments/935470190127353868/942179699201806376/unknown.png)
+![trello-after](https://cdn.discordapp.com/attachments/935470190127353868/942179699201806376/unknown.png)
 
 ## What is logged
+TODO
