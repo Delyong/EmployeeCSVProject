@@ -15,15 +15,22 @@ import java.util.ArrayList;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class MySQLTest {
+public class EmployeeDatabaseTest {
     private static EmployeeDatabase employee;
+
+    public EmployeeDatabaseTest() throws SQLException, IOException {
+    }
+
     @BeforeAll
 
-    public static void setUp(){
+    public static void setUp() {
         employee = new EmployeeDatabase();
     }
+
     private Connection connection = ConnectionFactory.getConnection();
+
     String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
+
     String createTable = "CREATE TABLE `EmployeeRecords` (" +
             "`EmployeeID` INT," +
             "`NamePrefix` VARCHAR(5)," +
@@ -52,7 +59,7 @@ public class MySQLTest {
         ResultSet rs = dbmd.getTables(null, null, "%", types);
 
         while (rs.next()) {
-            if(rs.getString("TABLE_NAME").equals("EmployeeRecords")) exists = true;
+            if (rs.getString("TABLE_NAME").equals("EmployeeRecords")) exists = true;
         }
 
         st.close(); //close connection to database
@@ -74,7 +81,7 @@ public class MySQLTest {
         employee.insertRecordsList(testRecords);//insert records
 
         ResultSet rs = st.executeQuery("SELECT * FROM `EmployeeRecords`;");
-        while (rs.next()){
+        while (rs.next()) {
             int id = rs.getInt("EmployeeID");
             String fName = rs.getString("FirstName");
             String lName = rs.getString("LastName");
@@ -84,6 +91,4 @@ public class MySQLTest {
         Assertions.assertTrue(exists);
     }
 
-    public MySQLTest() throws SQLException, IOException {
-    }
 }
