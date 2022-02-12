@@ -1,7 +1,5 @@
 package com.sparta.employeecsv.model;
 
-import com.sparta.employeecsv.CSVMain;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -48,7 +46,10 @@ public class EmployeeFileReader {
             employeesList = new ArrayList<>(distinctList);
             duplicates = new ArrayList<>(duplicatesList);
 
+            logger.info("File provided has been read");
+
         } catch (IOException e) {
+            logger.error("Error reading the file", e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -79,7 +80,7 @@ public class EmployeeFileReader {
             }
             logger.info("File provided has been read");
         } catch (IOException e) {
-            CSVMain.logger.error("Error reading the file");
+            logger.error("Error reading the file", e.getMessage(), e);
             e.printStackTrace();
         }
 

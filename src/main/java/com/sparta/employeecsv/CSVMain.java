@@ -12,29 +12,22 @@ public class CSVMain {
 
     public static Logger logger = LogManager.getLogger("CSV-Logger");
 
+    private static DisplayManager displayManager;
+    private static CSVController controller;
+
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
 
-        CSVController controller = new CSVController();
+        controller = new CSVController();
         logger.debug("Successfully created controller");
-        DisplayManager displayManager = new DisplayManager();
+        displayManager = new DisplayManager();
         logger.debug("Successfully created view");
 
         controller.setupDatabase();
 
-        String threadCountStr = displayManager.getThreadCount();
-        boolean isValidThreadCount = controller.checkThreadCount(threadCountStr);
-
-        while (!isValidThreadCount) {
-            logger.warn("Invalid thread count input retrying");
-            displayManager.displayInvalidThreadMsg();
-            threadCountStr = displayManager.getThreadCount();
-            isValidThreadCount = controller.checkThreadCount(threadCountStr);
-        }
-
-        int threadCount = controller.parseThreadCount(threadCountStr);
+        int threadCount = getThreadCountMain();
 
         // truncate database before click
         ActionListener buttonEvent = e -> {
@@ -69,6 +62,22 @@ public class CSVMain {
         logger.debug("JFrame was initialized");
         displayManager.frame.setVisible(true);
 
+
+    }
+
+    public static int getThreadCountMain() {
+
+        String threadCountStr = displayManager.getThreadCount();
+        boolean isValidThreadCount = controller.checkThreadCount(threadCountStr);
+
+        while (!isValidThreadCount) {
+            logger.warn("Invalid thread count input retrying");
+            displayManager.displayInvalidThreadMsg();
+            threadCountStr = displayManager.getThreadCount();
+            isValidThreadCount = controller.checkThreadCount(threadCountStr);
+        }
+
+        return controller.parseThreadCount(threadCountStr);
 
     }
 }
