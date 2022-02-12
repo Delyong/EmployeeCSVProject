@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
-public class ReadFile {
+public class EmployeeFileReader {
 
     private ArrayList<Employee> employeesList;
     private HashMap<String, Employee> employeesMap;
@@ -53,7 +53,7 @@ public class ReadFile {
         }
     }
 
-    public void readFile(String fileName) {
+    public void readFileMap(String fileName) {
 
         employeesMap = new HashMap<>();
         duplicates = new ArrayList<>();

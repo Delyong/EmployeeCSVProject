@@ -1,13 +1,12 @@
 package com.sparta.employeecsv.view;
 
-import com.sparta.employeecsv.controller.CSVController;
-import com.sparta.employeecsv.model.ReadFile;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.util.Scanner;
+
+import static com.sparta.employeecsv.CSVMain.logger;
 
 public class DisplayManager {
 
@@ -21,12 +20,15 @@ public class DisplayManager {
     /**
      * Initialize the contents of the frame.
      */
-    public void initialize(ActionListener buttonPress) {
+    public void initialize(ActionListener buttonPress, WindowAdapter closeEvent) {
+
         frame = new JFrame();
         frame.setResizable(false);
         frame.setBounds(100, 100, 673, 507);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.setAlwaysOnTop(true);
+        frame.addWindowListener(closeEvent);
 
         JLabel lblNewLabel = new JLabel("Enter file name:");
         lblNewLabel.setBounds(46, 77, 106, 14);
@@ -45,7 +47,7 @@ public class DisplayManager {
         lblNewLabel_2.setBounds(46, 180, 250, 14);
         frame.getContentPane().add(lblNewLabel_2);
 
-        JLabel lblNewLabel_3 = new JLabel("Number of Corrupted records:");
+        JLabel lblNewLabel_3 = new JLabel("Number of corrupted records:");
         lblNewLabel_3.setBounds(46, 120, 250, 14);
         frame.getContentPane().add(lblNewLabel_3);
 
@@ -82,6 +84,7 @@ public class DisplayManager {
         btnStart.setBounds(500, 73, 89, 23);
         frame.getContentPane().add(btnStart);
         btnStart.addActionListener(buttonPress);
+
     }
 
 
@@ -91,7 +94,7 @@ public class DisplayManager {
      * @param numberOfDuplicates Integer value of number of duplicate record
      */
     public void setDuplicateNumber(int numberOfDuplicates) {
-        lblDupNumber.setText("" + numberOfDuplicates);
+        lblDupNumber.setText(String.valueOf(numberOfDuplicates));
     }
 
     /**
@@ -100,11 +103,11 @@ public class DisplayManager {
      * @param numberOfUnique Integer value of number of unique record
      */
     public void setUniqueNumber(int numberOfUnique) {
-        lblUniqueNumber.setText("" + numberOfUnique);
+        lblUniqueNumber.setText(String.valueOf(numberOfUnique));
     }
 
     public void setCorruptedNumber(int numberOfCorrupted) {
-        lblCurNumber.setText("" + numberOfCorrupted);
+        lblCurNumber.setText(String.valueOf(numberOfCorrupted));
     }
 
     /**
@@ -121,7 +124,7 @@ public class DisplayManager {
 
     public String getThreadCount() {
 
-        System.out.print("Please enter the desired number of threads: ");
+        System.out.println("Please enter the desired number of threads (1 - 100): ");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
@@ -131,8 +134,18 @@ public class DisplayManager {
     }
 
     public void displayInvalidThreadMsg() {
-        System.out.println("Invalid thread count please input a number between 1 and 100!");
+        System.out.print("Invalid thread count please input a number between 1 and 100!");
     }
 
+    public void displayReadingTime(long startTime, long endTime) {
+        System.out.println("Reading records took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Reading records took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+    }
+
+
+    public void displayWritingTime(long startTime, long endTime) {
+        System.out.println("Writing records to database took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+        logger.info("Writing records to database took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
+    }
 }
 
