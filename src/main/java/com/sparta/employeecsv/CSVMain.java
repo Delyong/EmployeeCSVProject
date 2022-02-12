@@ -56,18 +56,8 @@ public class CSVMain {
             long writeEndTime = controller.insertRecordsToDatabaseThreads(threadCount);
             displayManager.displayWritingTime(writeStartTime, writeEndTime);
 
-
-            // Put into a method
-            Scanner sc = new Scanner(System.in);
-            System.out.print("\nSelect all employees?(ALL) or select a single employee?(SINGLE): ");
-            String allEmployeeOrSingle = sc.next();
-            if (allEmployeeOrSingle.equals("ALL"))
-                System.out.println(controller.getEmployees());
-            else if (allEmployeeOrSingle.equals("SINGLE")) {
-                System.out.print("Enter id: ");
-                int empID = sc.nextInt();
-                System.out.println(controller.getEmployeeById(empID));
-                ;
+            while(true){
+                displayManager.getSelectOption(controller);
             }
         };
 

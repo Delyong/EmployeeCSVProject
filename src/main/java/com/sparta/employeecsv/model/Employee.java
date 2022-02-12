@@ -148,7 +148,7 @@ public class Employee {
                 " | email: " + email +
                 " | dob: " + dateOfBirth +
                 " | doj: " + dateOfJoin +
-                " | salary: " + salary + ")\n";
+                " | salary: $" + salary + ")\n";
     }
 
     @Override
