@@ -4,29 +4,29 @@ import com.sparta.employeecsv.database.ConnectionFactory;
 import com.sparta.employeecsv.model.Employee;
 import com.sparta.employeecsv.model.EmployeeDatabase;
 import com.sparta.employeecsv.model.InsertEmployeeThread;
-import com.sparta.employeecsv.model.ReadFile;
+import com.sparta.employeecsv.model.EmployeeFileReader;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
 public class CSVController {
 
-    private ReadFile readFile;
+    private EmployeeFileReader employeeFileReader;
     private EmployeeDatabase employeeDatabase;
 
-    public void getFile(String fileName) {
+    public void readFile(String fileName) {
 
-        readFile = new ReadFile();
-        readFile.readFileLambda(fileName);
+        employeeFileReader = new EmployeeFileReader();
+        employeeFileReader.readFileLambda(fileName);
 
     }
 
     public void setupDatabase() {
 
-        logger.info("Database has been set up");
         employeeDatabase = new EmployeeDatabase();
 
         employeeDatabase.dropTable();
@@ -34,13 +34,12 @@ public class CSVController {
 
     }
 
-    public void insertRecordsToDatabaseThreads(int threadCount) {
+    public long insertRecordsToDatabaseThreads(int threadCount) {
 
-        long startTime = System.nanoTime();
-
-        ArrayList<Employee> employees = readFile.getEmployeesList();
+        ArrayList<Employee> employees = employeeFileReader.getEmployeesList();
 
         Thread[] threads = createNumberOfThreads(threadCount, employees);
+        logger.debug("Created: " + threads.length + " threads, " + "Expected: " + threadCount + " threads");
 
         for (Thread thread : threads) {
             thread.start();
@@ -51,8 +50,7 @@ public class CSVController {
             }
         }
 
-        System.out.println("Writing to database took: " + ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
-        logger.info("Writing to database took: " +  ((double)(System.nanoTime() - startTime)) / 1_000_000_000 + " seconds");
+        return System.nanoTime();
 
     }
 
@@ -76,6 +74,7 @@ public class CSVController {
 
         // make sure no values are lost to rounding
         intervals[intervals.length - 1] = employeesSize;
+        logger.debug("Dividing employees with intervals: " + Arrays.toString(intervals));
 
         // System.out.println(Arrays.toString(intervals));
         // System.out.println(employeesSize);
@@ -107,9 +106,11 @@ public class CSVController {
         }
 
         if (threadCount >= 1 && threadCount <= 100) {
+            logger.info("Thread count input was valid");
             return true;
         }
         else {
+            logger.warn("Invalid thread count input is not a number between 1 and 100");
             return false;
         }
 
@@ -122,32 +123,31 @@ public class CSVController {
     public void cleanUpDatabase() {
         try {
             ConnectionFactory.closeConnection();
-            logger.info("Database has been closed");
         } catch (SQLException e) {
-            logger.error("Error while closing the connection", e);
+            logger.error("Error while closing the database connection");
             e.printStackTrace();
         }
     }
 
     public int getUniqueCount() {
         logger.info("Amount of unique records has been displayed");
-        return readFile.getEmployeesList().size();
+        return employeeFileReader.getEmployeesList().size();
     }
 
     public int getDuplicateCount() {
         logger.info("Amount of duplicated records has been displayed");
-        return readFile.getDuplicates().size();
+        return employeeFileReader.getDuplicates().size();
     }
 
     public String getDuplicatesString() {
         logger.info("Duplicate records has been displayed to the user");
-        return readFile.getDuplicates().toString();
+        return employeeFileReader.getDuplicates().toString();
     }
 
     public int getCorruptedCount() {
 
         int corruptCount = 0;
-        ArrayList<Employee> employees = readFile.getEmployeesList();
+        ArrayList<Employee> employees = employeeFileReader.getEmployeesList();
 
         for (Employee employee : employees) {
             if (!employee.isRecordValid()) {

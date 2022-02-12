@@ -18,6 +18,9 @@ public class ConnectionFactory {
     public static Connection getConnection() throws IOException, SQLException {
 
         if (connection == null) {
+
+            logger.debug("Database connection was null attempting to create one");
+
             Properties props = new Properties();
             props.load(new FileReader("mysql.properties"));
 
@@ -26,9 +29,11 @@ public class ConnectionFactory {
                     props.getProperty("dbuserid"),
                     props.getProperty("dbpassword")
             );
+
         }
 
-        logger.info("Database is connected");
+        logger.info("Getting database connection");
+
         return connection;
 
     }
@@ -36,6 +41,7 @@ public class ConnectionFactory {
     public static void closeConnection() throws SQLException {
         if (connection != null) {
             connection.close();
+            logger.debug("Closed database connection");
         }
     }
 
