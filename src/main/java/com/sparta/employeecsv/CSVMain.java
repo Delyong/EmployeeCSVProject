@@ -56,6 +56,7 @@ public class CSVMain {
                     controller.insertRecordsToDatabaseThreads(threadCount);
 
 
+                    // Put into a method
                     Scanner sc = new Scanner(System.in);
                     System.out.print("\nSelect all employees?(ALL) or select a single employee?(SINGLE): ");
                     String allEmployeeOrSingle = sc.next();
