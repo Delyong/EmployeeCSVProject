@@ -36,12 +36,13 @@ public class CSVMain {
 
         int threadCount = controller.parseThreadCount(threadCountStr);
 
+        // truncate database before click
         ActionListener buttonEvent = e -> {
 
             String filename = displayManager.getFilename();
 
             long readStartTime = System.nanoTime();
-            controller.getFile(filename);
+            controller.readFile(filename);
             displayManager.displayReadingTime(readStartTime, System.nanoTime());
 
             displayManager.setDuplicateNumber(controller.getDuplicateCount());
@@ -65,6 +66,7 @@ public class CSVMain {
         };
 
         displayManager.initialize(buttonEvent, closeEvent);
+        logger.debug("JFrame was initialized");
         displayManager.frame.setVisible(true);
 
 

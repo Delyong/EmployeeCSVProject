@@ -1,11 +1,7 @@
 package com.sparta.employeecsv.view;
 
-import com.sparta.employeecsv.controller.CSVController;
-import com.sparta.employeecsv.model.ReadFile;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.util.Scanner;
@@ -98,7 +94,7 @@ public class DisplayManager {
      * @param numberOfDuplicates Integer value of number of duplicate record
      */
     public void setDuplicateNumber(int numberOfDuplicates) {
-        lblDupNumber.setText("" + numberOfDuplicates);
+        lblDupNumber.setText(String.valueOf(numberOfDuplicates));
     }
 
     /**
@@ -107,11 +103,11 @@ public class DisplayManager {
      * @param numberOfUnique Integer value of number of unique record
      */
     public void setUniqueNumber(int numberOfUnique) {
-        lblUniqueNumber.setText("" + numberOfUnique);
+        lblUniqueNumber.setText(String.valueOf(numberOfUnique));
     }
 
     public void setCorruptedNumber(int numberOfCorrupted) {
-        lblCurNumber.setText("" + numberOfCorrupted);
+        lblCurNumber.setText(String.valueOf(numberOfCorrupted));
     }
 
     /**
