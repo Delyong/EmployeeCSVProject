@@ -21,6 +21,8 @@
 >> + MVC Project Structure
 >> + Logging
 >> + System Timings
+>> + Project Management
+>> + Version Control
 
 ## Dependencies
 > + JUnit (For test cases)
@@ -60,7 +62,7 @@
 >> + dburl=
 >> + dbuserid=
 >> + dbpassword=
-> + Create a `mylogfile.log` file in the root folder to store the 
+> + Create a `mylogfile.log` file in the root folder to log user actions and system status
 
 ## How to use the project
 > Run `CSVMain` Java class and enter the number of threads that you wish to run the program with
@@ -84,5 +86,7 @@
 ## Testing and Outcome
 
 ## Timings
+
+## Project management
 
 ## What is logged

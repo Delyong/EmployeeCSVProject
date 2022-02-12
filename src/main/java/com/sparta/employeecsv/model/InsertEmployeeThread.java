@@ -11,6 +11,13 @@ public class InsertEmployeeThread implements Runnable {
         this.employees = employees;
     }
 
+    private ArrayList<ArrayList<Employee>> splitTests() {
+
+
+        return null;
+    }
+
+
     @Override
     public void run() {
         EmployeeDatabase employeeDatabase = new EmployeeDatabase();

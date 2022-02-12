@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import java.awt.event.WindowAdapter;
 
 public class CSVMain {
@@ -48,6 +49,9 @@ public class CSVMain {
             long writeEndTime = controller.insertRecordsToDatabaseThreads(threadCount);
             displayManager.displayWritingTime(writeStartTime, writeEndTime);
 
+            while(true){
+                displayManager.getSelectOption(controller);
+            }
         };
 
         WindowAdapter closeEvent = new WindowAdapter() {
@@ -61,8 +65,6 @@ public class CSVMain {
         displayManager.initialize(buttonEvent, closeEvent);
         logger.debug("JFrame was initialized");
         displayManager.frame.setVisible(true);
-
-
     }
 
     public static int getThreadCountMain() {

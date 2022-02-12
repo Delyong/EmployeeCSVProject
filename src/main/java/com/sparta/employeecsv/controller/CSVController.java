@@ -25,6 +25,14 @@ public class CSVController {
 
     }
 
+    public Employee getEmployeeById(int employeeId){
+        return employeeDatabase.getEmployeeByEmpId(employeeId);
+    }
+
+    public List<Employee> getEmployees(){
+        return employeeDatabase.getEmployees();
+    }
+
     public void setupDatabase() {
 
         employeeDatabase = new EmployeeDatabase();
