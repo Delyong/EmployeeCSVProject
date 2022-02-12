@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
@@ -123,8 +124,6 @@ public class EmployeeDatabase {
                 "(EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-
-
         try {
 
             connection.setAutoCommit(false);
@@ -154,7 +153,73 @@ public class EmployeeDatabase {
             logger.error("Error while inserting data into the table", e); //add error into the log file
             e.printStackTrace();
         }
-
     }
 
+    public List<Employee> getEmployees() {
+
+        String query = "SELECT * FROM EmployeeRecords";
+        List<Employee> list = new ArrayList<Employee>();
+        Employee employee = null;
+        ResultSet rs = null;
+        try {
+            Statement statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                employee = new Employee();
+                // Retrieve one employee details and store it in employee object
+                employee.setEmployeeID(rs.getInt("EmployeeID"));
+                employee.setNamePrefix(rs.getString("NamePrefix"));
+                employee.setFirstName(rs.getString("FirstName"));
+                String middleInitial = rs.getString("MiddleInitial");
+                employee.setMiddleInitial(middleInitial.charAt(0));
+                employee.setLastName(rs.getString("LastName"));
+                String gender = rs.getString("Gender");
+                employee.setGender(gender.charAt(0));
+                employee.setEmail(rs.getString("Email"));
+                employee.setDateOfBirth(rs.getDate("DateOfBirth"));
+                employee.setDateOfJoin(rs.getDate("DateOfJoining"));
+                employee.setSalary(rs.getFloat("Salary"));
+
+                //add each employee to the list
+                list.add(employee);
+            }
+        } catch (Exception e) {
+            logger.fatal("Error while retrieving the employees from the table", e);
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public Employee getEmployeeByEmpId(int empId) {
+
+        String query = "SELECT * FROM EmployeeRecords where EmployeeID = ?";
+        List<Employee> list = new ArrayList<Employee>();
+        Employee employee = null;
+        ResultSet rs = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, empId);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                employee = new Employee();
+                // Retrieve one employee details and store it in employee object
+                employee.setEmployeeID(rs.getInt("EmployeeID"));
+                employee.setNamePrefix(rs.getString("NamePrefix"));
+                employee.setFirstName(rs.getString("FirstName"));
+                String middleInitial = rs.getString("MiddleInitial");
+                employee.setMiddleInitial(middleInitial.charAt(0));
+                employee.setLastName(rs.getString("LastName"));
+                String gender = rs.getString("Gender");
+                employee.setGender(gender.charAt(0));
+                employee.setEmail(rs.getString("Email"));
+                employee.setDateOfBirth(rs.getDate("DateOfBirth"));
+                employee.setDateOfJoin(rs.getDate("DateOfJoining"));
+                employee.setSalary(rs.getFloat("Salary"));
+            }
+        } catch (Exception e) {
+            logger.fatal("Error while retrieving the employees from the table", e);
+            e.printStackTrace();
+        }
+        return employee;
+    }
 }

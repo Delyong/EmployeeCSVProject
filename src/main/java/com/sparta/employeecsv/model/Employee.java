@@ -85,6 +85,46 @@ public class Employee {
         return salary;
     }
 
+    public void setEmployeeID(Integer employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public void setNamePrefix(String namePrefix) {
+        this.namePrefix = namePrefix;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setMiddleInitial(Character middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setGender(Character gender) {
+        this.gender = gender;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setDateOfJoin(Date dateOfJoin) {
+        this.dateOfJoin = dateOfJoin;
+    }
+
+    public void setSalary(Float salary) {
+        this.salary = salary;
+    }
+
     public boolean isRecordValid() {
 
         if (employeeID == null || namePrefix == null || firstName == null ||

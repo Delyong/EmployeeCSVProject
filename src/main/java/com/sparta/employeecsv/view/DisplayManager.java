@@ -121,7 +121,7 @@ public class DisplayManager {
 
     public String getThreadCount() {
 
-        System.out.println("Please enter the desired number of threads: ");
+        System.out.print("Please enter the desired number of threads: ");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
@@ -133,5 +133,6 @@ public class DisplayManager {
     public void displayInvalidThreadMsg() {
         System.out.println("Invalid thread count please input a number between 1 and 100!");
     }
+
 }
 

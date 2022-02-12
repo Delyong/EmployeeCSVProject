@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 public class CSVMain {
 
@@ -54,6 +55,17 @@ public class CSVMain {
 
                     controller.insertRecordsToDatabaseThreads(threadCount);
 
+
+                    Scanner sc = new Scanner(System.in);
+                    System.out.print("\nSelect all employees?(ALL) or select a single employee?(SINGLE): ");
+                    String allEmployeeOrSingle = sc.next();
+                    if (allEmployeeOrSingle.equals("ALL"))
+                        System.out.println(controller.getEmployees());
+                    else if (allEmployeeOrSingle.equals("SINGLE")){
+                        System.out.print("Enter id: ");
+                        int empID = sc.nextInt();
+                        System.out.println(controller.getEmployeeById(empID));;
+                    }
                 }
             };
 
@@ -63,6 +75,5 @@ public class CSVMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
