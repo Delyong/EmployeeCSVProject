@@ -195,3 +195,10 @@
 >> + Warn - logs when the user input an invalid option.
 >> + Error - logs when the file couldn't be read or path was invalid.
 >> + Fatal - logs when the database table couldn't be created.
+
+![employeeparse](https://user-images.githubusercontent.com/48356710/153762840-cec5dd23-8a3a-4d85-903a-55498a29a55e.png)
+![employeetests](https://user-images.githubusercontent.com/48356710/153762842-c06adbde-8090-4fbe-8689-bd4e44094577.png)
+![Csvcontrollertest](https://user-images.githubusercontent.com/48356710/153762843-bfaa9098-b5bc-4cc8-87cd-9d85e991d4ca.png)
+![employeedbtests](https://user-images.githubusercontent.com/48356710/153762844-445f0137-41b4-4455-8f3c-9033277fe0fb.png)
+![employeefilerecordtest](https://user-images.githubusercontent.com/48356710/153762845-8176c40f-f9f5-40f6-b242-15df36d06be9.png)
+
