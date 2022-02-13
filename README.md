@@ -146,10 +146,20 @@
 
 ![100thread](https://cdn.discordapp.com/attachments/935470190127353868/942385615771697182/unknown.png)
 
+> Conclusion: 8 threads was the fastest of them all in average
+
 ## Project management
-TODO
+
+> Throughout the development of the project, the team has been keeping track of the project requirements
+> and tasks on Trello by using lists and cards. Setting each card to the member who
+> is the most confident on implementing the requirement
+>> Before
 ![trello-before](https://cdn.discordapp.com/attachments/935470190127353868/942179699201806376/unknown.png)
+>> After
 ![trello-after](https://cdn.discordapp.com/attachments/935470190127353868/942179569102889010/unknown.png)
 
 ## What is logged
-TODO
+> + Database status | including database exceptions
+> + User actions | including invalid user inputs
+> + Program status | including reading file exceptions
+> + Information displayed to the user | including reading from and writing to database timings
