@@ -30,7 +30,6 @@ public class CSVMain {
 
         int threadCount = getThreadCountMain();
 
-        // truncate database before click
         ActionListener buttonEvent = e -> {
 
             String filename = displayManager.getFilename();
@@ -49,9 +48,9 @@ public class CSVMain {
             long writeEndTime = controller.insertRecordsToDatabaseThreads(threadCount);
             displayManager.displayWritingTime(writeStartTime, writeEndTime);
 
-            // while(true){
-            //     displayManager.getSelectOption(controller);
-            // }
+             while(true){
+                 displayManager.getSelectOption(controller);
+             }
         };
 
         WindowAdapter closeEvent = new WindowAdapter() {

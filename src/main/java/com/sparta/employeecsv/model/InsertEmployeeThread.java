@@ -43,9 +43,6 @@ public class InsertEmployeeThread implements Runnable {
             total = total + list.size();
         }
 
-        System.out.println(splitEmployees.size());
-        System.out.println(total);
-
         return splitEmployees;
     }
 

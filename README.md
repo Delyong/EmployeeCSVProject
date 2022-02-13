@@ -148,6 +148,10 @@
 
 > Conclusion: 8 threads was the fastest of them all in average
 
+> Confirmation that threading is actually writing to the database:
+
+![sqlcount](https://cdn.discordapp.com/attachments/935470190127353868/942391935824461844/unknown.png)
+
 ## Project management
 
 > Throughout the development of the project, the team has been keeping track of the project requirements

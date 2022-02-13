@@ -85,9 +85,6 @@ public class CSVController {
         intervals[intervals.length - 1] = employeesSize;
         logger.debug("Dividing employees with intervals: " + Arrays.toString(intervals));
 
-        // System.out.println(Arrays.toString(intervals));
-        // System.out.println(employeesSize);
-
         for (int i = 0; i < count; i++) {
 
             List<Employee> splitEmployees = employees.subList(intervals[i*2], intervals[(i*2)+1]);

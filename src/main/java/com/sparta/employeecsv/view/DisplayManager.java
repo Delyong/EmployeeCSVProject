@@ -90,7 +90,6 @@ public class DisplayManager {
 
     }
 
-
     /**
      * display number of duplicate records on the GUI
      *
@@ -127,7 +126,7 @@ public class DisplayManager {
 
     public String getThreadCount() {
 
-        System.out.println("Please enter the desired number of threads (1 - 100): ");
+        System.out.print("Please enter the desired number of threads (1 - 100): ");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
