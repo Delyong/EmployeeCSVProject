@@ -8,6 +8,8 @@
 > - [Branches and Phases](#Branches-and-Phases)
 > - [Testing and Outcome](#Testing-and-Outcome)
 > - [What is logged](#What-is-logged)
+> - [Timings](#Timings)
+> - [Project Management](#Project-Management)
 
 ## Summary
 > This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) 
@@ -152,7 +154,7 @@
 
 ![sqlcount](https://cdn.discordapp.com/attachments/935470190127353868/942391935824461844/unknown.png)
 
-## Project management
+## Project Management
 
 > Throughout the development of the project, the team has been keeping track of the project requirements
 > and tasks on Trello by using lists and cards. Setting each card to the member who

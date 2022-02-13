@@ -13,13 +13,20 @@ import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
+/**
+ * A controller class that acts as a bridge between the model classes and the view classes
+ */
 public class CSVController {
 
     private EmployeeFileReader employeeFileReader;
     private EmployeeDatabase employeeDatabase;
 
+    /**
+     * Creates an instance of the file reader and read the file
+     *
+     * @param fileName - the name of the file that is wished to read, as a String value
+     */
     public void readFile(String fileName) {
-
         employeeFileReader = new EmployeeFileReader();
         employeeFileReader.readFileLambda(fileName);
 
