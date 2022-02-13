@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 import java.awt.event.WindowAdapter;
 
 public class CSVMain {
@@ -30,7 +29,7 @@ public class CSVMain {
 
         int threadCount = getThreadCountMain();
 
-        // truncate database before click
+        // This executes after the button is pressed
         ActionListener buttonEvent = e -> {
 
             String filename = displayManager.getFilename();
@@ -40,7 +39,7 @@ public class CSVMain {
             displayManager.displayReadingTime(readStartTime, System.nanoTime());
 
             displayManager.setDuplicateNumber(controller.getDuplicateCount());
-            displayManager.setUniqueNumber(controller.getUniqueCount());
+            displayManager.setUniqueNumber(controller.getEmployeeCount());
             displayManager.setCorruptedNumber(controller.getCorruptedCount());
 
             displayManager.listDuplicates(controller.getDuplicatesString());
@@ -49,9 +48,9 @@ public class CSVMain {
             long writeEndTime = controller.insertRecordsToDatabaseThreads(threadCount);
             displayManager.displayWritingTime(writeStartTime, writeEndTime);
 
-            // while(true){
-            //     displayManager.getSelectOption(controller);
-            // }
+             while(true){
+                 displayManager.getSelectOption(controller);
+             }
         };
 
         WindowAdapter closeEvent = new WindowAdapter() {
@@ -67,6 +66,9 @@ public class CSVMain {
         displayManager.frame.setVisible(true);
     }
 
+    /**
+     * Get the amount of threads from the user
+     */
     public static int getThreadCountMain() {
 
         String threadCountStr = displayManager.getThreadCount();
@@ -78,8 +80,6 @@ public class CSVMain {
             threadCountStr = displayManager.getThreadCount();
             isValidThreadCount = controller.checkThreadCount(threadCountStr);
         }
-
         return controller.parseThreadCount(threadCountStr);
-
     }
 }
