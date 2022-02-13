@@ -55,7 +55,7 @@ public class EmployeeFileReader {
             logger.info("File provided has been read");
 
         } catch (IOException e) {
-            logger.error("Error reading the file", e.getMessage(), e);
+            logger.warn("Error reading the file", e.getMessage(), e);
             e.printStackTrace();
         }
     }
