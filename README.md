@@ -129,8 +129,8 @@
 
 ## Timings
 
-> Here are the following reading from and writing to the database timings,
-> including the number of threads of:
+> Here are the following reading from and writing to the database timings using lambda expressions
+> and streams, including the number of threads of:
 >> + 1 thread
 >> + 2 threads
 >> + 4 threads
@@ -150,7 +150,13 @@
 
 ![100thread](https://cdn.discordapp.com/attachments/935470190127353868/942385615771697182/unknown.png)
 
-> Conclusion: 8 threads was the fastest of them all in average
+> In comparison with the same amount of threads, the result below shows the timings for
+> 8 threads using Buffered file reader instead of lambda expressions and streams.
+>> Conclusion: 8 threads was the fastest of them all in average and
+>> using lambda expressions and streams when reading the file increases the program's performance
+
+
+![](https://cdn.discordapp.com/attachments/935470190127353868/942485698743783505/unknown.png)
 
 > Confirmation that threading is actually writing to the database:
 
