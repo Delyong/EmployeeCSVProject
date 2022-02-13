@@ -206,3 +206,14 @@
 > 
 > You can find more examples throughout the program :)
 
+![GitCloneImage](https://user-images.githubusercontent.com/48356710/153765447-c5a5538d-3732-49d5-a227-06d4d117110f.png)
+![OpenProjectImage](https://user-images.githubusercontent.com/48356710/153765449-280241da-cc21-424d-8fce-f96119b02262.png)
+![OpenProjectLocationImage](https://user-images.githubusercontent.com/48356710/153765450-f84933c2-4d42-4f09-91c6-77b2c45bbc50.png)
+![CreateMysqlProperties](https://user-images.githubusercontent.com/48356710/153765451-7d2fcb1e-ecb2-4011-b209-853ecf0e7cb9.png)
+![NameTheFileImage](https://user-images.githubusercontent.com/48356710/153765453-7ff6cc41-2223-416d-970f-b17e3d2de9a7.png)
+![MySqlDetailsImage](https://user-images.githubusercontent.com/48356710/153765454-5a7bfc0f-59b4-4dbd-a79b-581f214ec7a7.png)
+![CSVMainRunImage](https://user-images.githubusercontent.com/48356710/153765455-64423d74-8f44-4912-9402-fbbe799539bb.png)
+![CodeButtonImage](https://user-images.githubusercontent.com/48356710/153765457-2be6978a-fe0b-4391-817a-3b19fd3eff89.png)
+![CopyButtonImage](https://user-images.githubusercontent.com/48356710/153765459-763745e0-73b9-47e5-924d-6077921928e5.png)
+
+
