@@ -187,11 +187,13 @@
 >> <p align="center"> <img src="https://cdn.discordapp.com/attachments/935470190127353868/942385615771697182/unknown.png"/> </p>
 >
 > Optimal Thread Count Conclusion:
+>
+> 8 threads was the fastest of them all in average and
+> using functional programming when reading the file increased the program's performance
 > 
->> After 8 threads the performance dropped noticeably. Before 8 performance was similar however, overall 8 threads was the fastest of them all.
->>
->> Confirmation that threading is actually writing to the database:
->>
+> In comparison with the same amount of threads, the result below shows the timings for
+> 8 threads using Buffered file reader instead of lambda expressions and streams.
+>> <p align="center"> <img src="https://cdn.discordapp.com/attachments/935470190127353868/942485698743783505/unknown.png"/> </p>
 >> <p align="center"> <img src="https://cdn.discordapp.com/attachments/935470190127353868/942391935824461844/unknown.png"/> </p>
 
 ## Project Management
