@@ -7,9 +7,11 @@
 > - [How to Use the Project](#How-to-use-the-project)
 > - [Branches and Phases](#Branches-and-Phases)
 > - [Testing and Outcome](#Testing-and-Outcome)
-> - [What is logged](#What-is-logged)
 > - [Timings](#Timings)
 > - [Project Management](#Project-Management)
+> - [What is logged](#What-is-logged)
+
+
 
 ## Summary
 > This is an Employee CSV Project where users are able to enter a file name of their choice (In the console) 

@@ -1,4 +1,5 @@
 package com.sparta.employeecsv.model;
+
 import com.sparta.employeecsv.CSVMain;
 import com.sparta.employeecsv.database.ConnectionFactory;
 
@@ -11,10 +12,16 @@ import java.util.List;
 
 import static com.sparta.employeecsv.CSVMain.logger;
 
+/**
+ * Class which is in charge of getting the connection and querying the database
+ */
 public class EmployeeDatabase {
 
     private Connection connection;
 
+    /**
+     * Upon creation of an instance of this object, create the connection
+     */
     public EmployeeDatabase() {
         try {
             connection = ConnectionFactory.getConnection();
@@ -24,8 +31,10 @@ public class EmployeeDatabase {
         }
     }
 
+    /**
+     * Drops the table to ensure it does not exist when creating the table
+     */
     public void dropTable() {
-    
         try {
             String dropTable = "DROP TABLE IF EXISTS `EmployeeRecords`;"; //drop table if exists
     
@@ -42,10 +51,12 @@ public class EmployeeDatabase {
         }
     
     }
-    
+
+    /**
+     * Creates the table as we know the table has been dropped already
+     */
     public void createTable() {
         try {
-    
             String createTable = "CREATE TABLE `EmployeeRecords` (" +
                     "`EmployeeID` INT," +
                     "`NamePrefix` VARCHAR(5)," +
@@ -73,16 +84,17 @@ public class EmployeeDatabase {
         }
     }
 
+    /**
+     * A method for inserting the employee records that takes in a list of employees
+     * @param employees - list of employee records
+     */
     public void insertRecordsList(ArrayList<Employee> employees){
-    //insert values into the table
 
         String sqlInsert =
                 "INSERT INTO EmployeeRecords " +
                 "(EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
         try {
-
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
@@ -100,28 +112,28 @@ public class EmployeeDatabase {
                 preparedStatement.setFloat(10, employee.getSalary());
 
                 preparedStatement.executeUpdate();
-
             }
 
             connection.commit();
             connection.setAutoCommit(true);
 
             preparedStatement.close();
-
         } catch (SQLException e){
             logger.error("Error while inserting data into the table", e.getMessage(), e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * A method that inserts multiple records in one sql statement
+     * @param splitEmployees a list where each element is a separated list of employees
+     */
     public void insertRecordsMultipleList(ArrayList<ArrayList<Employee>> splitEmployees) {
-    //insert values into the table
 
         StringBuilder sb = new StringBuilder();
         PreparedStatement preparedStatement = null;
 
         try {
-
             connection.setAutoCommit(false);
 
             for (ArrayList<Employee> subListEmployee : splitEmployees) {
@@ -156,9 +168,7 @@ public class EmployeeDatabase {
                     preparedStatement.setFloat((i*10) + 10, employee.getSalary());
 
                 }
-
                 preparedStatement.executeUpdate();
-
             }
 
             connection.commit();
@@ -172,6 +182,10 @@ public class EmployeeDatabase {
         }
     }
 
+    /**
+     * Method for reading the database record by record
+     * @return a list of employees
+     */
     public List<Employee> getEmployees() {
 
         String query = "SELECT * FROM EmployeeRecords";
@@ -207,6 +221,11 @@ public class EmployeeDatabase {
         return list;
     }
 
+    /**
+     * Method for selecting a specific record in the database
+     * @param empId - The employee ID that the user wishes to view the records of
+     * @return the employee with the same employee ID
+     */
     public Employee getEmployeeByEmpId(int empId) {
 
         String query = "SELECT * FROM EmployeeRecords where EmployeeID = ?";

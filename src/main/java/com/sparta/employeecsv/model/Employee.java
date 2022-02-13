@@ -3,22 +3,37 @@ package com.sparta.employeecsv.model;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * A class which represents each employee that will be read from the CSV file.
+ * Including all the attributes and methods it should include
+ */
 public class Employee {
 
     private Integer employeeID;
-
     private String namePrefix;
     private String firstName;
     private Character middleInitial;
     private String lastName;
-
     private Character gender;
     private String email;
     private Date dateOfBirth;
     private Date dateOfJoin;
-
     private Float salary;
 
+    /**
+     * Basic constructor which takes in all the necessary attributes as a paramater
+     * And initialises them
+     * @param employeeID
+     * @param namePrefix
+     * @param firstName
+     * @param middleInitial
+     * @param lastName
+     * @param gender
+     * @param email
+     * @param dateOfBirth
+     * @param dateOfJoin
+     * @param salary
+     */
     public Employee(Integer employeeID, String namePrefix, String firstName,
                     Character middleInitial, String lastName, Character gender,
                     String email, Date dateOfBirth, Date dateOfJoin,
@@ -26,24 +41,25 @@ public class Employee {
     ) {
 
         this.employeeID = employeeID;
-
         this.namePrefix = namePrefix;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
         this.lastName = lastName;
-
         this.dateOfBirth = dateOfBirth;
         this.dateOfJoin = dateOfJoin;
-
         this.gender = gender;
         this.email = email;
         this.salary = salary;
-
     }
 
+    /**
+     * Default constructor
+     */
     public Employee() {
         super();
     }
+
+    // Getters
 
     public Integer getEmployeeID() {
         return employeeID;
@@ -85,6 +101,8 @@ public class Employee {
         return salary;
     }
 
+    // Setters
+
     public void setEmployeeID(Integer employeeID) {
         this.employeeID = employeeID;
     }
@@ -125,18 +143,24 @@ public class Employee {
         this.salary = salary;
     }
 
+    /**
+     * A check whether the employee record is corrupted
+     * @return true or false if the employee is corrupted
+     */
     public boolean isRecordValid() {
-
         if (employeeID == null || namePrefix == null || firstName == null ||
                 middleInitial == null || lastName == null || gender == null ||
                 email == null || dateOfBirth == null || dateOfJoin == null ||
                 salary == null) {
             return false;
         }
-
         return true;
     }
 
+    /**
+     * A non-generated employee toString method to display the employee details in a cleaner way
+     * @return String value of employee
+     */
     @Override
     public String toString() {
         return "(employeeID: " + employeeID +
@@ -151,6 +175,11 @@ public class Employee {
                 " | salary: $" + salary + ")\n";
     }
 
+    /**
+     * Generated equals method
+     * @param o - Object to be compared to
+     * @return true or false if the 2 objects have the same primary key or employee ID
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -159,6 +188,10 @@ public class Employee {
         return employeeID.equals(employee.employeeID);
     }
 
+    /**
+     * Generated hashcode method
+     * @return hashcode value of the employee ID
+     */
     @Override
     public int hashCode() {
         return Objects.hash(employeeID);

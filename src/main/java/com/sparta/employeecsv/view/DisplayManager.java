@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.util.Locale;
 import java.util.Scanner;
 
 import static com.sparta.employeecsv.CSVMain.logger;
@@ -120,10 +119,16 @@ public class DisplayManager {
         duplicateListFld.setText(duplicates);
     }
 
+    /**
+     * @return the file name provided by the user
+     */
     public String getFilename() {
         return filenameFld.getText();
     }
 
+    /**
+     * @return the amount of threads entered by the user
+     */
     public String getThreadCount() {
 
         System.out.print("Please enter the desired number of threads (1 - 100): ");
@@ -135,21 +140,32 @@ public class DisplayManager {
 
     }
 
+    /**
+     * Simply display an error message when thread count is not in the range
+     */
     public void displayInvalidThreadMsg() {
         System.out.print("Invalid thread count please input a number between 1 and 100!");
     }
 
+    /**
+     * Display the timings of the reading from the database
+     */
     public void displayReadingTime(long startTime, long endTime) {
         System.out.println("Reading records took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
         logger.info("Reading records took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
     }
 
-
+    /**
+     * Displays the timings of the writing to the database
+     */
     public void displayWritingTime(long startTime, long endTime) {
         System.out.println("Writing records to database took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
         logger.info("Writing records to database took: " + ((double) (endTime - startTime)) / 1_000_000_000 + " seconds");
     }
 
+    /**
+     * Displays the options to the user when it comes to selecting records from the database
+     */
     public void getSelectOption(CSVController controller){
         Scanner sc = new Scanner(System.in);
         System.out.print("\nSelect all employees?(ALL) or select a single employee?(SINGLE) or quit(EXIT): ");
