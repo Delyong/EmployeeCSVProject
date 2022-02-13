@@ -61,14 +61,24 @@
 ```
 
 ## How to set up the project
-> + Download the source code from this GitHub link
-> + Open the project with an IDE of your choice
-> + In the `pom.xml` file, refresh Maven if needed.
-> + In the root folder, create `mysql.properties` file and write the following with details to connect to your own mySQL database:
->> + dburl=
->> + dbuserid=
->> + dbpassword=
-> + Run CSVMain and enjoy!
+> 1. Click the green code button on the repo page.
+>> ![GreenButtonImage](https://user-images.githubusercontent.com/48356710/153765457-2be6978a-fe0b-4391-817a-3b19fd3eff89.png)
+> 2. Click the copy button to copy the url to your clipboard.
+>> ![CopyButtonImage](https://user-images.githubusercontent.com/48356710/153765459-763745e0-73b9-47e5-924d-6077921928e5.png)
+> 3. Open up a terminal and navigate to a directory of your choice. Type 'git clone' then paste the url.
+>> ![GitCloneImage](https://user-images.githubusercontent.com/48356710/153765447-c5a5538d-3732-49d5-a227-06d4d117110f.png)
+> 4. In IntelliJ click the file button at the top left then navigate to open.
+>> <p align="center"> <img src="https://user-images.githubusercontent.com/48356710/153765449-280241da-cc21-424d-8fce-f96119b02262.png"/> </p>
+> 5. Navigate the directory you cloned the project and open it up.
+>> ![OpenProjectLocationImage](https://user-images.githubusercontent.com/48356710/153765450-f84933c2-4d42-4f09-91c6-77b2c45bbc50.png)
+> 6. In the root folder of the project go to create a new file.
+>> ![CreateMysqlProperties](https://user-images.githubusercontent.com/48356710/153765451-7d2fcb1e-ecb2-4011-b209-853ecf0e7cb9.png)
+> 7. Name the file 'mysql.properties'.
+>> ![NameTheFileImage](https://user-images.githubusercontent.com/48356710/153765453-7ff6cc41-2223-416d-970f-b17e3d2de9a7.png)
+> 8. Inside 'mysql.properties' copy the following with your own valid details for your own local or remote MySQL database. Then save the changes.
+>> ![MySqlDetailsImage](https://user-images.githubusercontent.com/48356710/153765454-5a7bfc0f-59b4-4dbd-a79b-581f214ec7a7.png)
+> 9. Navigate to CSVMain in the project view. Run and enjoy!
+>> ![CSVMainRunImage](https://user-images.githubusercontent.com/48356710/153765455-64423d74-8f44-4912-9402-fbbe799539bb.png)
 
 ## How to use the project
 > Run `CSVMain` Java class and enter the number of threads that you wish to run the program with
@@ -205,15 +215,4 @@
 >> + Fatal - logs when the database table couldn't be created.
 > 
 > You can find more examples throughout the program :)
-
-![GitCloneImage](https://user-images.githubusercontent.com/48356710/153765447-c5a5538d-3732-49d5-a227-06d4d117110f.png)
-![OpenProjectImage](https://user-images.githubusercontent.com/48356710/153765449-280241da-cc21-424d-8fce-f96119b02262.png)
-![OpenProjectLocationImage](https://user-images.githubusercontent.com/48356710/153765450-f84933c2-4d42-4f09-91c6-77b2c45bbc50.png)
-![CreateMysqlProperties](https://user-images.githubusercontent.com/48356710/153765451-7d2fcb1e-ecb2-4011-b209-853ecf0e7cb9.png)
-![NameTheFileImage](https://user-images.githubusercontent.com/48356710/153765453-7ff6cc41-2223-416d-970f-b17e3d2de9a7.png)
-![MySqlDetailsImage](https://user-images.githubusercontent.com/48356710/153765454-5a7bfc0f-59b4-4dbd-a79b-581f214ec7a7.png)
-![CSVMainRunImage](https://user-images.githubusercontent.com/48356710/153765455-64423d74-8f44-4912-9402-fbbe799539bb.png)
-![CodeButtonImage](https://user-images.githubusercontent.com/48356710/153765457-2be6978a-fe0b-4391-817a-3b19fd3eff89.png)
-![CopyButtonImage](https://user-images.githubusercontent.com/48356710/153765459-763745e0-73b9-47e5-924d-6077921928e5.png)
-
 
