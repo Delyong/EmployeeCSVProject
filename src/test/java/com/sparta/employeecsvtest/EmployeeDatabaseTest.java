@@ -1,5 +1,5 @@
 package com.sparta.employeecsvtest;
-import com.mysql.cj.jdbc.DatabaseMetaData;
+
 import com.sparta.employeecsv.database.ConnectionFactory;
 import com.sparta.employeecsv.model.Employee;
 import com.sparta.employeecsv.model.EmployeeDatabase;
