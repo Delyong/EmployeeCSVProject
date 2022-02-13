@@ -108,7 +108,65 @@ public class EmployeeDatabase {
 
             preparedStatement.close();
 
-        } catch (Exception e){
+        } catch (SQLException e){
+            logger.error("Error while inserting data into the table", e.getMessage(), e);
+            e.printStackTrace();
+        }
+    }
+
+    public void insertRecordsMultipleList(ArrayList<ArrayList<Employee>> splitEmployees) {
+    //insert values into the table
+
+        StringBuilder sb = new StringBuilder();
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            connection.setAutoCommit(false);
+
+            for (ArrayList<Employee> subListEmployee : splitEmployees) {
+
+                sb.append("INSERT INTO EmployeeRecords ");
+                sb.append("(EmployeeID, NamePrefix, FirstName, MiddleInitial, LastName, Gender, Email, DateOfBirth, DateOfJoining, Salary) ");
+                sb.append("VALUES ");
+
+                for ( int x = 0 ; x < subListEmployee.size() ; x++ ) {
+                    if (x < subListEmployee.size() - 1) {
+                        sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?), ");
+                    } else {
+                        sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    }
+                }
+
+                preparedStatement = connection.prepareStatement(sb.toString());
+                sb.setLength(0);
+
+                for (int i = 0; i < subListEmployee.size() ; i++) {
+                    Employee employee = subListEmployee.get(i);
+
+                    preparedStatement.setInt((i*10) + 1, employee.getEmployeeID());
+                    preparedStatement.setString((i*10) + 2, employee.getNamePrefix());
+                    preparedStatement.setString((i*10) + 3, employee.getFirstName());
+                    preparedStatement.setString((i*10) + 4, employee.getMiddleInitial().toString());
+                    preparedStatement.setString((i*10) + 5, employee.getLastName());
+                    preparedStatement.setString((i*10) + 6, employee.getGender().toString());
+                    preparedStatement.setString((i*10) + 7, employee.getEmail());
+                    preparedStatement.setDate((i*10) + 8, employee.getDateOfBirth());
+                    preparedStatement.setDate((i*10) + 9, employee.getDateOfJoin());
+                    preparedStatement.setFloat((i*10) + 10, employee.getSalary());
+
+                }
+
+                preparedStatement.executeUpdate();
+
+            }
+
+            connection.commit();
+            connection.setAutoCommit(true);
+
+            preparedStatement.close();
+
+        } catch (SQLException e) {
             logger.error("Error while inserting data into the table", e.getMessage(), e);
             e.printStackTrace();
         }
@@ -142,7 +200,7 @@ public class EmployeeDatabase {
                 //add each employee to the list
                 list.add(employee);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.fatal("Error while retrieving the employees from the table", e);
             e.printStackTrace();
         }
@@ -175,7 +233,7 @@ public class EmployeeDatabase {
                 employee.setDateOfJoin(rs.getDate("DateOfJoining"));
                 employee.setSalary(rs.getFloat("Salary"));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.fatal("Error while retrieving the employees from the table", e);
             e.printStackTrace();
         }
