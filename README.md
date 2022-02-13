@@ -171,3 +171,5 @@
 > + User actions | including invalid user inputs
 > + Program status | including reading file exceptions
 > + Information displayed to the user | including reading from and writing to database timings
+
+![CSVMainRunImage](https://user-images.githubusercontent.com/48356710/153766012-a203b438-ef91-4a54-934f-0361a8ac7644.png)
