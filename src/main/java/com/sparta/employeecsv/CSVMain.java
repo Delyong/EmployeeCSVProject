@@ -49,9 +49,9 @@ public class CSVMain {
             long writeEndTime = controller.insertRecordsToDatabaseThreads(threadCount);
             displayManager.displayWritingTime(writeStartTime, writeEndTime);
 
-            while(true){
-                displayManager.getSelectOption(controller);
-            }
+            // while(true){
+            //     displayManager.getSelectOption(controller);
+            // }
         };
 
         WindowAdapter closeEvent = new WindowAdapter() {
