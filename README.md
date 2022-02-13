@@ -27,6 +27,9 @@
 >> + System Timings
 >> + Project Management
 >> + Version Control
+>> + Singleton Database Connection (ConnectionFactory class)
+>> + Database Access Object (EmployeeDatabase class)
+>> + Multithreading (InsertEmployeeThread class)
 
 ## Dependencies
 > + JUnit (For test cases)
@@ -60,13 +63,12 @@
 ## How to set up the project
 > + Download the source code from this GitHub link
 > + Open the project with an IDE of your choice
-> + In the `pom.xml` file, insert the dependencies listed above
-> + Refresh Maven
-> + In the root folder, create `mysql.properties` file and write the following details to connect to the database
+> + In the `pom.xml` file, refresh Maven if needed.
+> + In the root folder, create `mysql.properties` file and write the following with details to connect to your own mySQL database:
 >> + dburl=
 >> + dbuserid=
 >> + dbpassword=
-> + Create a `mylogfile.log` file in the root folder to log user actions and system status
+> + Run CSVMain and enjoy!
 
 ## How to use the project
 > Run `CSVMain` Java class and enter the number of threads that you wish to run the program with
@@ -96,65 +98,82 @@
 
 ## Branches and Phases
 > Phase 1: Initial Reading and Cleaning
->> This phase entailed reading data from a CSV file which involved using TDD on JUnit test cases
+>> This phase entailed reading data from a CSV file which involved using TDD on JUnit test cases.
 >
 > Phase 2: Persist to Database
->> This phase entailed connecting the program to the database and querying the database
+>> This phase entailed connecting the program to the database and querying the database.
 > 
 > Phase 3: Add Multithreading
 >> This phase entailed using the larger CSV file and utilising multithreading in order to
->> improve the program's efficiency in terms of time complexity
+>> improve the program's efficiency in terms of time complexity.
 > 
 > Phase 4: Add streams and Lambdas
 >> This phase entailed using functional programming concepts, such as
->> lambda expressions and streams for reading the CSV file
+>> lambda expressions and streams for reading the CSV file.
 
 ## Testing and Outcome
 > Automated tests:
->> + CSV Controller Test
->> + Employee Database Test
->> + Employee File Reader Test
->> + Employee Parser Test
->> + Employee Test
+>> + CSVControllerTest
+>> + EmployeeDatabaseTest
+>> + EmployeeFileReaderTest
+>> + EmployeeParserTest
+>> + EmployeeTest
 
 > Manual test:
->> + Display Manager
->> + CSV Main
->> + Database Connection
->> + Multithreading
+>> + DisplayManager
+>> + CSVMain
+>> + Database Connection (Connection Factory)
+>> + Multithreading (Insert Employee Thread)
 
 > Outcome:
 >> All manual and automated tests passed.
 >> The program has met all the requirements and works as intended
+>> 
+>>
 
 ## Timings
 
-> Here are the following reading from and writing to the database timings,
-> including the number of threads of:
+> General Performance:
+> 
+>> During the process of development we started writing at around 3 minutes for 65,499 records.
+>> After implementing multithreading this time went down to around 30 seconds. After refactoring
+>> the multithreading we managed around 10-20 seconds. 
+>> Then finally after combining multiple SQL inserts we managed around 1-2 seconds.
+>> 
+>> We were very happy as at team at this write speed. We did the most we could to make 
+>> the application write as quick as possible. The only other idea we had for improving
+>> the applications was improving the hardware it ran on.
+>
+> Optimal Thread Count:
+>
+>> Here are the following reading from and writing to the database timings,
+>> including the number of threads of:
 >> + 1 thread
 >> + 2 threads
 >> + 4 threads
 >> + 8 threads
 >> + 64 threads
 >> + 100 threads
-
-![1thread](https://cdn.discordapp.com/attachments/935470190127353868/942384815976620062/unknown.png)
-
-![2thread](https://cdn.discordapp.com/attachments/935470190127353868/942385028099346463/unknown.png)
-
-![4thread](https://cdn.discordapp.com/attachments/935470190127353868/942385169392893962/unknown.png)
-
-![8thread](https://cdn.discordapp.com/attachments/935470190127353868/942385917551857694/unknown.png)
-
-![64thread](https://cdn.discordapp.com/attachments/935470190127353868/942385408803749968/unknown.png)
-
-![100thread](https://cdn.discordapp.com/attachments/935470190127353868/942385615771697182/unknown.png)
-
-> Conclusion: 8 threads was the fastest of them all in average
-
-> Confirmation that threading is actually writing to the database:
-
-![sqlcount](https://cdn.discordapp.com/attachments/935470190127353868/942391935824461844/unknown.png)
+>>
+>> ![1thread](https://cdn.discordapp.com/attachments/935470190127353868/942384815976620062/unknown.png)
+>>
+>> ![2thread](https://cdn.discordapp.com/attachments/935470190127353868/942385028099346463/unknown.png)
+>>
+>> ![4thread](https://cdn.discordapp.com/attachments/935470190127353868/942385169392893962/unknown.png)
+>>
+>> ![8thread](https://cdn.discordapp.com/attachments/935470190127353868/942385917551857694/unknown.png)
+>>
+>> ![64thread](https://cdn.discordapp.com/attachments/935470190127353868/942385408803749968/unknown.png)
+>>
+>> ![100thread](https://cdn.discordapp.com/attachments/935470190127353868/942385615771697182/unknown.png)
+>
+> Optimal Thread Count Conclusion:
+> 
+>> After 8 threads the performance dropped noticeably. Before 8 performance was similar however, overall 8 threads was the fastest of them all.
+>>
+>> Confirmation that threading is actually writing to the database:
+>>
+>>![sqlcount](https://cdn.discordapp.com/attachments/935470190127353868/942391935824461844/unknown.png)
 
 ## Project Management
 
@@ -166,8 +185,13 @@
 >> After
 ![trello-after](https://cdn.discordapp.com/attachments/935470190127353868/942179569102889010/unknown.png)
 
-## What is logged
-> + Database status | including database exceptions
-> + User actions | including invalid user inputs
-> + Program status | including reading file exceptions
-> + Information displayed to the user | including reading from and writing to database timings
+## Logging
+> The levels of logging utilized where debug, info, warn, error, fatal.
+> 
+> Examples of logging levels:
+> 
+>> + Debug - logs when the database connection is null and needs creating.
+>> + Info - logs when trying to get the database connection.
+>> + Warn - logs when the user input an invalid option.
+>> + Error - logs when the file couldn't be read or path was invalid.
+>> + Fatal - logs when the database table couldn't be created.

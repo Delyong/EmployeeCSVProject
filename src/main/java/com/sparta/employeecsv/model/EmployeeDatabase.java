@@ -46,7 +46,7 @@ public class EmployeeDatabase {
             st.close(); //close connection to database
     
         } catch (SQLException e) {
-            logger.error("Error while dropping table ", e.getMessage(), e); //add error into the log file
+            logger.fatal("Error while dropping table ", e.getMessage(), e); //add error into the log file
             e.printStackTrace();
         }
     
@@ -119,7 +119,7 @@ public class EmployeeDatabase {
 
             preparedStatement.close();
         } catch (SQLException e){
-            logger.error("Error while inserting data into the table", e.getMessage(), e);
+            logger.fatal("Error while inserting data into the table", e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -177,7 +177,7 @@ public class EmployeeDatabase {
             preparedStatement.close();
 
         } catch (SQLException e) {
-            logger.error("Error while inserting data into the table", e.getMessage(), e);
+            logger.fatal("Error while inserting data into the table", e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -215,7 +215,7 @@ public class EmployeeDatabase {
                 list.add(employee);
             }
         } catch (SQLException e) {
-            logger.fatal("Error while retrieving the employees from the table", e);
+            logger.error("Error while retrieving the employees from the table", e);
             e.printStackTrace();
         }
         return list;
@@ -253,7 +253,7 @@ public class EmployeeDatabase {
                 employee.setSalary(rs.getFloat("Salary"));
             }
         } catch (SQLException e) {
-            logger.fatal("Error while retrieving the employees from the table", e);
+            logger.error("Error while retrieving the employees from the table", e);
             e.printStackTrace();
         }
         return employee;
