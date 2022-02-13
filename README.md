@@ -124,7 +124,27 @@
 >> The program has met all the requirements and works as intended
 
 ## Timings
-TODO
+
+> Here are the following reading from and writing to the database timings,
+> including the number of threads of:
+>> + 1 thread
+>> + 2 threads
+>> + 4 threads
+>> + 8 threads
+>> + 64 threads
+>> + 100 threads
+
+![1thread](https://cdn.discordapp.com/attachments/935470190127353868/942384815976620062/unknown.png)
+
+![2thread](https://cdn.discordapp.com/attachments/935470190127353868/942385028099346463/unknown.png)
+
+![4thread](https://cdn.discordapp.com/attachments/935470190127353868/942385169392893962/unknown.png)
+
+![8thread](https://cdn.discordapp.com/attachments/935470190127353868/942385917551857694/unknown.png)
+
+![64thread](https://cdn.discordapp.com/attachments/935470190127353868/942385408803749968/unknown.png)
+
+![100thread](https://cdn.discordapp.com/attachments/935470190127353868/942385615771697182/unknown.png)
 
 ## Project management
 TODO
